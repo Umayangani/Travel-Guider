@@ -1,5 +1,5 @@
 .footer {
-  background-color: #062E03;
+  background-color: #021801;
   color: #fafafa;
   padding: 40px 30px 20px;
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: space-between;
   gap: 30px;
   position: relative;
-  border-top: 1px solid #062E03;
+  border-top: 1px solid #021801;
 }
 
 .footer-section {

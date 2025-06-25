@@ -1,0 +1,98 @@
+.card-list {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  width: 80%;
+  height: 220px;
+  background: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.6s ease both;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+.card-image {
+  width: 40%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  width: 60%;
+  padding: 20px;
+  position: relative; /* for absolute positioning heart */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.heart-icon {
+  position: absolute;  /* position heart top-right */
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.heart-icon:hover {
+  transform: scale(1.2);
+}
+
+.heart-icon.liked {
+  color: red;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card-image, .card-content {
+    width: 100%;
+    height: auto;
+  }
+
+  .card-content {
+    padding: 16px;
+    position: relative;
+  }
+
+  .heart-icon {
+    top: 16px;
+    right: 16px;
+  }
+}

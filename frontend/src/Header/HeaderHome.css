@@ -5,36 +5,126 @@
   padding: 10px 20px;
   background-color: #062E03;
   border-bottom: 1px solid #062E03;
+  color: #faf9f9;
+  font-family: Arial, sans-serif;
+  user-select: none;
 }
 
+/* Left side */
 .left {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .logo {
   height: 40px;
-  margin-right: 10px;
 }
 
 .site-name {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #faf9f9;
 }
 
-.right a {
-  margin-left: 25px;
+/* Center nav - Home and About centered horizontally */
+.center {
+  display: flex;
+  gap: 30px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.center a {
   text-decoration: none;
   color: #faf9f9;
-  padding: 6px 12px;      
-  border-radius: 4px;  
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
   transition: background 0.3s ease;
-  display: inline-block;
 }
 
-.right a:hover {
-  text-decoration: underline;
-  background : #f4d943;
+.center a:hover {
+  background: #f4d943;
   color: black;
+}
+
+/* Right side dropdown */
+.right {
+  position: relative;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: #faf9f9;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+  background: #f4d943;
+  color: black;
+  outline: none;
+}
+
+/* User icon */
+.user-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
+    brightness(103%) contrast(103%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.dropdown-toggle:hover .user-icon,
+.dropdown-toggle:focus .user-icon {
+  filter: invert(33%) sepia(89%) saturate(754%) hue-rotate(1deg)
+    brightness(96%) contrast(90%);
+  transform: scale(1.1);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  color: black;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  z-index: 10;
+  overflow: hidden;
+  font-weight: 500;
+  user-select: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: black;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #f4d943;
+  color: black;
+}
+
+/* Responsive - optional */
+@media (max-width: 600px) {
+  .center {
+    display: none;
+  }
 }
