@@ -53,7 +53,7 @@
 
 .get-started-btn {
   position: absolute;
-  bottom: 10px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #062E03;

@@ -5,7 +5,7 @@ function HeaderHome() {
     <header className="headerHome">
       <div className="left">
         <img src="logo.png" alt="Logo" className="logo" />
-        <span className="site-name">Travel Guider</span>
+        <span className="site-name">Trevora</span>
       </div>
       <nav className="right">
         <a href="">Home</a>
