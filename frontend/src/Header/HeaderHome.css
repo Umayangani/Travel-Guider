@@ -1,0 +1,40 @@
+.headerHome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #062E03;
+  border-bottom: 1px solid #FFD700;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.site-name {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #faf9f9;
+}
+
+.right a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #faf9f9;
+  padding: 6px 12px;      
+  border-radius: 4px;  
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.right a:hover {
+  text-decoration: underline;
+  background : #f4d943;
+  color: black;
+}
