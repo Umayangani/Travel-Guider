@@ -17,7 +17,7 @@
 
 .footer-brand {
   font-size: 1.8rem;
-  color: #FFD700;
+  color: #AE8625;
   margin-bottom: 10px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .footer-links a:hover {
-  color: #FFD700;
+  color: #AE8625;
 }
 
 .newsletter-form {
@@ -76,7 +76,7 @@
 }
 
 .newsletter-form button {
-  background-color: #FFD700;
+  background-color: #AE8625;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -87,7 +87,7 @@
 }
 
 .newsletter-form button:hover {
-  background-color: #e6c200;
+  background-color: #AE8625;
 }
 
 .footer-bottom {

@@ -2,6 +2,7 @@
   height: calc(100vh - 60px); 
   background: linear-gradient(135deg, #daf9da, #f5fbe1);
   position: relative;
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -11,9 +12,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Placeholder for animation (replace with actual animation later) */
 .fake-animation {
   width: 80%;
   height: 80%;
@@ -33,22 +34,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-@media (max-width: 600px) {
-  .get-started-btn {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-}
-
-@keyframes floatUpDown {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
+  position: relative;
+  z-index: 0;
 }
 
 .get-started-btn {
@@ -67,6 +54,22 @@
 }
 
 .get-started-btn:hover {
-  background-color: #f4d943;
+  background-color: #AE8625;
   color: black;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@media (max-width: 600px) {
+  .get-started-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 }
