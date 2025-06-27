@@ -31,7 +31,7 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   border-radius: 50%;
   width: 35px;
@@ -43,7 +43,7 @@
 .form-section {
   flex: 1;
   padding: 40px;
-  background-color: #062E03;
+  background-color: #021301;
   color: white;
 }
 
@@ -93,10 +93,10 @@
 
 .switch-btn {
   margin-top: 20px;
-  border: 2px solid #062E03;
+  border: 2px solid #021301;
   background: none;
   padding: 10px 20px;
-  color: #062E03;
+  color: #021301;
   border-radius: 6px;
   cursor: pointer;
 }

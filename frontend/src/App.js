@@ -1,30 +1,25 @@
-import { useState } from 'react';
-import HeaderHome from "./Header/HeaderHome";
-import HeroSection from "./Animation/HeroSection";
-import Footer from "./Footer/Footer";
-import CardList from "./Body/CardList"; 
-import RegistrationPage from "./Signup/RegistrationPage";
-import LoginPage from "./Signup/LoginPage";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Sidebar from "./Admin/Sidebar";
+import AddPlace from "./Admin/AddPlace";
+import Dashboard from "./Admin/Dashboard"; // Dummy dashboard component
+
 
 function App() {
-  const [currentModal, setCurrentModal] = useState(null);
-
-  const openModal = (modalType) => setCurrentModal(modalType);
-  const closeModal = () => setCurrentModal(null);
-
   return (
-    <>
-      <HeaderHome onNavigate={openModal} />
-      <HeroSection />
-      <CardList />
-      <Footer />
-      {currentModal === 'signup' && (
-        <RegistrationPage onClose={closeModal} onNavigate={setCurrentModal} />
-      )}
-      {currentModal === 'login' && (
-        <LoginPage onClose={closeModal} onNavigate={setCurrentModal} />
-      )}
-    </>
+    <Router>
+      <div style={{ display: "flex" }}>
+        <Sidebar adminName="Admin" />
+        {/* Add marginLeft equal to sidebar width (240px) */}
+        <div style={{ flex: 1, padding: "20px", marginLeft: "240px" }}>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/add-place" element={<AddPlace />} />
+            {/* Add other routes here */}
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
