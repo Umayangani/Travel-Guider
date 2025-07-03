@@ -144,15 +144,20 @@ const Sidebar = ({ adminName = "Admin" }) => {
   </div>
 )}
       </div>
-
       <div className="menu-item">
         <div className="menu-title">
-          <div className="menu-label">
-            <img src="/icons/settings.png" alt="Settings" className="menu-icon" />
-            Settings
+         <div className="menu-label">
+           <img src="/icons/settings.png" alt="Settings" className="menu-icon" />
+           <NavLink to="/Settings" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
+             Settings
+            </NavLink>
           </div>
         </div>
       </div>
+
+
+
+
 
       <div className="menu-item">
         <div className="menu-title">

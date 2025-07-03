@@ -38,35 +38,63 @@ const AddPlace = () => {
     setVideo(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // For now just log data to verify form works
-    console.log("Place Data:", placeData);
-    console.log("Images:", images);
-    console.log("Video:", video);
+    const formData = new FormData();
 
-    alert("Form submitted! (Check console for data)");
-
-    // Reset form
-    setPlaceData({
-      name: "",
-      district: "",
-      description: "",
-      region: "",
-      category: "",
-      estimated_time_to_visit: "",
-      latitude: "",
-      longitude: "",
-      free_entry: false,
-      foreign_adult: "",
-      foreign_child: "",
-      local_adult: "",
-      local_child: "",
-      student: "",
+    // Append all form fields
+    Object.entries(placeData).forEach(([key, value]) => {
+      formData.append(key, value);
     });
-    setImages([]);
-    setVideo(null);
+
+    // Append images
+    images.forEach((file) => {
+      formData.append("images", file);
+    });
+
+    // Append video
+    if (video) {
+      formData.append("video", video);
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/api/places", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.text();
+        alert("✅ Place added successfully!\n" + result);
+
+        // Reset form
+        setPlaceData({
+          name: "",
+          district: "",
+          description: "",
+          region: "",
+          category: "",
+          estimated_time_to_visit: "",
+          latitude: "",
+          longitude: "",
+          free_entry: false,
+          foreign_adult: "",
+          foreign_child: "",
+          local_adult: "",
+          local_child: "",
+          student: "",
+        });
+        setImages([]);
+        setVideo(null);
+      } else {
+        const errorText = await response.text();
+        alert("❌ Error adding place: " + errorText);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("❌ Network error submitting form.");
+    }
   };
 
   return (
@@ -115,17 +143,35 @@ const AddPlace = () => {
 
           <label>Category:</label>
           <select
-            name="category"
-            value={placeData.category}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Category</option>
-            <option value="Historical">Historical</option>
-            <option value="Natural">Natural</option>
-            <option value="Religious">Religious</option>
-            <option value="Other">Other</option>
-          </select>
+  name="category"
+  value={placeData.category}
+  onChange={handleInputChange}
+  required
+>
+  <option value="">Select Category</option>
+  <optgroup label="Heritage & Culture">
+    <option value="Cultural">Cultural</option>
+    <option value="Religious">Religious</option>
+    <option value="Historical">Historical</option>
+    <option value="Festivals & Events">Festivals & Events</option>
+  </optgroup>
+  <optgroup label="Nature & Outdoors">
+    <option value="Nature">Nature</option>
+    <option value="Wildlife">Wildlife</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Camping">Camping</option>
+    <option value="Scenic">Scenic</option>
+    <option value="Waterfalls">Waterfalls</option>
+    <option value="Tea Estates">Tea Estates</option>
+    <option value="Lakes & Reservoirs">Lakes & Reservoirs</option>
+  </optgroup>
+  <optgroup label="Leisure & Urban">
+    <option value="Beach">Beach</option>
+    <option value="Urban">Urban</option>
+    <option value="Agricultural">Agricultural</option>
+  </optgroup>
+</select>
+
 
           <label>Estimated Time to Visit (hrs):</label>
           <input
@@ -223,7 +269,7 @@ const AddPlace = () => {
             onChange={handleImageChange}
           />
           {images.length > 0 && (
-            <p>Selected Images: {images.map((file) => file.name).join(", ")}</p>
+            <p>Selected Images: {images.map((f) => f.name).join(", ")}</p>
           )}
 
           <label>Upload Video:</label>

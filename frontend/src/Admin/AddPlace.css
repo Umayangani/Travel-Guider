@@ -61,7 +61,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #4da64d;
+  border-color: #61e9c9;
   outline: none;
   box-shadow: 0 0 4px rgba(77,166,77,0.5);
 }
@@ -71,25 +71,46 @@ input[type="checkbox"] {
   margin-right: 8px;
 }
 
+/*.add-place-container {
+  display: flex;
+  flex-direction: column; */     /* Stack vertically */
+ /* min-height: 100vh; */          /* At least full screen height */
+  /*max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #f7faf8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  color: #062e03;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap; */  /* Allows multiple rows if needed */
+  /*gap: 20px; */        /* Space between columns */
+/*}*/
+
 button[type="submit"] {
-  flex: 1 1 100%;
-  padding: 12px;
-  background-color: #044a0c;
-  color: white;
-  font-size: 16px;
+  flex: 1 1 100%;          /* Force full row */
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: #89723c;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
   transition: background-color 0.3s;
+  align-self: center;      /* Center horizontally */
 }
 
 button[type="submit"]:hover {
-  background-color: #066d12;
+  background-color: #AE8625;
 }
 
 p {
   margin-top: 5px;
   font-style: italic;
-  color: #444;
+  color: #444; 
 }
