@@ -1,0 +1,301 @@
+place_id,Name,District,Description,Region,Category,Entry_fee_id,Estimated_time_to_visit,Latitude,Longitude
+WE-COL001,Colombo National Museum,Colombo,Colombo National Museum shows history and culture with many old things to see,Western,Museum,WE-COL001-FEE,1.00,6.9271,79.8612
+CE-KAN002,Temple of the Tooth,Kandy,Temple of the Tooth is famous for holding Buddha’s tooth and many people visit to pray,Central,Religious Site,CE-KAN002-FEE,2.00,7.2936,80.6411
+SO-GAL003,Galle Fort,Galle,Galle Fort has old walls and buildings from colonial times and a beautiful sea view,Southern,Historical Site,SO-GAL003-FEE,2.00,6.0327,80.217
+NO-JAF004,Nallur Kandaswamy Kovil,Jaffna,Nallur Kovil is a big and colorful Hindu temple with a peaceful place to pray,Northern,Religious Site,NO-JAF004-FEE,1.00,9.6685,80.0074
+NC-ANU005,Sigiriya Rock Fortress,Anuradhapura,Sigiriya is a giant rock with old palace ruins and wall paintings to climb and explore,North Central,Historical Site,NC-ANU005-FEE,7.00,7.957,80.7603
+CE-NUW006,Gregory Lake,Nuwara Eliya,Gregory Lake is a nice lake to walk around  ride boats and enjoy cool weather,Central,Lake,CE-NUW006-FEE,2.00,6.9572,80.7852
+EA-TRI007,Koneswaram Temple,Trincomalee,Koneswaram Temple is on a cliff by the sea and known for its views and worship,Eastern,Religious Site,EA-TRI007-FEE,1.00,8.5874,81.2329
+SO-MAT008,Dondra Head Lighthouse,Matara,Dondra Head Lighthouse is the southern point of Sri Lanka with sea views and old charm,Southern,Historical Site,SO-MAT008-FEE,1.00,5.9206,80.5861
+UV-BAD009,Diyaluma Falls,Badulla,Diyaluma is a tall waterfall with natural pools where people enjoy swimming,Uva,Waterfall,UV-BAD009-FEE,2.00,6.7589,81.0058
+NW-KUR010,Ritigala Forest Monastery,Kurunegala,Ritigala has ruins hidden in forest and a peaceful place to walk and explore,North Western,Religious Site,NW-KUR010-FEE,2.00,8.0753,80.7009
+CE-KAN011,Udawatta Kele Sanctuary,Kandy,Udawatta Kele Sanctuary is a quiet forest reserve where visitors see birds and monkeys,Central,Wildlife Park,CE-KAN011-FEE,2.00,7.288,80.6246
+SO-GAL012,Mihidu Beach,Galle,Mihidu Beach is a calm place for swimming and relaxing on soft sand,Southern,Beach,SO-GAL012-FEE,2.00,6.0405,80.2182
+NO-JAF013,Jaffna Library,Jaffna,Jaffna Library is a large  historic library rebuilt after conflict and a symbol of knowledge,Northern,Northern,NO-JAF013-FEE,1.00,9.6635,80.0233
+NC-ANU014,Anuradhapura Sacred City,Anuradhapura,Anuradhapura Sacred City has ancient temples and ruins for pilgrims and history lovers,North Central,Religious Site,NC-ANU014-FEE,7.00,8.3114,80.4037
+CE-NUW015,Horton Plains National Park,Nuwara Eliya,Horton Plains is a highland park with walking trails  wildlife  and scenic views,Central,Wildlife Park,CE-NUW015-FEE,7.00,6.817,80.7984
+EA-TRI016,Uppuveli Beach,Trincomalee,Uppuveli Beach offers golden sand and clear waters  perfect for relaxing and swimming,Eastern,Beach,EA-TRI016-FEE,2.00,8.5693,81.243
+SO-MAT017,Polhena Reef,Matara,Polhena Reef is popular for snorkeling with colorful fish and coral,Southern,Beach,SO-MAT017-FEE,2.00,5.9474,80.5482
+UV-BAD018,Mahiyangana Rajamaha Viharaya,Badulla,Mahiyangana Viharaya is an ancient Buddhist temple with peaceful surroundings,Uva,Religious Site,UV-BAD018-FEE,1.00,6.8195,81.0739
+NW-KUR019,Ethugalpura Forest Reserve,Kurunegala,Ethugalpura Forest is good for nature walks and seeing wildlife,North Western,Wildlife Park,NW-KUR019-FEE,2.00,7.5921,80.0223
+WE-COL020,Dehiwala Zoo,Colombo,Dehiwala Zoo houses many animals and is a fun place for families,Western,Wildlife Park,WE-COL020-FEE,7.00,6.8678,79.8806
+CE-KAN021,Bahirawakanda Temple,Kandy,Bahirawakanda Temple offers great city views and spiritual peace,Central,Religious Site,CE-KAN021-FEE,1.00,7.2861,80.6405
+SO-GAL022,Unawatuna Beach,Galle,Unawatuna Beach is popular for swimming  coral reefs  and beach activities,Southern,Beach,SO-GAL022-FEE,2.00,6.0283,80.2589
+NO-JAF023,Keerimalai Hot Springs,Jaffna,Keerimalai Hot Springs are warm waters believed to have healing powers,Northern,Adventure,NO-JAF023-FEE,1.00,9.7847,80.0419
+NC-ANU024,Minneriya National Park,Anuradhapura,Minneriya Park is famous for seeing many wild elephants in their natural habitat,North Central,Wildlife Park,NC-ANU024-FEE,7.00,8.0123,80.817
+CE-NUW025,Victoria Park,Nuwara Eliya,Victoria Park is a colorful flower park with walking paths and fresh air,Central,Cultural Village,CE-NUW025-FEE,1.00,6.9619,80.792
+EA-TRI026,Fort Frederick,Trincomalee,Fort Frederick is an old fort with ocean views and historical significance,Eastern,Historical Site,EA-TRI026-FEE,1.00,8.5798,81.2344
+SO-MAT027,Mirissa Beach,Matara,Mirissa Beach is a lively spot for surfing  whale watching  and sunbathing,Southern,Beach,SO-MAT027-FEE,2.00,5.948,80.4708
+UV-BAD028,Gal Oya National Park,Badulla,Gal Oya Park is a wildlife park with boat safaris and wild elephants,Uva,Wildlife Park,UV-BAD028-FEE,7.00,7.2345,81.1134
+NW-KUR029,Herbal Garden,Kurunegala,Herbal Garden shows many plants used in traditional medicine,North Western,Cultural Village,NW-KUR029-FEE,1.00,7.4809,80.3587
+WE-COL030,Viharamahadevi Park,Colombo,Viharamahadevi Park is a large city park with trees  flowers  and a playground,Western,Cultural Village,WE-COL030-FEE,1.00,6.9028,79.8619
+CE-KAN031,Lake Gregory,Nuwara Eliya,Lake Gregory offers boating and walking paths with cool fresh air,Central,Lake,CE-KAN031-FEE,2.00,6.9718,80.7829
+SO-HAM032,Mirissa Whale Watching,Matara,Mirissa Whale Watching gives chances to see big whales in the ocean,Southern,Adventure,SO-HAM032-FEE,3.00,5.9481,80.4643
+NC-MON033,Isurumuniya Temple,Anuradhapura,Isurumuniya Temple has old statues and peaceful gardens to enjoy,North Central,Religious Site,NC-MON033-FEE,1.00,8.3457,80.4012
+WE-GAM034,Bellanwila Rajamaha Viharaya,Colombo,Bellanwila Rajamaha Viharaya is a popular temple with beautiful architecture,Western,Religious Site,WE-GAM034-FEE,1.00,6.8436,79.9701
+EA-BAT035,Kantale Tank,Trincomalee,Kantale Tank is a large ancient reservoir for nature and bird lovers,Eastern,Lake,EA-BAT035-FEE,1.00,8.5003,81.0735
+SO-GAM036,Rummana Beach,Galle,Rummana Beach is quiet and great for relaxation and swimming,Southern,Beach,SO-GAM036-FEE,2.00,6.0629,80.2389
+UV-MAH037,Rawana Falls,Badulla,Rawana Falls is a scenic waterfall with easy trails and natural pools,Uva,Waterfall,UV-MAH037-FEE,2.00,6.8204,81.0501
+NW-PUT038,Pidurangala Rock,Anuradhapura,Pidurangala Rock offers a climb with great views over Sigiriya and nature,North Western,Adventure,NW-PUT038-FEE,2.00,7.0312,80.7632
+WE-KAL039,Independence Memorial Hall,Colombo,Independence Memorial Hall is a historical monument with wide grounds,Western,Historical Site,WE-KAL039-FEE,1.00,6.9248,79.8588
+CE-KAN040,Peradeniya Botanical Gardens,Kandy,Peradeniya Botanical Gardens is famous for many colorful flowers and trees,Central,Cultural Village,CE-KAN040-FEE,2.00,7.2563,80.5979
+SO-HAM041,Weligama Beach,Matara,Weligama Beach is a sandy beach good for surfing and family time,Southern,Beach,SO-HAM041-FEE,2.00,5.9745,80.4321
+NC-MON042,Ruwanwelisaya Stupa,Anuradhapura,Ruwanwelisaya is a large sacred stupa important for Buddhist pilgrims,North Central,Religious Site,NC-MON042-FEE,1.00,8.3591,80.3965
+WE-GAM043,Borella Cemetery,Colombo,Borella Cemetery is the resting place for many famous Sri Lankans,Western,Cultural Village,WE-GAM043-FEE,1.00,6.9254,79.8657
+EA-BAT044,Nilaveli Beach,Trincomalee,Nilaveli Beach has white sand and calm sea good for swimming,Eastern,Beach,EA-BAT044-FEE,2.00,8.7001,81.1863
+SO-GAM045,Mulkirigala Rock Temple,Ratnapura,Mulkirigala Rock Temple is an ancient cave temple with paintings,Southern,Religious Site,SO-GAM045-FEE,2.00,6.4252,80.3773
+UV-MAH046,Demodara Nine Arch Bridge,Badulla,Demodara Bridge is a famous railway bridge with stunning views and photo spots,Uva,Adventure,UV-MAH046-FEE,1.00,6.8475,81.0509
+NW-PUT047,Mihintale,Anuradhapura,Mihintale is a sacred mountain with Buddhist temples and sunrise views,North Western,Religious Site,NW-PUT047-FEE,2.00,8.3514,80.5218
+WE-KAL048,Galle Face Green,Colombo,Galle Face Green is a wide sea-front park with evening food stalls,Western,Cultural Village,WE-KAL048-FEE,1.00,6.9271,79.8467
+CE-KAN049,Bahirawakanda Buddha Statue,Kandy,Bahirawakanda Buddha Statue is large and visible from many parts of the city,Central,Religious Site,CE-KAN049-FEE,1.00,7.2875,80.6413
+SO-HAM050,Wanamal Beach,Matara,Wanamal Beach is quiet with clean sand and good for swimming,Southern,Beach,SO-HAM050-FEE,2.00,5.9231,80.5638
+NC-MON051,Isurumuniya Rock Temple,Anuradhapura,Isurumuniya Temple has ancient carvings and a peaceful park,North Central,Religious Site,NC-MON051-FEE,1.00,8.3412,80.4023
+WE-GAM052,Kotte Raja Maha Viharaya,Colombo,Kotte Raja Maha Viharaya is an old temple surrounded by nature,Western,Religious Site,WE-GAM052-FEE,1.00,6.9001,79.8873
+EA-BAT053,Fort Frederick Trincomalee,Trincomalee,Fort Frederick has historic walls and sea views from a high hill,Eastern,Historical Site,EA-BAT053-FEE,1.00,8.5871,81.2359
+SO-GAM054,Martin’s Beach,Galle,Martin’s Beach is calm with soft sand and clear water,Southern,Beach,SO-GAM054-FEE,2.00,6.0344,80.2135
+UV-MAH055,Elle Rock,Badulla,Elle Rock offers hiking and beautiful views over tea plantations,Uva,Adventure,UV-MAH055-FEE,3.00,6.9325,81.0456
+NW-PUT056,Aluvihara Rock Temple,Matahara,Aluvihara Rock Temple has Buddhist caves and historic importance,North Western,Religious Site,NW-PUT056-FEE,1.00,7.4089,80.0441
+WE-KAL057,Gangaramaya Temple,Colombo,Gangaramaya Temple is a large temple complex with museum and art,Western,Religious Site,WE-KAL057-FEE,1.00,6.9219,79.8577
+CE-KAN058,Kandy Lake,Kandy,Kandy Lake is a peaceful lake in the city center for walks and nature,Central,Lake,CE-KAN058-FEE,1.00,7.2919,80.6354
+SO-HAM059,Madiha Beach,Matara,Madiha Beach is good for surfing and less crowded,Southern,Beach,SO-HAM059-FEE,2.00,5.9937,80.4802
+NC-MON060,Tissa Wewa,Anuradhapura,Tissa Wewa is a big ancient reservoir with calm water and bird watching,North Central,Lake,NC-MON060-FEE,1.00,8.3339,80.4109
+WE-COL061,Colombo National Museum,Colombo,A museum showing Sri Lanka's history with many artifacts and art,Western,Historical Site,WE-COL061-FEE,2.00,6.9271,79.8612
+CE-KAN062,Udawattekele Sanctuary,Kandy,A forest reserve with walking trails and many wild birds,Central,Nature Reserve,CE-KAN062-FEE,2.00,7.2833,80.6356
+SO-GAM063,Galle Dutch Fort,Galle,An old fort with colonial buildings  walls  and sea views,Southern,Historical Site,SO-GAM063-FEE,3.00,6.0327,80.217
+NC-MON064,Anuradhapura Sacred City,Anuradhapura,Ancient city with many ruins and stupas,North Central,Religious Site,NC-MON064-FEE,3.00,8.3425,80.4031
+EA-TRI065,Koneswaram Temple,Trincomalee,A Hindu temple on a cliff with beautiful ocean views,Eastern,Religious Site,EA-TRI065-FEE,2.00,8.5843,81.2342
+UV-BAD066,Tea Plantations,Badulla,Green rolling hills with tea gardens and factories,Uva,Nature Reserve,UV-BAD066-FEE,2.00,6.9052,81.0412
+NW-KUR067,Kurunegala Rock Temple,Kurunegala,Ancient rock temple with murals and Buddha statues,North Western,Religious Site,NW-KUR067-FEE,1.00,7.486,80.3643
+WE-NEG068,Negombo Beach,Negombo,Sandy beach near Colombo with fishing boats and seafood,Western,Beach,WE-NEG068-FEE,2.00,7.2076,79.8393
+CE-MAT069,Dambulla Cave Temple,Dambulla,Cave temple with colorful paintings and Buddha statues,Central,Religious Site,CE-MAT069-FEE,2.00,7.8618,80.651
+SO-HAM070,Matara Fort,Matara,Historic fort with walls and sea views,Southern,Historical Site,SO-HAM070-FEE,1.00,5.9521,80.5365
+NC-MON071,Wilpattu National Park,Anuradhapura,A large park with elephants and leopards,North Central,Nature Reserve,NC-MON071-FEE,4.00,8.1121,79.9381
+WE-COL072,Viharamahadevi Park,Colombo,A large city park with gardens  playgrounds  and lakes,Western,Parks,WE-COL072-FEE,1.00,6.9274,79.8673
+EA-BAT073,Uppuveli Beach,Trincomalee,A peaceful beach with soft sand and clean water,Eastern,Beach,EA-BAT073-FEE,2.00,8.6932,81.1829
+SO-GAM074,Rumassala Sanctuary,Galle,A nature reserve with forest trails and sea views,Southern,Nature Reserve,SO-GAM074-FEE,2.00,6.036,80.2211
+UV-BAD075,Horton Plains National Park,Badulla,A high plateau with hiking trails and cloud forests,Uva,Nature Reserve,UV-BAD075-FEE,4.00,6.8052,80.7991
+NW-PUT076,Mihintale Archeological Site,Anuradhapura,An ancient sacred site with ruins and temples,North Western,Religious Site,NW-PUT076-FEE,2.00,8.3505,80.5239
+WE-KAL077,Dehiwala Zoo,Colombo,A large zoo with many animal species,Western,Wildlife Park,WE-KAL077-FEE,2.00,6.8564,79.8889
+CE-KAN078,Kandy View Point,Kandy,A hilltop spot with panoramic views of the city and lake,Central,Adventure,CE-KAN078-FEE,1.00,7.293,80.6358
+SO-HAM079,Weligama Bay,Southern,Sandy bay popular for beginner surfers and beach fun,Southern,Beach,SO-HAM079-FEE,2.00,5.9737,80.4305
+NC-MON080,Ranmasu Uyana,Anuradhapura,An ancient royal garden with ponds and ruins,North Central,Historical Site,NC-MON080-FEE,1.00,8.3654,80.4037
+EA-TRI081,Koddiyar Bay,Trincomalee,A deep bay with beautiful water for swimming and diving,Eastern,Beach,EA-TRI081-FEE,2.00,8.5849,81.2467
+UV-BAD082,Baker’s Falls,Badulla,A waterfall surrounded by forest in Horton Plains,Uva,Waterfall,UV-BAD082-FEE,2.00,6.8081,80.8001
+NW-KUR083,Ridigama Temple,Kurunegala,A small temple with serene surroundings,North Western,Religious Site,NW-KUR083-FEE,1.00,7.4812,80.3651
+WE-NEG084,St. Mary’s Church,Negombo,A beautiful church built in colonial style,Western,Religious Site,WE-NEG084-FEE,1.00,7.2059,79.8381
+CE-MAT085,Hiriwadunna Village,Dambulla,A traditional village showing rural life and boat rides,Central,Cultural Village,CE-MAT085-FEE,2.00,7.8974,80.66
+SO-HAM086,Paravi Duwa Temple,Matara,A small temple on an island with scenic views,Southern,Religious Site,SO-HAM086-FEE,1.00,5.9497,80.5343
+NC-MON087,Manankattiya,Anuradhapura,An ancient stone carved site with historical importance,North Central,Historical Site,NC-MON087-FEE,1.00,8.353,80.408
+WE-COL088,Colombo Lighthouse,Colombo,A historic lighthouse by the sea with city views,Western,Historical Site,WE-COL088-FEE,1.00,6.9174,79.8498
+EA-BAT089,Trincomalee Harbor,Trincomalee,A busy harbor with naval history and boats,Eastern,Historical Site,EA-BAT089-FEE,1.00,8.5732,81.2351
+SO-GAM090,Galle Lighthouse,Galle,A lighthouse within the Galle Fort area,Southern,Historical Site,SO-GAM090-FEE,1.00,6.0329,80.2172
+WE-COL091,Galle Face Green,Colombo,A large ocean-side park for picnics  kite flying  and sunset views,Western,Parks,WE-COL091-FEE,1.00,6.9271,79.8452
+CE-KAN092,Bahirawakanda Temple,Kandy,A hilltop temple with a giant Buddha statue and city views,Central,Religious Site,CE-KAN092-FEE,1.50,7.291,80.6396
+SO-HAM093,Dondra Head Lighthouse,Matara,A lighthouse on the southernmost tip of Sri Lanka, Southern,Historical Site,SO-HAM093-FEE,1.00,5.9474,80.5725
+NC-MON094,Mihintale Sacred Site,Anuradhapura,Ancient Buddhist site with monasteries and stupas,North Central,Religious Site,NC-MON094-FEE,2.00,8.3547,80.5238
+EA-BAT095,Pigeon Island National Park,Trincomalee,Island park with coral reefs and snorkeling,Eastern,Nature Reserve,EA-BAT095-FEE,3.00,8.7696,81.1631
+UV-BAD096,Rawana Falls,Badulla,A scenic waterfall near Ella surrounded by forest,Uva,Waterfall,UV-BAD096-FEE,1.50,6.8659,81.0367
+NW-PUT097,Kurunegala Clock Tower,Kurunegala,A colonial-era clock tower in town center,North Western,Historical Site,NW-PUT097-FEE,0.50,7.4863,80.3645
+WE-NEG098,Angurukaramulla Temple,Negombo,A colorful Buddhist temple with murals and statues,Western,Religious Site,WE-NEG098-FEE,1.00,7.2064,79.8376
+CE-MAT099,Spice Gardens,Dambulla,A garden showing local spices and herbs,Central,Cultural Village,CE-MAT099-FEE,1.00,7.8741,80.6543
+SO-GAM100,Martin Wickramasinghe Folk Museum,Galle,A museum dedicated to Sri Lankan rural life and history,Southern,Museum,SO-GAM100-FEE,1.50,6.034,80.215
+NC-MON101,Isurumuniya Temple,Anuradhapura,An ancient rock temple with carvings and statues,North Central,Religious Site,NC-MON101-FEE,1.00,8.3492,80.3983
+WE-COL102,Bellanwila Rajamaha Viharaya,Colombo,A Buddhist temple with a large sacred Bo tree,Western,Religious Site,WE-COL102-FEE,1.00,6.8835,79.9601
+EA-TRI103,Fort Frederick,Trincomalee,Historic fort overlooking the harbor,Eastern,Historical Site,EA-TRI103-FEE,1.00,8.5799,81.2357
+UV-BAD104,Diyaluma Falls,Badulla,Second highest waterfall in Sri Lanka with swimming spots,Uva,Waterfall,UV-BAD104-FEE,2.00,6.7571,81.0504
+NW-KUR105,Elephant Rock,Kurunegala,A large rock shaped like an elephant with views,North Western,Adventure,NW-KUR105-FEE,1.00,7.482,80.3612
+WE-NEG106,St. Sebastian’s Church,Negombo,A historic church with Portuguese architecture,Western,Religious Site,WE-NEG106-FEE,1.00,7.2102,79.8388
+CE-KAN107,Bahirawakanda Buddha Statue,Kandy,A giant seated Buddha statue visible from the city,Central,Religious Site,CE-KAN107-FEE,1.00,7.2917,80.6412
+SO-HAM108,Paravi Duwa Island,Matara,A small island with an ancient temple,Southern,Religious Site,SO-HAM108-FEE,1.00,5.9491,80.534
+NC-MON109,Atamasthana,Anuradhapura,A group of eight sacred Buddhist sites,North Central,Religious Site,NC-MON109-FEE,3.00,8.3437,80.4003
+EA-BAT110,Uppuveli Beach,Trincomalee,A quiet sandy beach good for swimming and relaxing,Eastern,Beach,EA-BAT110-FEE,2.00,8.693,81.1842
+UV-BAD111,Haputale Viewpoint,Badulla,A scenic viewpoint with hills and tea plantations,Uva,Adventure,UV-BAD111-FEE,1.00,6.845,80.9654
+NW-PUT112,Madu River Wetlands,Madu,A mangrove wetland area with boat tours,North Western,Nature Reserve,NW-PUT112-FEE,2.00,6.4347,79.9604
+WE-COL113,Beira Lake,Colombo,A large lake in the city with small islands and temples,Western,Parks,WE-COL113-FEE,1.00,6.9275,79.8562
+CE-MAT114,Rock Temple of Dambulla,Dambulla,A UNESCO World Heritage cave temple,Central,Religious Site,CE-MAT114-FEE,2.00,7.8618,80.651
+SO-GAM115,Unawatuna Beach,Galle,A popular beach with calm waters for swimming,Southern,Beach,SO-GAM115-FEE,2.00,6.0319,80.2518
+NC-MON116,Minneriya National Park,Polonnaruwa,A park known for large elephant herds,North Central,Nature Reserve,NC-MON116-FEE,4.00,8.0403,81.0022
+WE-NEG117,Kosgoda Turtle Hatchery,Galle,A center for turtle conservation,Western,Wildlife Park,WE-NEG117-FEE,1.00,6.2242,80.024
+CE-KAN118,Kandy Lake,Kandy,A large lake in the city center,Central,Parks,CE-KAN118-FEE,1.00,7.2936,80.6368
+SO-HAM119,Yala National Park,Yala,Wildlife park with leopards and elephants,Southern,Nature Reserve,SO-HAM119-FEE,4.00,6.3617,81.5088
+NC-MON120,Polonnaruwa Ancient City,Polonnaruwa,An ancient capital with ruins and temples,North Central,Historical Site,NC-MON120-FEE,3.00,7.9434,81.0024
+WE-COL121,Independence Memorial Hall,Colombo,A historic monument commemorating Sri Lanka’s independence,Western,Historical Site,WE-COL121-FEE,1.00,6.9271,79.8555
+CE-KAN122,Kandy Royal Botanical Gardens,Kandy,A large garden with diverse plant species and lakes,Central,Parks,CE-KAN122-FEE,2.00,7.2885,80.621
+SO-HAM123,Matara Fort,Matara,A well-preserved Dutch fort near the coast,Southern,Historical Site,SO-HAM123-FEE,1.00,5.9516,80.5366
+NC-MON124,Jaya Sri Maha Bodhi,Anuradhapura,World’s oldest living sacred fig tree,North Central,Religious Site,NC-MON124-FEE,1.00,8.3489,80.4061
+EA-BAT125,Koneswaram Temple,Trincomalee,Ancient Hindu temple with ocean views,Eastern,Religious Site,EA-BAT125-FEE,1.50,8.5846,81.2311
+UV-BAD126,Lipton’s Seat,Badulla,A famous viewpoint overlooking tea plantations,Uva,Adventure,UV-BAD126-FEE,1.00,6.8409,81.0502
+NW-PUT127,Angurukaramulla Temple,Negombo,A colorful Buddhist temple with murals,North Western,Religious Site,NW-PUT127-FEE,1.00,7.2103,79.8377
+WE-NEG128,St. Anne’s Church,Thalawila,A historic Catholic church famous for miracles,Western,Religious Site,WE-NEG128-FEE,1.00,7.5036,79.9048
+CE-MAT129,Dambulla Cave Temple,Dambulla,A UNESCO World Heritage cave temple complex,Central,Religious Site,CE-MAT129-FEE,2.00,7.8618,80.652
+SO-GAM130,Japanese Peace Pagoda,Galle,A white stupa symbolizing peace, Southern,Religious Site,SO-GAM130-FEE,1.00,6.0351,80.2235
+NC-MON131,Isurumuniya Rock Temple,Anuradhapura,Ancient temple with intricate rock carvings,North Central,Religious Site,NC-MON131-FEE,1.00,8.3492,80.3985
+WE-COL132,Viharamahadevi Park,Colombo,A large public park with a lake and playground,Western,Parks,WE-COL132-FEE,1.50,6.9147,79.8617
+EA-TRI133,Fort Frederick,Trincomalee,A historic fort overlooking the harbor,Eastern,Historical Site,EA-TRI133-FEE,1.00,8.5799,81.2357
+UV-BAD134,Horton Plains National Park,Badulla,A highland park with trails and “World’s End” cliff,Uva,Nature Reserve,UV-BAD134-FEE,4.00,6.8003,80.8
+NW-KUR135,Kurunegala Clock Tower,Kurunegala,A colonial-era clock tower in town center,North Western,Historical Site,NW-KUR135-FEE,0.50,7.4863,80.3645
+WE-NEG136,Negombo Lagoon,Negombo,A coastal lagoon with fishing villages and birds,Western,Nature Reserve,WE-NEG136-FEE,2.00,7.22,79.84
+CE-KAN137,Bahirawakanda Buddha Statue,Kandy,A giant Buddha statue overlooking the city,Central,Religious Site,CE-KAN137-FEE,1.00,7.291,80.6397
+SO-HAM138,Martin Wickramasinghe Folk Museum,Galle,A museum dedicated to rural Sri Lankan life,Southern,Museum,SO-HAM138-FEE,1.50,6.034,80.215
+NC-MON139,Minneriya National Park,Polonnaruwa,A park famous for large elephant herds,North Central,Nature Reserve,NC-MON139-FEE,4.00,8.0403,81.0022
+WE-COL140,Gangaramaya Temple,Colombo,A temple with eclectic architecture and museum,Western,Religious Site,WE-COL140-FEE,1.50,6.9271,79.8516
+CE-MAT141,Spice Garden,Dambulla,A garden showcasing Sri Lankan spices,Central,Cultural Village,CE-MAT141-FEE,1.00,7.8741,80.6543
+SO-GAM142,Unawatuna Beach,Galle,A popular beach with calm waters, Southern,Beach,SO-GAM142-FEE,2.00,6.0319,80.2518
+NC-MON143,Polonnaruwa Ancient City,Polonnaruwa,Ancient capital city with well-preserved ruins,North Central,Historical Site,NC-MON143-FEE,3.00,7.9434,81.0024
+WE-NEG144,Kosgoda Turtle Hatchery,Galle,A conservation center for sea turtles,Western,Wildlife Park,WE-NEG144-FEE,1.00,6.2242,80.024
+CE-KAN145,Kandy Lake,Kandy,A serene lake in the heart of Kandy city,Central,Parks,CE-KAN145-FEE,1.00,7.2936,80.6368
+SO-HAM146,Yala National Park,Yala,Wildlife park known for leopards and elephants,Southern,Nature Reserve,SO-HAM146-FEE,4.00,6.3617,81.5088
+NC-MON147,Polonnaruwa Museum,Polonnaruwa,A museum showcasing ancient artifacts,North Central,Museum,NC-MON147-FEE,1.00,7.945,81.002
+WE-COL148,Bellanwila Rajamaha Viharaya,Colombo,A temple with a large sacred Bo tree,Western,Religious Site,WE-COL148-FEE,1.00,6.8835,79.9601
+EA-BAT149,Pigeon Island National Park,Trincomalee,A coral island known for snorkeling,Eastern,Nature Reserve,EA-BAT149-FEE,3.00,8.7696,81.1631
+UV-BAD150,Haputale Viewpoint,Badulla,A scenic viewpoint overlooking valleys,Uva,Adventure,UV-BAD150-FEE,1.00,6.845,80.9654
+WE-COL151,Galle Face Green,Colombo,A large ocean-side urban park with kite flying and food stalls,Western,Parks,WE-COL151-FEE,1.50,6.9271,79.8421
+CE-KAN152,Udawattekele Sanctuary,Kandy,A forest reserve with walking trails and bird watching,Central,Nature Reserve,CE-KAN152-FEE,2.00,7.287,80.6337
+SO-HAM153,Richmond Castle,Galle,A historic mansion with unique architecture,Southern,Historical Site,SO-HAM153-FEE,1.00,6.0276,80.2292
+NC-MON154,Wilpattu National Park,Anuradhapura,Largest and oldest national park with wildlife,North Central,Nature Reserve,NC-MON154-FEE,4.00,8.1633,79.973
+EA-BAT155,Kinniya Bridge,Trincomalee,A long bridge connecting coastal towns,Eastern,Landmark,EA-BAT155-FEE,0.50,8.5913,81.1962
+UV-BAD156,BP International Butterfly Sanctuary,Badulla,A sanctuary with colorful butterflies,Uva,Wildlife Park,UV-BAD156-FEE,1.00,6.9845,81.0452
+NW-PUT157,Wilpattu Lake,Putlam,A scenic freshwater lake in a wildlife park,North Western,Nature Reserve,NW-PUT157-FEE,2.00,8.0384,79.9945
+WE-NEG158,Negombo Beach,Negombo,A popular beach known for sunsets and seafood,Western,Beach,WE-NEG158-FEE,2.00,7.2071,79.839
+CE-MAT159,Ritigala Forest Monastery,Anuradhapura,Ancient Buddhist monastery ruins in forest,Central,Historical Site,CE-MAT159-FEE,1.50,8.1022,80.5527
+SO-GAM160,Galle Lighthouse,Galle,A historic lighthouse near the fort,Southern,Historical Site,SO-GAM160-FEE,0.50,6.0341,80.2176
+NC-MON161,Mihintale,Anuradhapura,The cradle of Buddhism in Sri Lanka,North Central,Religious Site,NC-MON161-FEE,2.00,8.3595,80.5617
+WE-COL162,Borella Cemetery,Colombo,A large colonial-era cemetery with historical graves,Western,Historical Site,WE-COL162-FEE,1.00,6.9312,79.8884
+EA-TRI163,Marble Beach,Trincomalee,A white sandy beach with clear waters,Eastern,Beach,EA-TRI163-FEE,2.00,8.5722,81.241
+UV-BAD164,Lindula Tea Factory,Badulla,A working tea factory with guided tours,Uva,Cultural Village,UV-BAD164-FEE,1.00,6.8421,80.9704
+NW-KUR165,Dambadeniya Ancient City,Kurunegala,Capital city ruins from medieval times,North Western,Historical Site,NW-KUR165-FEE,1.50,7.4849,80.3608
+WE-NEG166,Angurukaramulla Temple,Negombo,A colorful Buddhist temple with murals,Western,Religious Site,WE-NEG166-FEE,1.00,7.2094,79.832
+CE-KAN167,Udawatta Kele Sanctuary,Kandy,A forest reserve with rare birds and trails,Central,Nature Reserve,CE-KAN167-FEE,2.00,7.2901,80.6367
+SO-HAM168,Martin Wickramasinghe Folk Museum,Galle,A museum showing Sri Lanka’s rural lifestyle,Southern,Museum,SO-HAM168-FEE,1.50,6.0345,80.216
+NC-MON169,Minneriya National Park,Polonnaruwa,Known for large herds of wild elephants,North Central,Nature Reserve,NC-MON169-FEE,4.00,8.0411,81.0027
+WE-COL170,Gangaramaya Temple,Colombo,A Buddhist temple with eclectic architecture,Western,Religious Site,WE-COL170-FEE,1.50,6.9279,79.8505
+CE-MAT171,Spice Garden,Dambulla,A garden showing Sri Lankan spices and herbs,Central,Cultural Village,CE-MAT171-FEE,1.00,7.8738,80.654
+SO-GAM172,Unawatuna Beach,Galle,A calm beach popular with tourists,Southern,Beach,SO-GAM172-FEE,2.00,6.0315,80.252
+NC-MON173,Polonnaruwa Ancient City,Polonnaruwa,Well-preserved ancient ruins,North Central,Historical Site,NC-MON173-FEE,3.00,7.9438,81.002
+WE-NEG174,Kosgoda Turtle Hatchery,Galle,A conservation center protecting sea turtles,Western,Wildlife Park,WE-NEG174-FEE,1.00,6.2239,80.0237
+CE-KAN175,Kandy Lake,Kandy,A serene lake in central Kandy,Central,Parks,CE-KAN175-FEE,1.00,7.2933,80.637
+SO-HAM176,Yala National Park,Yala,National park with elephants and leopards,Southern,Nature Reserve,SO-HAM176-FEE,4.00,6.3613,81.5091
+NC-MON177,Polonnaruwa Museum,Polonnaruwa,Museum with artifacts from ancient city,North Central,Museum,NC-MON177-FEE,1.00,7.9455,81.0017
+WE-COL178,Bellanwila Rajamaha Viharaya,Colombo,A temple with a sacred Bo tree,Western,Religious Site,WE-COL178-FEE,1.00,6.8839,79.9605
+EA-BAT179,Pigeon Island National Park,Trincomalee,A coral island with snorkeling opportunities,Eastern,Nature Reserve,EA-BAT179-FEE,3.00,8.77,81.1633
+UV-BAD180,Haputale Viewpoint,Badulla,A scenic view over valleys and tea estates,Uva,Adventure,UV-BAD180-FEE,1.00,6.8455,80.965
+CE-KAN181,Temple of the Sacred Tooth Relic,Kandy,A famous Buddhist temple holding a sacred tooth relic,Central,Religious Site,CE-KAN181-FEE,1.50,7.293,80.639
+SO-HAM182,Fort Galle,Galle,A historic fort with colonial buildings and museums,Southern,Historical Site,SO-HAM182-FEE,2.00,6.025,80.217
+WE-COL183,Viharamahadevi Park,Colombo,A large city park with gardens and a pond,Western,Parks,WE-COL183-FEE,1.50,6.9271,79.8603
+NC-MON184,Anuradhapura Ancient City,Anuradhapura,Ancient city ruins with stupas and palaces,North Central,Historical Site,NC-MON184-FEE,3.00,8.3129,80.4248
+UV-BAD185,Ravana Falls,Badulla,A wide scenic waterfall with a natural pool,Uva,Nature,UV-BAD185-FEE,1.00,6.8622,81.0569
+NW-KUR186,Elephant Rock,Kurunegala,A large rock with elephant-shaped features,North Western,Adventure,NW-KUR186-FEE,1.00,7.48,80.366
+EA-BAT187,Koddiyar Bay,Trincomalee,A beautiful bay popular for fishing and boating,Eastern,Beach,EA-BAT187-FEE,2.00,8.565,81.234
+SO-GAM188,Martin Wickramasinghe Folk Museum,Galle,A museum showcasing traditional rural life,Southern,Museum,SO-GAM188-FEE,1.50,6.0345,80.216
+WE-NEG189,Angurukaramulla Temple,Negombo,A colorful Buddhist temple with murals,Western,Religious Site,WE-NEG189-FEE,1.00,7.2094,79.832
+CE-KAN190,Udawatta Kele Sanctuary,Kandy,A forest reserve with rare birds and trails,Central,Nature Reserve,CE-KAN190-FEE,2.00,7.2901,80.6367
+NC-MON191,Minneriya National Park,Polonnaruwa,Known for large herds of wild elephants,North Central,Nature Reserve,NC-MON191-FEE,4.00,8.0411,81.0027
+WE-COL192,Gangaramaya Temple,Colombo,A Buddhist temple with eclectic architecture,Western,Religious Site,WE-COL192-FEE,1.50,6.9279,79.8505
+CE-MAT193,Spice Garden,Dambulla,A garden showing Sri Lankan spices and herbs,Central,Cultural Village,CE-MAT193-FEE,1.00,7.8738,80.654
+SO-GAM194,Unawatuna Beach,Galle,A calm beach popular with tourists,Southern,Beach,SO-GAM194-FEE,2.00,6.0315,80.252
+NC-MON195,Polonnaruwa Ancient City,Polonnaruwa,Well-preserved ancient ruins,North Central,Historical Site,NC-MON195-FEE,3.00,7.9438,81.002
+WE-NEG196,Kosgoda Turtle Hatchery,Galle,A conservation center protecting sea turtles,Western,Wildlife Park,WE-NEG196-FEE,1.00,6.2239,80.0237
+CE-KAN197,Kandy Lake,Kandy,A serene lake in central Kandy,Central,Parks,CE-KAN197-FEE,1.00,7.2933,80.637
+SO-HAM198,Yala National Park,Yala,National park with elephants and leopards,Southern,Nature Reserve,SO-HAM198-FEE,4.00,6.3613,81.5091
+NC-MON199,Polonnaruwa Museum,Polonnaruwa,Museum with artifacts from ancient city,North Central,Museum,NC-MON199-FEE,1.00,7.9455,81.0017
+WE-COL200,Bellanwila Rajamaha Viharaya,Colombo,A temple with a sacred Bo tree,Western,Religious Site,WE-COL200-FEE,1.00,6.8839,79.9605
+EA-BAT201,Pigeon Island National Park,Trincomalee,A coral island with snorkeling opportunities,Eastern,Nature Reserve,EA-BAT201-FEE,3.00,8.77,81.1633
+UV-BAD202,Haputale Viewpoint,Badulla,A scenic view over valleys and tea estates,Uva,Adventure,UV-BAD202-FEE,1.00,6.8455,80.965
+NW-PUT203,Wilpattu Lake,Putlam,A scenic freshwater lake in a wildlife park,North Western,Nature Reserve,NW-PUT203-FEE,2.00,8.0384,79.9945
+WE-NEG204,Negombo Beach,Negombo,A popular beach known for sunsets and seafood,Western,Beach,WE-NEG204-FEE,2.00,7.2071,79.839
+CE-MAT205,Ritigala Forest Monastery,Anuradhapura,Ancient Buddhist monastery ruins in forest,Central,Historical Site,CE-MAT205-FEE,1.50,8.1022,80.5527
+SO-GAM206,Galle Lighthouse,Galle,A historic lighthouse near the fort,Southern,Historical Site,SO-GAM206-FEE,0.50,6.0341,80.2176
+NC-MON207,Mihintale,Anuradhapura,The cradle of Buddhism in Sri Lanka,North Central,Religious Site,NC-MON207-FEE,2.00,8.3595,80.5617
+WE-COL208,Borella Cemetery,Colombo,A large colonial-era cemetery with historical graves,Western,Historical Site,WE-COL208-FEE,1.00,6.9312,79.8884
+EA-TRI209,Marble Beach,Trincomalee,A white sandy beach with clear waters,Eastern,Beach,EA-TRI209-FEE,2.00,8.5722,81.241
+UV-BAD210,Lindula Tea Factory,Badulla,A working tea factory with guided tours,Uva,Cultural Village,UV-BAD210-FEE,1.00,6.8421,80.9704
+NC-MON211-FEE,Medirigiriya Ancient City,Medirigiriya,Ancient city ruins with temples and stupas,North Central,Historical Site,NC-MON211-FEE,2.00,7.9132,81.1551
+SO-HAM212,Induruwa Beach,Induruwa,A quiet beach with golden sand and calm waters,Southern,Beach,SO-HAM212-FEE,2.00,6.3335,80.12
+CE-KAN213,Bahirawakanda Temple,Kandy,A hilltop temple with panoramic views of the city,Central,Religious Site,CE-KAN213-FEE,1.00,7.2905,80.6275
+WE-COL214,Colombo National Museum,Colombo,Largest museum of Sri Lankan history and art,Western,Museum,WE-COL214-FEE,2.00,6.9271,79.8587
+EA-TRI215,Nilaveli Beach,Trincomalee,A sandy beach with clear water and coral reefs,Eastern,Beach,EA-TRI215-FEE,2.00,8.7167,81.1983
+UV-BAD216,Diyaluma Falls,Badulla,Second highest waterfall in Sri Lanka with pools,Uva,Nature,UV-BAD216-FEE,1.50,6.853,81.01
+NW-PUT217,Chilaw Beach,Chilaw,A peaceful beach town popular with locals,North Western,Beach,NW-PUT217-FEE,1.50,7.4667,79.7833
+NC-MON218,Ramba Viharaya,Anuradhapura,Ancient monastery with old inscriptions,North Central,Historical Site,NC-MON218-FEE,1.00,8.3034,80.4199
+SO-GAM219,Mulkirigala Rock Temple,Mulkirigala,A temple complex built on a rock hill,Southern,Religious Site,SO-GAM219-FEE,2.00,6.1577,81.0781
+WE-NEG220,Angurukaramulla Temple,Negombo,A Buddhist temple famous for its giant Buddha statue,Western,Religious Site,WE-NEG220-FEE,1.00,7.2095,79.8305
+CE-MAT221,Minneriya Tank,Minneriya,A large ancient reservoir surrounded by wildlife,Central,Nature Reserve,CE-MAT221-FEE,2.00,8,80.92
+SO-HAM222,Martin Wickramasinghe Folk Museum,Galle,A museum showing rural life of Sri Lanka,Southern,Museum,SO-HAM222-FEE,1.00,6.0329,80.2147
+WE-COL223,Galle Face Green,Colombo,A large ocean-side urban park,Western,Parks,WE-COL223-FEE,1.00,6.9271,79.8512
+NC-MON224,Wilpattu National Park,Wilpattu,Known for leopard sightings and wild elephants,North Western,Nature Reserve,NC-MON224-FEE,4.00,8.1478,79.9271
+UV-BAD225,Horton Plains National Park,Nuwara Eliya,A scenic park with cloud forests and trails,Central,Nature Reserve,UV-BAD225-FEE,3.00,6.8,80.8
+EA-TRI226,Koneswaram Temple,Trincomalee,Ancient Hindu temple on a cliff,Eastern,Religious Site,EA-TRI226-FEE,1.00,8.5776,81.2331
+NW-KUR227,Mihindu Shrine,Kurunegala,A historic Buddhist shrine,North Western,Religious Site,NW-KUR227-FEE,0.50,7.485,80.364
+SO-HAM228,Galle Dutch Fort,Galle,A UNESCO World Heritage site with colonial architecture,Southern,Historical Site,SO-HAM228-FEE,2.00,6.032,80.217
+WE-COL229,Viharamahadevi Park,Colombo,A large city park with flowers and playgrounds,Western,Parks,WE-COL229-FEE,1.00,6.927,79.86
+NC-MON230,Arankele Cave Temple,Kurunegala,A historic cave temple with ancient paintings,North Western,Religious Site,NC-MON230-FEE,1.00,7.45,80.3645
+SO-GAM231,Galle Lighthouse,Galle,A lighthouse offering sea views near Galle Fort,Southern,Historical Site,SO-GAM231-FEE,0.50,6.0341,80.2176
+CE-KAN232,Kandy Lake,Kandy,A tranquil lake in the center of Kandy city,Central,Parks,CE-KAN232-FEE,1.00,7.2933,80.6391
+UV-BAD233,Bahirawa Kanda Temple,Kandy,A temple perched on a hill with city views,Uva,Religious Site,UV-BAD233-FEE,1.00,7.294,80.6405
+WE-NEG234,Negombo Beach,Negombo,A long sandy beach with seafood vendors,Western,Beach,WE-NEG234-FEE,2.00,7.205,79.84
+NC-MON235,Polonnaruwa Museum,Polonnaruwa,Exhibits ancient artifacts and sculptures,North Central,Museum,NC-MON235-FEE,1.00,7.9437,81.002
+SO-HAM236,Unawatuna Beach,Galle,A popular beach with calm water for swimming,Southern,Beach,SO-HAM236-FEE,2.00,6.0315,80.252
+EA-TRI237,Pigeon Island National Park,Trincomalee,A coral island famous for snorkeling,Eastern,Nature Reserve,EA-TRI237-FEE,3.00,8.774,81.167
+NW-KUR238,Elephant Rock,Kurunegala,A giant rock formation resembling an elephant,North Western,Adventure,NW-KUR238-FEE,1.00,7.48,80.366
+WE-COL239,Gangaramaya Temple,Colombo,A temple combining modern architecture with traditions,Western,Religious Site,WE-COL239-FEE,1.50,6.9279,79.8505
+CE-MAT240,Spice Garden,Dambulla,A garden showcasing Sri Lankan spices and herbs,Central,Cultural Village,CE-MAT240-FEE,1.00,7.8738,80.654
+SO-HAM241,Rekawa Turtle Conservation Project,Hambantota,A conservation site where you can see sea turtles laying eggs,Southern,Nature Reserve,SO-HAM241-FEE,2.00,6.1667,81.1347
+NC-MON242,Isurumuniya Temple,Anuradhapura,Ancient rock temple with beautiful carvings and statues,North Central,Religious Site,NC-MON242-FEE,1.00,8.3277,80.3995
+CE-KAN243,Kandy View Point,Kandy,A scenic viewpoint overlooking the city of Kandy,Central,Nature,CE-KAN243-FEE,0.50,7.2906,80.628
+WE-COC244,Colombo Dutch Hospital,Colombo,A historic hospital complex turned shopping and dining area,Western,Cultural Site,WE-COC244-FEE,1.00,6.931,79.8486
+EA-BAT245,Baticaloa Lagoon,Baticaloa,A large lagoon with rich birdlife and boat rides,Eastern,Nature,EA-BAT245-FEE,2.00,7.7154,81.7005
+UV-MON246,Rawana Falls,Bandarawela,A majestic waterfall surrounded by lush forest,Uva,Nature,UV-MON246-FEE,1.50,6.8401,81.0456
+NW-PUT247,Paravi Dupatha Temple,Chilaw,An ancient Buddhist temple with historical significance,North Western,Religious Site,NW-PUT247-FEE,1.00,7.4645,79.789
+NC-MON248,Mihintale,Anuradhapura,The birthplace of Buddhism in Sri Lanka with ancient ruins,North Central,Religious Site,NC-MON248-FEE,2.00,8.3453,80.4
+SO-GAM249,Koggala Lake,Galle,A large freshwater lagoon known for its biodiversity,Southern,Nature,SO-GAM249-FEE,2.00,5.987,80.316
+WE-COL250,Independence Memorial Hall,Colombo,A monument celebrating Sri Lanka’s independence,Western,Historical Site,WE-COL250-FEE,1.00,6.9306,79.8539
+CE-MAT251,Dambulla Cave Temple,Dambulla,A UNESCO World Heritage site with colorful cave murals,Central,Religious Site,CE-MAT251-FEE,2.00,7.8586,80.652
+EA-TRI252,Trincomalee Harbour,Trincomalee,One of the world’s finest natural harbors,Eastern,Historical Site,EA-TRI252-FEE,1.00,8.569,81.234
+UV-BAD253,Demodara Nine Arch Bridge,Badulla,A famous colonial-era railway bridge,Uva,Historical Site,UV-BAD253-FEE,1.00,6.825,81.0405
+NW-KUR254,Ethagala Rock,Kurunegala,A large rock offering panoramic views,North Western,Nature,NW-KUR254-FEE,1.00,7.4862,80.359
+SO-HAM255,Yala National Park,Tissamaharama,Sri Lanka’s most famous wildlife park with leopards,Southern,Nature Reserve,SO-HAM255-FEE,4.00,6.34,81.5
+WE-NEG256,St. Mary's Church,Negombo,A colonial-era Catholic church with intricate architecture,Western,Religious Site,WE-NEG256-FEE,1.00,7.2101,79.8403
+NC-MON257,Thuparamaya Dagoba,Anuradhapura,The oldest dagoba in Sri Lanka dating to 3rd century BC,North Central,Historical Site,NC-MON257-FEE,1.00,8.33,80.3998
+SO-GAM258,Kanneliya Rainforest Reserve,Kanneliya,An untouched rainforest with rare flora and fauna,Southern,Nature Reserve,SO-GAM258-FEE,3.00,6.1452,80.3451
+CE-KAN259,Udawattakele Forest Reserve,Kandy,A forest reserve and birdwatching hotspot,Central,Nature Reserve,CE-KAN259-FEE,2.00,7.29,80.6295
+EA-TRI260,Fort Frederick,Trincomalee,A historic fort with views over the harbor,Eastern,Historical Site,EA-TRI260-FEE,1.00,8.5765,81.2356
+UV-MON261,St. Clair's Falls,Nuwara Eliya,A beautiful waterfall in a tea plantation area,Uva,Nature,UV-MON261-FEE,1.00,6.927,80.744
+NW-PUT262,Mundal Lake,Chilaw,A calm freshwater lake popular for boating,North Western,Nature,NW-PUT262-FEE,2.00,7.473,79.79
+SO-HAM263,Rahulana National Park,Tissamaharama,A lesser-known park with elephants and wildlife,Southern,Nature Reserve,SO-HAM263-FEE,3.00,6.3,81.46
+WE-COL264,Borella Cemetery,Colombo,A large cemetery with historical graves,Western,Historical Site,WE-COL264-FEE,1.00,6.94,79.88
+NC-MON265,Isurupaya Archaeological Site,Anuradhapura,Ancient ruins of a royal palace,North Central,Historical Site,NC-MON265-FEE,1.00,8.3305,80.3985
+CE-MAT266,Handunugoda Tea Estate,Dambulla,A tea plantation with tours and tastings,Central,Cultural Village,CE-MAT266-FEE,1.50,7.9,80.6
+EA-BAT267,Passikudah Bay,Batticaloa,A bay with calm waters for swimming,Eastern,Beach,EA-BAT267-FEE,2.00,7.7171,81.8022
+UV-BAD268,Little Adam’s Peak,Ella,A moderate hike with beautiful views,Uva,Nature,UV-BAD268-FEE,2.00,6.873,81.0445
+NW-KUR269,Ritigala Forest Reserve,Ritigala,A mystical forest with ancient ruins,North Western,Nature Reserve,NW-KUR269-FEE,3.00,7.6,80.3833
+SO-GAM270,Kushtarajagala,Galle,Ancient Buddha statues carved in rock,Southern,Historical Site,SO-GAM270-FEE,1.00,6.041,80.212
+CE-MAT271,Minneriya National Park,Minneriya,Home to large herds of wild elephants  known for spectacular sightings,Central,Nature Reserve,CE-MAT271-FEE,4.00,7.95,80.9
+NW-PUT272,Chilaw Lagoon,Chilaw,A calm lagoon ideal for fishing and bird watching,North Western,Nature,NW-PUT272-FEE,2.00,7.461,79.786
+WE-COL273,Galle Face Green,Colombo,Popular urban park by the sea for picnics and kite flying,Western,Recreational,WE-COL273-FEE,1.00,6.9271,79.8467
+SO-HAM274,Bundala National Park,Tissamaharama,A wetland sanctuary for migratory birds and wildlife,Southern,Nature Reserve,SO-HAM274-FEE,3.00,6.2275,81.14
+EA-TRI275,Koneswaram Temple,Trincomalee,An ancient Hindu temple with cliff-top views,Eastern,Religious Site,EA-TRI275-FEE,1.50,8.568,81.2345
+UV-BAD276,Bakamuna Ancient City,Badulla,Historic ruins surrounded by natural beauty,Uva,Historical Site,UV-BAD276-FEE,2.00,7,81.0833
+NC-MON277,Wilpattu National Park,Anuradhapura,Largest national park with elephants and leopards,North Central,Nature Reserve,NC-MON277-FEE,4.00,8,80.4
+CE-KAN278,Tea Museum,Kandy,Interactive museum showcasing Sri Lanka’s tea history,Central,Cultural,CE-KAN278-FEE,1.50,7.2906,80.6337
+NW-KUR279,Ridiyagama Safari Park,Ridiyagama,A new safari park home to diverse wild animals,North Western,Nature Reserve,NW-KUR279-FEE,3.00,7.5,80
+SO-GAM280,Unawatuna Beach,Galle,Popular beach known for calm waters and coral reefs,Southern,Beach,SO-GAM280-FEE,3.00,6.0322,80.2359
+WE-COL281,Gangaramaya Temple,Colombo,A unique temple mixing modern architecture and history,Western,Religious Site,WE-COL281-FEE,1.00,6.925,79.8617
+EA-BAT282,Chenkalady Lagoon,Batticaloa,Serene lagoon with boat rides and fishing,Eastern,Nature,EA-BAT282-FEE,2.00,7.7,81.695
+UV-BAD283,Ravana Falls,Ella,A wide waterfall surrounded by green hills,Uva,Nature,UV-BAD283-FEE,1.00,6.8734,81.0462
+NC-MON284,Jaya Sri Maha Bodhi,Anuradhapura,The oldest sacred fig tree in the world,North Central,Religious Site,NC-MON284-FEE,1.00,8.3456,80.4011
+CE-MAT285,Pidurangala Rock,Dambulla,A climbing spot with panoramic views of Sigiriya,Central,Nature,CE-MAT285-FEE,1.50,7.96,80.651
+NW-PUT286,Kapparagaha Temple,Chilaw,Historic Buddhist temple with tranquil surroundings,North Western,Religious Site,NW-PUT286-FEE,1.00,7.465,79.789
+SO-HAM287,Tissa Wewa,Tissamaharama,A large reservoir popular for birdwatching,Southern,Nature,SO-HAM287-FEE,2.00,6.353,81.45
+WE-NEG288,Negombo Beach,Negombo,A lively beach town famous for seafood and sunsets,Western,Beach,WE-NEG288-FEE,3.00,7.215,79.838
+EA-TRI289,Mahaweli River Trincomalee,Eastern,A beautiful river flowing into the sea near Trincomalee,Eastern,Nature,EA-TRI289-FEE,2.00,8.565,81.23
+UV-BAD290,Ella Rock,Ella,A challenging hike with stunning valley views,Uva,Nature,UV-BAD290-FEE,3.00,6.853,81.044
+NC-MON291,Sigiriya Rock Fortress,Sigiriya,Iconic ancient rock fortress with frescoes and gardens,North Central,Historical Site,NC-MON291-FEE,3.00,7.957,80.759
+CE-KAN292,Kandy Lake,Kandy,A serene lake in the heart of Kandy city,Central,Nature,CE-KAN292-FEE,1.00,7.294,80.631
+NW-KUR293,Angurukaramulla Temple,Kurunegala,Colorful Buddhist temple with giant Buddha statue,North Western,Religious Site,NW-KUR293-FEE,1.00,7.484,80.359
+SO-GAM294,Galle Dutch Fort,Galle,A well-preserved colonial fort with museums and shops,Southern,Historical Site,SO-GAM294-FEE,2.00,6.033,80.216
+WE-COL295,National Museum Colombo,Colombo,Sri Lanka’s largest museum with cultural exhibits,Western,Cultural,WE-COL295-FEE,2.00,6.925,79.858
+EA-BAT296,Arugam Bay,Eastern,Famous surf spot with beautiful beaches and nightlife,Eastern,Beach,EA-BAT296-FEE,3.00,6.854,81.868
+UV-BAD297,Tea Plantations,Nuwara Eliya,Vast green tea plantations with factory tours,Uva,Cultural,UV-BAD297-FEE,2.00,6.969,80.789
+NC-MON298,Ruwanwelisaya Stupa,Anuradhapura,Massive dagoba considered a sacred Buddhist site,North Central,Religious Site,NC-MON298-FEE,1.00,8.327,80.3985
+CE-MAT299,Sigiriya Museum,Sigiriya,Museum detailing history and archaeology of Sigiriya,Central,Cultural,CE-MAT299-FEE,1.00,7.954,80.759
+NW-PUT300,Wilpaththu Lagoon,Wilpaththu,A pristine lagoon within Wilpattu National Park,North Western,Nature Reserve,NW-PUT300-FEE,2.00,8,79.85

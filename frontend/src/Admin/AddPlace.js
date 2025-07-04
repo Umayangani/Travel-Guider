@@ -40,35 +40,33 @@ const AddPlace = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    // Append all form fields
-    Object.entries(placeData).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    // Append images
-    images.forEach((file) => {
-      formData.append("images", file);
-    });
-
-    // Append video
-    if (video) {
-      formData.append("video", video);
-    }
-
+    // Split fields for backend
+    const place = {
+      name: placeData.name,
+      district: placeData.district,
+      description: placeData.description,
+      region: placeData.region,
+      category: placeData.category,
+      estimatedTimeToVisit: parseFloat(placeData.estimated_time_to_visit),
+      latitude: parseFloat(placeData.latitude),
+      longitude: parseFloat(placeData.longitude),
+    };
+    const entryFee = {
+      foreignAdult: parseFloat(placeData.foreign_adult),
+      foreignChild: parseFloat(placeData.foreign_child),
+      localAdult: parseFloat(placeData.local_adult),
+      localChild: parseFloat(placeData.local_child),
+      student: parseFloat(placeData.student),
+      freeEntry: placeData.free_entry,
+    };
     try {
       const response = await fetch("http://localhost:8080/api/places", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ place, entryFee }),
       });
-
       if (response.ok) {
-        const result = await response.text();
-        alert("✅ Place added successfully!\n" + result);
-
-        // Reset form
+        alert("✅ Place added successfully!");
         setPlaceData({
           name: "",
           district: "",
