@@ -17,22 +17,26 @@ const AddAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
     try {
       const response = await fetch("http://localhost:8080/api/admin/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(adminData),
+        body: JSON.stringify({
+          name: adminData.name,
+          email: adminData.email,
+          password: adminData.password,
+          dob: adminData.dob,
+        }),
       });
 
+      const data = await response.json();
       if (response.ok) {
         alert("✅ Admin created successfully!");
         setAdminData({ name: "", email: "", password: "", dob: "", role: "ADMIN" });
       } else {
-        alert("❌ Failed to create admin");
+        alert(data.message || "❌ Failed to create admin");
       }
     } catch (error) {
       alert("❌ Network error");

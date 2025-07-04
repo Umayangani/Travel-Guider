@@ -198,6 +198,31 @@ a {
   text-decoration: underline;
 }
 
+/* Success and error messages */
+.success-message {
+  background: #e1f7d5;
+  color: #176c2b;
+  border: 1px solid #b2e6b2;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  background: #ffe0e0;
+  color: #b30000;
+  border: 1px solid #ffb2b2;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .login-card,
