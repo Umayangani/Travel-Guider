@@ -1,0 +1,36 @@
+.csv-import-container {
+  background: #f8fff8;
+  border-radius: 8px;
+  padding: 2em;
+  max-width: 500px;
+  margin: 2em auto;
+  box-shadow: 0 2px 8px #0001;
+}
+.import-section {
+  margin-bottom: 1.5em;
+}
+.import-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.import-section input[type="file"] {
+  margin-bottom: 0.5em;
+}
+.import-section button {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1.2em;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1em;
+}
+.import-section button:hover {
+  background: #1b5e20;
+}
+.import-message {
+  margin-top: 1em;
+  font-weight: bold;
+  color: #2e7d32;
+}

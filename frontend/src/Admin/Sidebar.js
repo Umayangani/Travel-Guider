@@ -60,6 +60,14 @@ const Sidebar = ({ adminName = "Admin" }) => {
             >
               Edit Place
             </NavLink>
+            <NavLink
+              to="/admin/csv-import"
+              className={({ isActive }) =>
+                isActive ? "submenu-item active" : "submenu-item"
+              }
+            >
+              Import CSV
+            </NavLink>
           </div>
         )}
       </div>

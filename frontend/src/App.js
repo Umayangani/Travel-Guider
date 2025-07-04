@@ -16,6 +16,7 @@ import Sidebar from './Admin/Sidebar';
 import EditPlace from "./Admin/EditPlace";
 import Settings from "./Admin/Settings";
 import AdminLayout from "./Admin/AdminLayout";
+import CsvImport from "./Admin/CsvImport";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -55,6 +56,7 @@ function App() {
           <Route path="add-train" element={<AddTrain />} />
           <Route path="add-bus" element={<AddBus />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="csv-import" element={<CsvImport />} />
           {/* Add more admin routes as needed */}
         </Route>
 
