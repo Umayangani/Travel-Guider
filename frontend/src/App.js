@@ -15,7 +15,7 @@ import AddPlace from "./Admin/AddPlace";
 import Sidebar from './Admin/Sidebar';
 import EditPlace from "./Admin/EditPlace";
 import Settings from "./Admin/Settings";
-// import other admin pages if needed
+import AdminLayout from "./Admin/AdminLayout";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -45,18 +45,21 @@ function App() {
           }
         />
 
-        {/* 🔐 Admin Routes */}
-        <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add-admin" element={<AddAdmin />} />
+        {/* Admin layout with sidebar and dashboard by default */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="add-admin" element={<AddAdmin />} />
+          <Route path="add-place" element={<AddPlace />} />
+          <Route path="edit-place" element={<EditPlace />} />
+          <Route path="add-train" element={<AddTrain />} />
+          <Route path="add-bus" element={<AddBus />} />
+          <Route path="settings" element={<Settings />} />
+          {/* Add more admin routes as needed */}
+        </Route>
 
-        {/* 🧭 Add more routes if needed: */}
-        <Route path="/add-place" element={<AddPlace />} />
-        <Route path="/edit-place" element={<EditPlace />} />
-        <Route path="/add-train" element={<AddTrain />} />
-        <Route path="/add-bus" element={<AddBus />} />
-        <Route path="/settings" element={<Settings />} />
-       
+        {/* User route placeholder */}
+        <Route path="/user" element={<div></div>} />
       </Routes>
     </Router>
   );

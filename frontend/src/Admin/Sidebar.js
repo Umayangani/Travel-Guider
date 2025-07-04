@@ -23,7 +23,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
 
       <div className="menu-item">
         <NavLink
-          to="/"
+          to="/admin"
           end
           className={({ isActive }) => (isActive ? "menu-title active" : "menu-title")}
         >
@@ -45,7 +45,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
         {openMenu === "place" && (
           <div className="submenu">
             <NavLink
-              to="/add-place"
+              to="/admin/add-place"
               className={({ isActive }) =>
                 isActive ? "submenu-item active" : "submenu-item"
               }
@@ -53,7 +53,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
               Add Place
             </NavLink>
             <NavLink
-              to="/edit-place"
+              to="/admin/edit-place"
               className={({ isActive }) =>
                 isActive ? "submenu-item active" : "submenu-item"
               }
@@ -75,12 +75,8 @@ const Sidebar = ({ adminName = "Admin" }) => {
         </div>
         {openMenu === "train" && (
             <div className="submenu">
-            <NavLink to="/add-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-              Add Train
-            </NavLink>
-         <NavLink to="/edit-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-              Edit Train
-        </NavLink>
+            <NavLink to="/admin/add-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add Train</NavLink>
+         <NavLink to="/admin/edit-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Edit Train</NavLink>
          </div>
         )}
       </div>
@@ -95,12 +91,8 @@ const Sidebar = ({ adminName = "Admin" }) => {
         </div>
         {openMenu === "bus" && (
   <div className="submenu">
-    <NavLink to="/add-bus" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Add Bus
-    </NavLink>
-    <NavLink to="/edit-bus" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Edit Bus
-    </NavLink>
+    <NavLink to="/admin/add-bus" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add Bus</NavLink>
+    <NavLink to="/admin/edit-bus" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Edit Bus</NavLink>
   </div>
 )}
       </div>
@@ -115,12 +107,8 @@ const Sidebar = ({ adminName = "Admin" }) => {
         </div>
         {openMenu === "user" && (
   <div className="submenu">
-    <NavLink to="/add-user" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Add User
-    </NavLink>
-    <NavLink to="/manage-users" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Manage Users
-    </NavLink>
+    <NavLink to="/admin/add-user" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add User</NavLink>
+    <NavLink to="/admin/manage-users" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Manage Users</NavLink>
   </div>
 )}
       </div>
@@ -135,12 +123,8 @@ const Sidebar = ({ adminName = "Admin" }) => {
         </div>
         {openMenu === "admin" && (
   <div className="submenu">
-    <NavLink to="/add-admin" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Add Admin
-    </NavLink>
-    <NavLink to="/manage-admins" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-      Manage Admins
-    </NavLink>
+    <NavLink to="/admin/add-admin" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add Admin</NavLink>
+    <NavLink to="/admin/manage-admins" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Manage Admins</NavLink>
   </div>
 )}
       </div>
@@ -148,9 +132,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
         <div className="menu-title">
          <div className="menu-label">
            <img src="/icons/settings.png" alt="Settings" className="menu-icon" />
-           <NavLink to="/Settings" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>
-             Settings
-            </NavLink>
+           <NavLink to="/admin/settings" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Settings</NavLink>
           </div>
         </div>
       </div>
