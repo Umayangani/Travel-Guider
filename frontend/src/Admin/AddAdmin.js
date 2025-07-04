@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AddPlace.css"; // Reuse same styling
+import "./AddPlace.css";
 
 const AddAdmin = () => {
   const [adminData, setAdminData] = useState({
@@ -12,44 +12,30 @@ const AddAdmin = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAdminData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setAdminData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // You might want to hash the password in backend (important!)
+    const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:8080/api/users", {
+      const response = await fetch("http://localhost:8080/api/admin/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(adminData),
       });
 
       if (response.ok) {
-        const result = await response.text();
-        alert("✅ Admin user created successfully!\n" + result);
-
-        // Reset form
-        setAdminData({
-          name: "",
-          email: "",
-          password: "",
-          dob: "",
-          role: "ADMIN",
-        });
+        alert("✅ Admin created successfully!");
+        setAdminData({ name: "", email: "", password: "", dob: "", role: "ADMIN" });
       } else {
-        const errorText = await response.text();
-        alert("❌ Error creating admin user: " + errorText);
+        alert("❌ Failed to create admin");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("❌ Network error submitting form.");
+      alert("❌ Network error");
     }
   };
 
@@ -59,50 +45,19 @@ const AddAdmin = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-section">
           <label>Name:</label>
-          <input
-            name="name"
-            value={adminData.name}
-            onChange={handleInputChange}
-            required
-          />
-
+          <input name="name" value={adminData.name} onChange={handleInputChange} required />
           <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={adminData.email}
-            onChange={handleInputChange}
-            required
-          />
-
+          <input type="email" name="email" value={adminData.email} onChange={handleInputChange} required />
           <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={adminData.password}
-            onChange={handleInputChange}
-            required
-          />
-
+          <input type="password" name="password" value={adminData.password} onChange={handleInputChange} required />
           <label>Date of Birth:</label>
-          <input
-            type="date"
-            name="dob"
-            value={adminData.dob}
-            onChange={handleInputChange}
-          />
-
+          <input type="date" name="dob" value={adminData.dob} onChange={handleInputChange} />
           <label>Role:</label>
-          <select
-            name="role"
-            value={adminData.role}
-            onChange={handleInputChange}
-          >
+          <select name="role" value={adminData.role} onChange={handleInputChange}>
             <option value="ADMIN">Admin</option>
             <option value="USER">User</option>
           </select>
         </div>
-
         <button type="submit">Create Admin User</button>
       </form>
     </div>

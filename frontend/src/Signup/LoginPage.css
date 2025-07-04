@@ -1,4 +1,4 @@
-/* LoginPage.css - Updated with better close button positioning */
+/* Overlay to center the modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -9,84 +9,75 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
   animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* Container animations */
+.registration-container,
 .login-container {
-  position: relative;
-  animation: slideIn 0.3s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes slideIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.login-card {
+/* Card styling (shared for login & registration) */
+.login-card{
   display: flex;
   flex-direction: row-reverse;
-  width: 90%;
-  max-width: 900px;
-  max-height: 90vh;
-  background-color: white;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px;
+  background: white;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  align-items: stretch; /* Ensures both halves are same height */
+  height: 700px;
 }
 
+/* Close button */
 .close-btn {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(255, 255, 255, 0.95);
+  background: white;
   border: none;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  z-index: 1001; /* Higher z-index to ensure it's above everything */
-  transition: all 0.3s ease;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 1);
+  background: #f0f0f0;
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.form-section {
-  flex: 1;
-  padding: 40px;
-  background-color: #021301;
-  color: white;
+/* Form section styling */
+.form-section,
+.image-section {
+  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow-y: auto;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+  min-height: 100%; /* Ensure same height */
+}
+
+.form-section {
+  background-color: #062E03;
+  color: white;
 }
 
 .form-section h2 {
@@ -96,22 +87,23 @@
   text-align: center;
 }
 
+/* Input groups */
 .input-group {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
   background: white;
+  padding: 10px;
   border-radius: 6px;
-  padding: 8px;
+  margin-bottom: 15px;
+  align-items: center;
+  width: 100%;
 }
 
 .input-group input {
+  flex: 1;
   border: none;
   outline: none;
-  padding: 12px;
-  flex: 1;
   font-size: 1rem;
-  color: #333;
+  padding: 10px;
 }
 
 .input-group input::placeholder {
@@ -123,9 +115,19 @@
   font-size: 1.2rem;
 }
 
+.checkbox-group {
+  margin: 15px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
 .forgot-password {
   text-align: right;
   margin: 15px 0;
+  width: 100%;
 }
 
 .forgot-password a {
@@ -138,85 +140,81 @@
   text-decoration: underline;
 }
 
+/* Buttons */
+.register-btn,
 .login-btn {
   width: 100%;
   padding: 12px;
   background-color: #AE8625;
-  border: none;
   color: white;
-  font-size: 1.1rem;
+  border: none;
   font-weight: bold;
+  font-size: 1.1rem;
   border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
+.register-btn:hover,
 .login-btn:hover {
   background-color: #8a6a1e;
 }
 
+/* Image section */
 .image-section {
-  flex: 1;
   background: white;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  overflow-y: auto;
 }
 
 .image-section img {
-  width: 80%;
+  width: 100%;
   max-width: 300px;
-  min-width: 200px;
   height: auto;
+  object-fit: contain;
   margin-bottom: 20px;
-  border-radius: 8px;
-  object-fit: cover;
 }
 
 .switch-btn {
   margin-top: 20px;
+  border: 2px solid #062E03;
   background: none;
-  border: 2px solid #021301;
-  color: #021301;
-  font-weight: bold;
   padding: 10px 20px;
+  color: #062E03;
+  font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .switch-btn:hover {
-  background-color: #021301;
+  background-color: #062E03;
   color: white;
 }
 
+/* Links styling */
 a {
   color: #AE8625;
   text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .login-card {
+  .login-card,
+  .registration-card {
     flex-direction: column;
-    margin: 20px;
     max-width: 95%;
-    max-height: 95vh;
   }
-  
+
   .form-section,
   .image-section {
+    flex: 1 1 auto;
     padding: 30px;
+    min-height: auto;
   }
 
   .image-section img {
-    width: 70%;
-    max-width: 250px;
+    width: 80%;
   }
 
   .close-btn {
