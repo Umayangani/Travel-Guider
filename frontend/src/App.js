@@ -1,6 +1,6 @@
-// 📁 src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import HeaderHome from "./Header/HeaderHome";
 import HeroSection from "./Animation/HeroSection";
 import CardList from "./Body/CardList";
@@ -17,6 +17,9 @@ import EditPlace from "./Admin/EditPlace";
 import Settings from "./Admin/Settings";
 import AdminLayout from "./Admin/AdminLayout";
 import CsvImport from "./Admin/CsvImport";
+import HeaderUser from "./Header/HeaderUser";
+import { fetchCurrentUser } from "./api/user";
+import ItineraryForm from "./User/ItineraryForm";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -60,10 +63,32 @@ function App() {
           {/* Add more admin routes as needed */}
         </Route>
 
-        {/* User route placeholder */}
-        <Route path="/user" element={<div></div>} />
+        {/* User route: HeaderUser and Footer for user page */}
+        <Route path="/user" element={<UserPage />} />
       </Routes>
     </Router>
+  );
+}
+
+// UserPage component to fetch and provide user name
+function UserPage() {
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    fetchCurrentUser()
+      .then(data => {
+        console.log("Fetched user data:", data);
+        setUserName(data.name || "User");
+      })
+      .catch(() => setUserName("User"));
+  }, []);
+
+  return (
+    <>
+      <HeaderUser userName={userName} />
+      <ItineraryForm />
+      <Footer />
+    </>
   );
 }
 

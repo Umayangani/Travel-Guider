@@ -1,0 +1,165 @@
+.itinerary-field.same-size {
+  min-width: 160px;
+  max-width: 220px;
+  flex: 1 1 200px;
+  justify-content: flex-end;
+}
+.itinerary-field.start-location {
+  min-width: 180px;
+  max-width: 260px;
+  flex: 0 1 220px;
+}
+.itinerary-field.adult-child,
+.itinerary-field.pref {
+  min-width: 90px;
+  max-width: 120px;
+  flex: 0 1 110px;
+}
+.itinerary-form {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(6,46,3,0.08);
+  padding: 1.2rem 2.5rem 1.2rem 2.5rem;
+  margin: 2rem auto 2rem auto;
+  max-width: 1400px;
+  min-width: 100px;
+  width: 98vw;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.itinerary-title {
+  color: #062E03;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.itinerary-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.itinerary-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 150px;
+  flex: 1 1 180px;
+  justify-content: flex-end;
+}
+
+.itinerary-field label {
+  font-size: 1rem;
+  color: #062E03;
+  font-weight: 500;
+}
+
+.itinerary-field input[type="date"],
+.itinerary-field input[type="number"],
+.itinerary-field input[type="text"],
+.itinerary-field select {
+  padding: 0.4rem 0.7rem;
+  border: 1.2px solid #b5b5b5;
+  border-radius: 7px;
+  font-size: 1rem;
+  background: #f8fafc;
+  color: #062E03;
+  box-shadow: none;
+  transition: border-color 0.15s;
+}
+/* Single red underline for all fields in the second row */
+
+
+.itinerary-location {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.itinerary-location input[type="text"] {
+  min-width: 90px;
+  max-width: 160px;
+  flex: 1 1 120px;
+}
+
+.map-btn {
+  background: #062E03;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.map-btn:hover {
+  background: #0a4a0a;
+}
+
+.itinerary-pref-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.itinerary-pref-list {
+  margin-top: 0.3rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.itinerary-pref-item {
+  background: #e6f4ea;
+  color: #062E03;
+  border-radius: 12px;
+  padding: 0.2rem 0.8rem 0.2rem 0.7rem;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.itinerary-pref-item button {
+  background: none;
+  border: none;
+  color: #b91c1c;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: 2px;
+}
+
+.itinerary-transport {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.2rem;
+}
+
+.itinerary-transport label {
+  font-size: 1rem;
+  color: #062E03;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.itinerary-submit {
+  background: #062E03;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.15s;
+}
+.itinerary-submit:hover {
+  background: #0a4a0a;
+}
