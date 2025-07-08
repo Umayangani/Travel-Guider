@@ -20,6 +20,7 @@ import CsvImport from "./Admin/CsvImport";
 import HeaderUser from "./Header/HeaderUser";
 import { fetchCurrentUser } from "./api/user";
 import ItineraryForm from "./User/ItineraryForm";
+import UserHero from './User/UserHero';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -86,7 +87,9 @@ function UserPage() {
   return (
     <>
       <HeaderUser userName={userName} />
-      <ItineraryForm />
+      <UserHero>
+          <ItineraryForm />
+      </UserHero> 
       <Footer />
     </>
   );
