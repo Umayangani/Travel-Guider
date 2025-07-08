@@ -22,21 +22,25 @@ function CardList() {
 
   return (
     <div className="card-list">
-      {cards.map((card) => (
-        <div className="card" key={card.id}>
-          <img src={card.image} alt="Place" className="card-image" />
-          <div className="card-content">
-            <p className="card-description">{card.description}</p>
-            <span
-              className={`heart-icon ${preferred.includes(card.id) ? "liked" : ""}`}
-              onClick={() => togglePreference(card.id)}
-              title={preferred.includes(card.id) ? "Unlike" : "Like"}
-            >
-              {preferred.includes(card.id) ? "❤️" : "🤍"}
-            </span>
+      <div className="card-list-grid">
+        {cards.map((card) => (
+          <div className="card" key={card.id}>
+            <div className="card-img-wrap">
+              <img src={card.image} alt="Place" className="card-image" />
+              <span
+                className={`heart-icon ${preferred.includes(card.id) ? "liked" : ""}`}
+                onClick={() => togglePreference(card.id)}
+                title={preferred.includes(card.id) ? "Unlike" : "Like"}
+              >
+                {preferred.includes(card.id) ? "❤️" : "🤍"}
+              </span>
+            </div>
+            <div className="card-content">
+              <p className="card-description">{card.description}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

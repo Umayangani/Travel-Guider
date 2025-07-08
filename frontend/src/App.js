@@ -21,6 +21,8 @@ import HeaderUser from "./Header/HeaderUser";
 import { fetchCurrentUser } from "./api/user";
 import ItineraryForm from "./User/ItineraryForm";
 import UserHero from './User/UserHero';
+import UserBody from './User/UserBody';
+import UpcomingEvents from './User/UpcomingEvents';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -88,8 +90,10 @@ function UserPage() {
     <>
       <HeaderUser userName={userName} />
       <UserHero>
-          <ItineraryForm />
-      </UserHero> 
+        <ItineraryForm />
+      </UserHero>
+      <UserBody />
+      <UpcomingEvents /> 
       <Footer />
     </>
   );

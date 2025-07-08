@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import "./UserHero.css";
 
 const images = [
-  "/media/kandy.jpg",
+  "/media/beach.jpg",
+  "/media/palm-trees.jpg",
   "/media/nineArch.jpg",
-  "/media/sigiriya.jpeg"
+  "/media/tree.jpg",
+  "/media/galle.jpg",
+  "/media/road.jpg"
 ];
 
 function UserHero({ children }) {
@@ -25,7 +28,7 @@ function UserHero({ children }) {
         width: '100vw',
         height: '100vh',
         minHeight: '400px',
-        background: `linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url(${images[bgIndex]}) center center / cover no-repeat`,
+        background: `linear-gradient(rgba(0,0,0,0.70),rgba(0,0,0,0.70)), url(${images[bgIndex]}) center center / cover no-repeat`,
         position: 'relative',
         overflow: 'hidden',
         transition: 'background-image 0.7s ease-in-out'

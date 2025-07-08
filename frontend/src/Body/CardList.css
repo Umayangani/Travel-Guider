@@ -1,41 +1,73 @@
 .card-list {
   padding: 40px 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-list-grid {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  width: 320px;
   display: flex;
-  width: 80%;
-  height: 220px;
-  background: #f9f9f9;
-  border: 2px solid #ccc;
-  border-radius: 12px;
+  flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  animation: fadeInUp 0.6s ease both;
-  transition: transform 0.3s;
+  position: relative;
+  transition: box-shadow 0.2s;
+  margin-bottom: 0;
 }
 
 .card:hover {
-  transform: scale(1.01);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+}
+
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 
 .card-image {
-  width: 40%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.heart-icon.liked {
+  background: #ffeaea;
 }
 
 .card-content {
-  width: 60%;
-  padding: 20px;
-  position: relative; /* for absolute positioning heart */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 1.2rem 1rem 1.5rem 1rem;
+  flex: 1;
 }
 
 .card-description {
@@ -44,55 +76,39 @@
   margin-bottom: 10px;
 }
 
-.heart-icon {
-  position: absolute;  /* position heart top-right */
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-  user-select: none;
-}
-
-.heart-icon:hover {
-  transform: scale(1.2);
-}
-
-.heart-icon.liked {
-  color: red;
-}
-
-/* Animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@media (max-width: 1100px) {
+  .card-list-grid {
+    gap: 1.2rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-/* Responsive */
-@media (max-width: 768px) {
   .card {
+    width: 30vw;
+    min-width: 220px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .card-list-grid {
+    gap: 1rem;
+  }
+
+  .card {
+    width: 45vw;
+    min-width: 180px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .card-list-grid {
     flex-direction: column;
-    height: auto;
+    align-items: center;
   }
 
-  .card-image, .card-content {
-    width: 100%;
-    height: auto;
-  }
-
-  .card-content {
-    padding: 16px;
-    position: relative;
-  }
-
-  .heart-icon {
-    top: 16px;
-    right: 16px;
+  .card {
+    width: 90vw;
+    min-width: 160px;
+    max-width: 98vw;
   }
 }
