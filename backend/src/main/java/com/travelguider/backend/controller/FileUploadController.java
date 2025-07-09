@@ -25,21 +25,27 @@ public class FileUploadController {
     @PostMapping
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("No file selected");
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "No file selected");
+            return ResponseEntity.badRequest().body(error);
         }
         try {
-            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            String filename = System.currentTimeMillis() + "_" + StringUtils.cleanPath(file.getOriginalFilename());
             Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
             Path filePath = uploadPath.resolve(filename);
             file.transferTo(filePath.toFile());
+            // Return a public URL (assuming /uploads is mapped to static)
+            String url = "/uploads/" + filename;
             Map<String, String> response = new HashMap<>();
-            response.put("path", filePath.toAbsolutePath().toString());
+            response.put("url", url);
             return ResponseEntity.ok(response);
         } catch (IOException e) {
-            return ResponseEntity.status(500).body("File upload failed: " + e.getMessage());
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "File upload failed: " + e.getMessage());
+            return ResponseEntity.status(500).body(error);
         }
     }
 }

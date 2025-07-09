@@ -84,7 +84,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
         {openMenu === "train" && (
             <div className="submenu">
             <NavLink to="/admin/add-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add Train</NavLink>
-         <NavLink to="/admin/edit-train" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Edit Train</NavLink>
+         <NavLink to="/admin/edit-train/" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Edit Train</NavLink>
          </div>
         )}
       </div>
@@ -150,7 +150,7 @@ const Sidebar = ({ adminName = "Admin" }) => {
 
 
       <div className="menu-item">
-        <div className="menu-title">
+        <div className="menu-title" onClick={() => { window.location.href = "/"; }} style={{ cursor: 'pointer' }}>
           <div className="menu-label">
             <img src="/icons/logout.png" alt="Logout" className="menu-icon" />
             Logout

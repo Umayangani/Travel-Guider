@@ -20,10 +20,11 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/admin/create").permitAll() // Allow public admin creation
+                .requestMatchers("/api/admin/create").permitAll()
                 .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/api/places/**").permitAll() // <-- Make /api/places public
-                .requestMatchers("/api/entryfees/**").permitAll() // <-- Make /api/entryfees public
+                .requestMatchers("/api/places/**").permitAll()
+                .requestMatchers("/api/entryfees/**").permitAll()
+                .requestMatchers("/api/train-schedules/**").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();

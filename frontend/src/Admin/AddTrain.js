@@ -23,17 +23,26 @@ const AddTrain = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/trains", {
+      // Map frontend state to backend property names
+      const payload = {
+        trainName: trainData.train_name,
+        fromStation: trainData.from_station,
+        toStation: trainData.to_station,
+        departureTime: trainData.departure_time + (trainData.departure_time.length === 5 ? ':00' : ''),
+        arrivalTime: trainData.arrival_time + (trainData.arrival_time.length === 5 ? ':00' : ''),
+        duration: trainData.duration + (trainData.duration.length === 5 ? ':00' : ''),
+      };
+      const response = await fetch("http://localhost:8080/api/train-schedules", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(trainData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        const result = await response.text();
-        alert("✅ Train schedule added successfully!\n" + result);
+        // const result = await response.json();
+        alert("✅ Train schedule added successfully!");
 
         // Reset form
         setTrainData({

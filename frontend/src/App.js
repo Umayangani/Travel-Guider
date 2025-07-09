@@ -14,6 +14,8 @@ import AddTrain from "./Admin/AddTrain";
 import AddPlace from "./Admin/AddPlace";
 import Sidebar from './Admin/Sidebar';
 import EditPlace from "./Admin/EditPlace";
+import EditTrain from "./Admin/EditTrain";
+import EditTrainList from "./Admin/EditTrainList";
 import Settings from "./Admin/Settings";
 import AdminLayout from "./Admin/AdminLayout";
 import CsvImport from "./Admin/CsvImport";
@@ -60,6 +62,8 @@ function App() {
           <Route path="add-place" element={<AddPlace />} />
           <Route path="edit-place" element={<EditPlace />} />
           <Route path="add-train" element={<AddTrain />} />
+          <Route path="edit-train" element={<EditTrainList />} />
+          <Route path="edit-train/:id" element={<EditTrain />} />
           <Route path="add-bus" element={<AddBus />} />
           <Route path="settings" element={<Settings />} />
           <Route path="csv-import" element={<CsvImport />} />

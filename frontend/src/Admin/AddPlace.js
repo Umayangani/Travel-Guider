@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+import imageCompression from 'browser-image-compression';
 import "./AddPlace.css";
 
 const AddPlace = () => {
@@ -20,6 +22,7 @@ const AddPlace = () => {
   });
 
   const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]); // URLs from backend
   const [video, setVideo] = useState(null);
 
   const handleInputChange = (e) => {
@@ -30,8 +33,43 @@ const AddPlace = () => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    setImages([...e.target.files].slice(0, 5));
+
+  // Compress and upload images to backend, then store URLs
+  const handleImageChange = async (e) => {
+    const files = [...e.target.files].slice(0, 5);
+    setImages(files);
+    const uploadedUrls = [];
+    for (const file of files) {
+      try {
+        // Compress
+        const compressedFile = await imageCompression(file, {
+          maxSizeMB: 0.5,
+          maxWidthOrHeight: 1024,
+          useWebWorker: true,
+        });
+        // Upload
+        const formData = new FormData();
+        formData.append('file', compressedFile);
+        const res = await fetch('http://localhost:8080/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        // Defensive: check for empty response
+        const text = await res.text();
+        if (!text) continue;
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          console.error('Invalid JSON from upload:', text);
+          continue;
+        }
+        if (data.url) uploadedUrls.push(data.url);
+      } catch (err) {
+        console.error('Image upload failed:', err);
+      }
+    }
+    setImageUrls(uploadedUrls);
   };
 
   const handleVideoChange = (e) => {
@@ -60,35 +98,54 @@ const AddPlace = () => {
       freeEntry: placeData.free_entry,
     };
     try {
+      // 1. Create place and entry fee
       const response = await fetch("http://localhost:8080/api/places", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ place, entryFee }),
       });
-      if (response.ok) {
-        alert("✅ Place added successfully!");
-        setPlaceData({
-          name: "",
-          district: "",
-          description: "",
-          region: "",
-          category: "",
-          estimated_time_to_visit: "",
-          latitude: "",
-          longitude: "",
-          free_entry: false,
-          foreign_adult: "",
-          foreign_child: "",
-          local_adult: "",
-          local_child: "",
-          student: "",
-        });
-        setImages([]);
-        setVideo(null);
-      } else {
+      if (!response.ok) {
         const errorText = await response.text();
         alert("❌ Error adding place: " + errorText);
+        return;
       }
+      const savedPlace = await response.json();
+      // 2. Save image URLs to place_media
+      for (const url of imageUrls) {
+        const resp = await fetch("http://localhost:8080/api/place-media", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ placeId: savedPlace.placeId, mediaUrl: url, mediaType: "image" }),
+        });
+        if (!resp.ok) {
+          const errText = await resp.text();
+          alert("❌ Failed to save image URL: " + errText);
+          console.error("Failed to save image URL:", errText);
+        } else {
+          const respData = await resp.json();
+          console.log("Saved image to place_media:", respData);
+        }
+      }
+      alert("✅ Place added successfully!");
+      setPlaceData({
+        name: "",
+        district: "",
+        description: "",
+        region: "",
+        category: "",
+        estimated_time_to_visit: "",
+        latitude: "",
+        longitude: "",
+        free_entry: false,
+        foreign_adult: "",
+        foreign_child: "",
+        local_adult: "",
+        local_child: "",
+        student: "",
+      });
+      setImages([]);
+      setImageUrls([]);
+      setVideo(null);
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("❌ Network error submitting form.");
@@ -268,6 +325,13 @@ const AddPlace = () => {
           />
           {images.length > 0 && (
             <p>Selected Images: {images.map((f) => f.name).join(", ")}</p>
+          )}
+          {imageUrls.length > 0 && (
+            <ul style={{ color: 'green', fontSize: '0.9em' }}>
+              {imageUrls.map((url, i) => (
+                <li key={i}>Uploaded: {url}</li>
+              ))}
+            </ul>
           )}
 
           <label>Upload Video:</label>
