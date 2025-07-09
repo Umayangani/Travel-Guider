@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/places/**").permitAll()
                 .requestMatchers("/api/entryfees/**").permitAll()
                 .requestMatchers("/api/train-schedules/**").permitAll()
+                .requestMatchers("/api/bus-schedules/**").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();

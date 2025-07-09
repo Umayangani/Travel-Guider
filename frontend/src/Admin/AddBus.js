@@ -24,17 +24,27 @@ const AddBus = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/buses", {
+
+      // Map frontend fields to backend camelCase and format times
+      const payload = {
+        routeName: busData.route_name,
+        departureLocation: busData.departure_location,
+        arrivalLocation: busData.arrival_location,
+        departureTime: busData.departure_time + (busData.departure_time.length === 5 ? ':00' : ''),
+        arrivalTime: busData.arrival_time + (busData.arrival_time.length === 5 ? ':00' : ''),
+        frequency: busData.frequency,
+        durationMinutes: busData.duration_minutes ? parseInt(busData.duration_minutes) : null,
+      };
+      const response = await fetch("http://localhost:8080/api/bus-schedules", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(busData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        const result = await response.text();
-        alert("✅ Bus schedule added successfully!\n" + result);
+        alert("✅ Bus schedule added successfully!");
         setBusData({
           route_name: "",
           departure_location: "",

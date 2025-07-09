@@ -10,6 +10,8 @@ import RegistrationPage from "./Signup/RegistrationPage";
 import Dashboard from "./Admin/Dashboard";
 import AddAdmin from "./Admin/AddAdmin";
 import AddBus from "./Admin/AddBus";
+import EditBusList from "./Admin/EditBusList";
+import EditBus from "./Admin/EditBus";
 import AddTrain from "./Admin/AddTrain";
 import AddPlace from "./Admin/AddPlace";
 import Sidebar from './Admin/Sidebar';
@@ -65,6 +67,8 @@ function App() {
           <Route path="edit-train" element={<EditTrainList />} />
           <Route path="edit-train/:id" element={<EditTrain />} />
           <Route path="add-bus" element={<AddBus />} />
+          <Route path="edit-bus" element={<EditBusList />} />
+          <Route path="edit-bus/:id" element={<EditBus />} />
           <Route path="settings" element={<Settings />} />
           <Route path="csv-import" element={<CsvImport />} />
           {/* Add more admin routes as needed */}
