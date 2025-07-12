@@ -1,0 +1,17 @@
+.floating-icon {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 9999;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.floating-icon:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+}
+.floating-icon img {
+  display: block;
+}

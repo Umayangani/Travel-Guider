@@ -27,12 +27,18 @@ import ItineraryForm from "./User/ItineraryForm";
 import UserHero from './User/UserHero';
 import UserBody from './User/UserBody';
 import UpcomingEvents from './User/UpcomingEvents';
+import FloatingIcon from './User/FloatingIcon';
+import ChatPage from './User/ChatPage';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleNavigate = (modal) => setActiveModal(modal);
-  const handleCloseModal = () => setActiveModal(null);
+  const handleCloseModal = () => {
+    if (activeModal === 'login') setIsLoggedIn(true);
+    setActiveModal(null);
+  };
 
   return (
     <Router>
@@ -52,10 +58,13 @@ function App() {
               {activeModal === 'signup' && (
                 <RegistrationPage onNavigate={handleNavigate} onClose={handleCloseModal} />
               )}
+              {/* Floating chat icon only after login, over home page */}
+              {isLoggedIn && (
+                <FloatingIcon icon="/icons/chat.png" alt="Chat" onClick={() => window.location.href='/user/chat'} />
+              )}
             </div>
           }
         />
-
         {/* Admin layout with sidebar and dashboard by default */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
@@ -73,9 +82,9 @@ function App() {
           <Route path="csv-import" element={<CsvImport />} />
           {/* Add more admin routes as needed */}
         </Route>
-
         {/* User route: HeaderUser and Footer for user page */}
         <Route path="/user" element={<UserPage />} />
+        <Route path="/user/chat" element={<ChatPage />} />
       </Routes>
     </Router>
   );
@@ -84,26 +93,34 @@ function App() {
 // UserPage component to fetch and provide user name
 function UserPage() {
   const [userName, setUserName] = useState("");
+  // Always show chat icon for demo/testing
+  const isLoggedIn = true;
 
+  // Optionally, keep the fetchCurrentUser for userName only
   useEffect(() => {
     fetchCurrentUser()
       .then(data => {
-        console.log("Fetched user data:", data);
         setUserName(data.name || "User");
       })
-      .catch(() => setUserName("User"));
+      .catch(() => {
+        setUserName("User");
+      });
   }, []);
 
   return (
-    <>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
       <HeaderUser userName={userName} />
       <UserHero>
         <ItineraryForm />
       </UserHero>
       <UserBody />
-      <UpcomingEvents /> 
+      <UpcomingEvents />
       <Footer />
-    </>
+      {/* Floating chat icon always visible for demo */}
+      <div style={{ position: 'fixed', right: 32, bottom: 32, zIndex: 9999 }}>
+        <FloatingIcon icon="/icons/chat.png" alt="Chat" onClick={() => window.location.href='/user/chat'} />
+      </div>
+    </div>
   );
 }
 
