@@ -72,6 +72,21 @@ const Sidebar = ({ adminName = "Admin" }) => {
         )}
       </div>
 
+      <div className="menu-item">
+        <div onClick={() => toggleMenu("event")} className="menu-title">
+          <div className="menu-label">
+            <img src="/icons/event.png" alt="Event & Festival" className="menu-icon" />
+            Event & Festival
+          </div>
+          <Chevron isOpen={openMenu === "event"} />
+        </div>
+        {openMenu === "event" && (
+          <div className="submenu">
+            <NavLink to="/admin/add-event" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Add Event</NavLink>
+            <NavLink to="/admin/manage-event" className={({ isActive }) => (isActive ? "submenu-item active" : "submenu-item")}>Manage Event</NavLink>
+          </div>
+        )}
+      </div>
       {/* Other menus */}
       <div className="menu-item">
         <div onClick={() => toggleMenu("train")} className="menu-title">
