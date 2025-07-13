@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import "./HeaderUser.css";
@@ -25,6 +24,14 @@ function HeaderUser({ userName = "User", onNavigate = () => {}, onLogout = () =>
   }, []);
 
   const toggleDropdown = () => setDropdownOpen((open) => !open);
+
+  const navigateTo = (route) => {
+    if (route === "profile") {
+      window.location.href = "/profile";
+    } else {
+      onNavigate(route);
+    }
+  };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -116,10 +123,10 @@ function HeaderUser({ userName = "User", onNavigate = () => {}, onLogout = () =>
               border: '1px solid rgba(255,255,255,0.08)'
             }}
           >
-            <button onClick={() => { setDropdownOpen(false); onNavigate("profile"); }}>Profile</button>
-            <button onClick={() => { setDropdownOpen(false); onNavigate("ongoing-trips"); }}>Ongoing Trips</button>
-            <button onClick={() => { setDropdownOpen(false); onNavigate("history"); }}>History</button>
-            <button onClick={() => { setDropdownOpen(false); onNavigate("explore-history"); }}>Explore History</button>
+            <button onClick={() => { setDropdownOpen(false); navigateTo("profile"); }}>Profile</button>
+            <button onClick={() => { setDropdownOpen(false); navigateTo("ongoing-trips"); }}>Ongoing Trips</button>
+            <button onClick={() => { setDropdownOpen(false); navigateTo("history"); }}>History</button>
+            <button onClick={() => { setDropdownOpen(false); navigateTo("explore-history"); }}>Explore History</button>
             <button onClick={() => {
               setDropdownOpen(false);
               onLogout();

@@ -29,6 +29,7 @@ import UserBody from './User/UserBody';
 import UpcomingEvents from './User/UpcomingEvents';
 import FloatingIcon from './User/FloatingIcon';
 import ChatPage from './User/ChatPage';
+import UserProfile from "./User/UserProfile";
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -85,6 +86,7 @@ function App() {
         {/* User route: HeaderUser and Footer for user page */}
         <Route path="/user" element={<UserPage />} />
         <Route path="/user/chat" element={<ChatPage />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </Router>
   );

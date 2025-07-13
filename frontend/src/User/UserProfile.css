@@ -1,0 +1,97 @@
+/* User Profile UI - dark theme with gold/green accents */
+.profile-container {
+  max-width: 420px;
+  margin: 40px auto;
+  background: #181c23;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  padding: 32px 28px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  border-bottom: 1.5px solid #232733;
+  padding-bottom: 18px;
+}
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffd700;
+  background: #fff;
+}
+.profile-edit-btn, .profile-save-btn, .profile-logout-btn, .profile-show-btn {
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.profile-edit-btn:hover, .profile-save-btn:hover, .profile-logout-btn:hover, .profile-show-btn:hover {
+  background: #ffd700;
+  color: #232733;
+}
+.profile-edit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.profile-input {
+  background: #232733;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.profile-password-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #232733;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.profile-password-section h3 {
+  margin: 0 12px 0 0;
+  font-size: 1.08rem;
+  color: #ffd700;
+}
+.profile-password-input {
+  flex: 1;
+  min-width: 120px;
+  width: 100%;
+  background: #232733;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.profile-logout-btn {
+  background: #9b8f09;
+  color: #232733;
+}
+.profile-logout-btn:hover {
+  background: #388e3c;
+  color: #fff;
+}

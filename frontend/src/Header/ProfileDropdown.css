@@ -1,0 +1,58 @@
+/* Profile dropdown - dark theme, gold/green accents */
+.profile-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+.profile-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 18px;
+  background: #232733;
+  color: #fff;
+  transition: background 0.2s;
+}
+.profile-dropdown-trigger:hover {
+  background: #388e3c;
+}
+.profile-dropdown-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffd700;
+  background: #fff;
+}
+.profile-dropdown-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.profile-dropdown-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: #232733;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  min-width: 160px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+.profile-dropdown-menu button {
+  background: none;
+  color: #fff;
+  border: none;
+  text-align: left;
+  padding: 10px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.profile-dropdown-menu button:hover {
+  background: #ffd700;
+  color: #232733;
+}
