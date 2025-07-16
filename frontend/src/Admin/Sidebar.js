@@ -1,9 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ adminName = "Admin" }) => {
+const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
+  const [adminName, setAdminName] = useState("Admin");
+
+  // Fetch admin data from database after login
+  useEffect(() => {
+    const fetchAdminData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        console.log('=== Sidebar Admin Debug ===');
+        console.log('Token found:', token ? 'Yes' : 'No');
+        
+        if (token) {
+          const response = await fetch('http://localhost:8080/api/user/profile', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          console.log('Sidebar Response status:', response.status);
+          
+          if (response.ok) {
+            const userData = await response.json();
+            console.log('Sidebar Admin data received:', userData);
+            setAdminName(userData.name || "Admin");
+          } else {
+            console.log('Sidebar Response not ok:', response.status);
+          }
+        } else {
+          console.log('Sidebar: No token found in localStorage');
+        }
+      } catch (error) {
+        console.error('Sidebar: Error fetching admin data:', error);
+      }
+    };
+
+    fetchAdminData();
+  }, []);
 
   const toggleMenu = (menuName) => {
     setOpenMenu(openMenu === menuName ? "" : menuName);

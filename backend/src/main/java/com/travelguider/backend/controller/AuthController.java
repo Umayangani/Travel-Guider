@@ -4,6 +4,7 @@ import com.travelguider.backend.dto.AuthRequest;
 import com.travelguider.backend.entity.User;
 import com.travelguider.backend.entity.Role;
 import com.travelguider.backend.repository.UserRepository;
+import com.travelguider.backend.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,9 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JWTUtil jwtUtil;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         Optional<User> userOpt = userRepository.findByEmail(request.email);
@@ -32,8 +36,10 @@ public class AuthController {
         if (!passwordEncoder.matches(request.password, user.getPassword())) {
             return ResponseEntity.status(401).body(new ErrorResponse("Invalid email or password"));
         }
-        // Return role for frontend
-        return ResponseEntity.ok(new RoleResponse(user.getRole().name().toLowerCase()));
+        // Generate JWT token
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+        // Return both role and token for frontend
+        return ResponseEntity.ok(new LoginResponse(user.getRole().name().toLowerCase(), token));
     }
 
     @PostMapping("/register")
@@ -70,5 +76,14 @@ public class AuthController {
     static class RoleResponse {
         public String role;
         public RoleResponse(String role) { this.role = role; }
+    }
+    
+    static class LoginResponse {
+        public String role;
+        public String token;
+        public LoginResponse(String role, String token) { 
+            this.role = role; 
+            this.token = token;
+        }
     }
 }

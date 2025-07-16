@@ -39,6 +39,13 @@ function LoginPage({ onNavigate, onClose }) {
         setError(data.message || JSON.stringify(data) || "Login failed");
         return;
       }
+      
+      // Store the token in localStorage
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        console.log('Token stored:', data.token);
+      }
+      
       if (!data.role) {
         setError("No role returned from backend. Check backend response format.");
         return;

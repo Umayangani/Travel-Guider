@@ -24,6 +24,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String avatar;
+
     // Getters and setters
 
 
@@ -49,5 +51,9 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

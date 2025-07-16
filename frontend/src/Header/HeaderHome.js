@@ -1,5 +1,4 @@
 import "./HeaderHome.css";
-import ProfileDropdown from "./ProfileDropdown";
 
 function HeaderHome({ onNavigate }) {
   const handleUserClick = (e) => {
@@ -28,7 +27,6 @@ function HeaderHome({ onNavigate }) {
         <a href="#" onClick={handleUserClick}>
           <img src="/icons/user.svg" alt="User Icon" className="user-icon" />
         </a>
-        <ProfileDropdown />
       </div>
     </header>
   );

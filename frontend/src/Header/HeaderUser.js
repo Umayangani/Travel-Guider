@@ -8,9 +8,10 @@ const images = [
   "/media/sigiriya.jpg"
 ];
 
-function HeaderUser({ userName = "User", onNavigate = () => {}, onLogout = () => {} }) {
+function HeaderUser({ onNavigate = () => {}, onLogout = () => {} }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
+  const [userName, setUserName] = useState("User");
   const intervalRef = useRef();
   const dropdownRef = useRef();
   const greetingRef = useRef();
@@ -21,6 +22,47 @@ function HeaderUser({ userName = "User", onNavigate = () => {}, onLogout = () =>
       setBgIndex((prev) => (prev + 1) % images.length);
     }, 3000);
     return () => clearInterval(intervalRef.current);
+  }, []);
+
+  // Fetch user data from database after login
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        console.log('=== HeaderUser Debug ===');
+        console.log('Token found:', token ? 'Yes' : 'No');
+        console.log('Token value:', token);
+        
+        if (token) {
+          const response = await fetch('http://localhost:8080/api/user/profile', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          console.log('Response status:', response.status);
+          
+          if (response.ok) {
+            const userData = await response.json();
+            console.log('User data received:', userData);
+            console.log('Setting userName to:', userData.name);
+            setUserName(userData.name || "User");
+          } else {
+            console.log('Response not ok:', response.status);
+            const errorText = await response.text();
+            console.log('Error response:', errorText);
+          }
+        } else {
+          console.log('No token found in localStorage');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const toggleDropdown = () => setDropdownOpen((open) => !open);
@@ -95,7 +137,7 @@ function HeaderUser({ userName = "User", onNavigate = () => {}, onLogout = () =>
           style={{ cursor: 'pointer', outline: 'none' }}
           onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') toggleDropdown(); }}
         >
-          Welcome back, {userName && userName !== "User" ? userName : "User"}
+          Welcome back, {userName}
           <img
             src="/icons/chevron-down.png"
             alt="Dropdown"

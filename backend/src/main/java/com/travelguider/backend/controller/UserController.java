@@ -31,4 +31,21 @@ public class UserController {
         }
         return ResponseEntity.ok(Map.of("name", user.getName()));
     }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body(Map.of("error", "Unauthorized"));
+        }
+        // Try to find user by email (username is email in most setups)
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(404).body(Map.of("error", "User not found"));
+        }
+        return ResponseEntity.ok(Map.of(
+            "name", user.getName(),
+            "email", user.getEmail(),
+            "avatar", user.getAvatar() != null ? user.getAvatar() : "https://i.pravatar.cc/100?img=3"
+        ));
+    }
 }
