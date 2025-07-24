@@ -21,6 +21,8 @@ public class User {
 
     private LocalDate dob;
 
+    private String address;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -47,6 +49,14 @@ public class User {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setRole(Role role) {

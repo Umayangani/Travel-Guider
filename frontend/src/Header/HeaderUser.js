@@ -168,7 +168,6 @@ function HeaderUser({ onNavigate = () => {}, onLogout = () => {} }) {
             }}
           >
             <button onClick={() => { setDropdownOpen(false); navigateTo("profile"); }}>Profile</button>
-            <button onClick={() => { setDropdownOpen(false); navigateTo("messages"); }}>Messages</button>
             <button onClick={() => { setDropdownOpen(false); navigateTo("ongoing-trips"); }}>Ongoing Trips</button>
             <button onClick={() => { setDropdownOpen(false); navigateTo("history"); }}>History</button>
             <button onClick={() => { setDropdownOpen(false); navigateTo("explore-history"); }}>Explore History</button>
