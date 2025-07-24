@@ -8,6 +8,7 @@ export default function UserProfile() {
     email: "",
     dob: "",
     address: "",
+    avatar: ""
   });
   const [editing, setEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -42,13 +43,15 @@ export default function UserProfile() {
           
           if (response.ok) {
             const userData = await response.json();
+            console.log('Fetched user data from backend:', userData);
             setUser({
               name: userData.name || "",
               email: userData.email || "",
               dob: userData.dob || "",
               address: userData.address || "",
-              avatar: userData.avatar || "https://i.pravatar.cc/150?img=3"
+              avatar: userData.avatar || ""
             });
+            console.log('Set user avatar:', userData.avatar);
           }
         }
       } catch (error) {
@@ -129,25 +132,22 @@ export default function UserProfile() {
   const handleSave = async () => {
     try {
       let updatedUser = { ...user };
+      let newAvatarUrl = null;
 
       // Upload avatar if a new file is selected
       if (selectedFile) {
         console.log('Uploading avatar...');
-        const avatarUrl = await uploadProfilePicture();
-        console.log('Received avatar URL:', avatarUrl);
-        if (avatarUrl) {
-          updatedUser.avatar = avatarUrl;
-          // Update the user state immediately with new avatar
-          setUser(prevUser => ({
-            ...prevUser,
-            avatar: avatarUrl
-          }));
-          console.log('Updated user state with new avatar:', avatarUrl);
+        newAvatarUrl = await uploadProfilePicture();
+        console.log('Received avatar URL:', newAvatarUrl);
+        if (newAvatarUrl) {
+          updatedUser.avatar = newAvatarUrl;
+          console.log('Updated user object with new avatar:', newAvatarUrl);
         } else {
           return; // Stop if avatar upload failed
         }
       }
 
+      // Update profile in backend
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8080/api/user/profile', {
         method: 'PUT',
@@ -159,44 +159,51 @@ export default function UserProfile() {
       });
 
       if (response.ok) {
-        setUser(updatedUser);
+        console.log('Profile update successful');
+        
+        // Clean up editing state first
         setEditing(false);
         setSelectedFile(null);
         setPreviewUrl(null);
         
-        // Force refresh user data from backend to ensure avatar is updated
-        try {
-          const token = localStorage.getItem('token');
-          const refreshResponse = await fetch('http://localhost:8080/api/user/profile', {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
+        // Force refresh user data from backend to ensure we have the latest data
+        const refreshResponse = await fetch('http://localhost:8080/api/user/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (refreshResponse.ok) {
+          const refreshedUserData = await refreshResponse.json();
+          console.log('Refreshed user data from backend:', refreshedUserData);
+          
+          // Update user state with fresh data from database
+          setUser({
+            name: refreshedUserData.name || "",
+            email: refreshedUserData.email || "",
+            dob: refreshedUserData.dob || "",
+            address: refreshedUserData.address || "",
+            avatar: refreshedUserData.avatar || ""
           });
           
-          if (refreshResponse.ok) {
-            const refreshedUserData = await refreshResponse.json();
-            setUser({
-              name: refreshedUserData.name || "",
-              email: refreshedUserData.email || "",
-              dob: refreshedUserData.dob || "",
-              address: refreshedUserData.address || "",
-              avatar: refreshedUserData.avatar || "https://i.pravatar.cc/150?img=3"
-            });
-            console.log('User data refreshed with avatar:', refreshedUserData.avatar);
-          }
-        } catch (refreshError) {
-          console.error('Failed to refresh user data:', refreshError);
+          console.log('Final user state set with avatar:', refreshedUserData.avatar);
+        } else {
+          // Fallback: use the updated user data we have
+          console.log('Fallback: using local updated user data');
+          setUser(updatedUser);
         }
         
         alert('Profile updated successfully!');
       } else {
-        alert('Failed to update profile');
+        const errorData = await response.json();
+        console.error('Profile update failed:', errorData);
+        alert('Failed to update profile: ' + (errorData.error || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Error updating profile');
+      alert('Error updating profile: ' + error.message);
     }
   };
 
@@ -268,13 +275,26 @@ export default function UserProfile() {
             <div className="profile-avatar-section">
               <div className="avatar-container">
                 <img 
-                  key={user.avatar + Date.now()} // Force re-render when avatar changes
-                  src={previewUrl || user.avatar || "https://i.pravatar.cc/150?img=3"} 
+                  key={`avatar-${user.avatar}-${Date.now()}`} // Force re-render when avatar changes
+                  src={
+                    previewUrl || 
+                    (user.avatar ? `${user.avatar}?t=${Date.now()}` : "https://i.pravatar.cc/150?img=3")
+                  } 
                   alt="Profile" 
                   className="profile-avatar-large" 
                   onError={(e) => {
                     console.log('Image failed to load:', e.target.src);
-                    e.target.src = "https://i.pravatar.cc/150?img=3";
+                    console.log('Current user.avatar from DB:', user.avatar);
+                    
+                    // Try fallback to FileServeController endpoint
+                    if (user.avatar && !e.target.src.includes('/api/files/avatar/')) {
+                      const filename = user.avatar.split('/').pop();
+                      const fallbackUrl = `http://localhost:8080/api/files/avatar/${filename}?t=${Date.now()}`;
+                      console.log('Trying fallback URL:', fallbackUrl);
+                      e.target.src = fallbackUrl;
+                    } else {
+                      e.target.src = "https://i.pravatar.cc/150?img=3";
+                    }
                   }}
                   onLoad={() => {
                     console.log('Image loaded successfully:', previewUrl || user.avatar);

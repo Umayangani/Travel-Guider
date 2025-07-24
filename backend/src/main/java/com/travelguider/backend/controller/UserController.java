@@ -27,16 +27,17 @@ import java.util.UUID;
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Value("${file.upload-dir:uploads}")
     private String uploadDir;
 
-    @GetMapping("/test")
+    @GetMapping("/test-connection")
     public ResponseEntity<?> testConnection() {
         try {
             long userCount = userRepository.count();
@@ -46,6 +47,28 @@ public class UserController {
             ));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Database connection failed: " + e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/test-avatar-access")
+    public ResponseEntity<?> testAvatarAccess(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(401).body(Map.of("error", "Unauthorized"));
+        }
+        
+        try {
+            String uploadsPath = System.getProperty("user.dir") + File.separator + uploadDir + File.separator + "avatars";
+            File uploadDirectory = new File(uploadsPath);
+            
+            return ResponseEntity.ok(Map.of(
+                "uploadsPath", uploadsPath,
+                "directoryExists", uploadDirectory.exists(),
+                "isDirectory", uploadDirectory.isDirectory(),
+                "canRead", uploadDirectory.canRead(),
+                "files", uploadDirectory.exists() ? uploadDirectory.list() : new String[0]
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Error checking uploads directory: " + e.getMessage()));
         }
     }
 
@@ -73,12 +96,14 @@ public class UserController {
             return ResponseEntity.status(404).body(Map.of("error", "User not found"));
         }
         
+        System.out.println("Getting profile for user: " + user.getEmail() + ", avatar: " + user.getAvatar());
+        
         return ResponseEntity.ok(Map.of(
             "name", user.getName() != null ? user.getName() : "",
             "email", user.getEmail() != null ? user.getEmail() : "",
             "dob", user.getDob() != null ? user.getDob().toString() : "",
             "address", user.getAddress() != null ? user.getAddress() : "",
-            "avatar", user.getAvatar() != null ? user.getAvatar() : "https://i.pravatar.cc/150?img=3"
+            "avatar", user.getAvatar() != null ? user.getAvatar() : ""
         ));
     }
     
@@ -172,8 +197,10 @@ public class UserController {
             User user = userRepository.findByEmail(userDetails.getUsername()).orElse(null);
             if (user != null) {
                 String avatarUrl = "http://localhost:8080/uploads/avatars/" + uniqueFilename;
+                System.out.println("Setting user avatar to: " + avatarUrl);
                 user.setAvatar(avatarUrl);
                 userRepository.save(user);
+                System.out.println("Avatar saved to database for user: " + user.getEmail());
                 
                 // Return the avatar URL
                 return ResponseEntity.ok(Map.of("avatarUrl", avatarUrl));
