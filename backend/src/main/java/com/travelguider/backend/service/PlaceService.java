@@ -17,6 +17,8 @@ public class PlaceService {
     private PlaceRepository placeRepository;
     @Autowired
     private PlaceEntryFeeRepository placeEntryFeeRepository;
+    @Autowired
+    private AutoMLService autoMLService;
 
     public List<Place> getAllPlaces() {
         return placeRepository.findAll();
@@ -50,17 +52,29 @@ public class PlaceService {
         entryFee.setPlaceId(placeId);
         placeRepository.save(place);
         placeEntryFeeRepository.save(entryFee);
+        
+        // Update ML datasets automatically
+        autoMLService.updateMLDatasets();
+        
         return place;
     }
 
     @Transactional
     public Place updatePlace(Place place) {
-        return placeRepository.save(place);
+        Place updated = placeRepository.save(place);
+        
+        // Update ML datasets automatically
+        autoMLService.updateMLDatasets();
+        
+        return updated;
     }
 
     @Transactional
     public void deletePlace(String placeId) {
         placeEntryFeeRepository.deleteAll(placeEntryFeeRepository.findAll().stream().filter(f -> f.getPlaceId().equals(placeId)).toList());
         placeRepository.deleteById(placeId);
+        
+        // Update ML datasets automatically
+        autoMLService.updateMLDatasets();
     }
 }

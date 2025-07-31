@@ -33,6 +33,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/entryfees/**").permitAll()
                 .requestMatchers("/api/train-schedules/**").permitAll()
                 .requestMatchers("/api/bus-schedules/**").permitAll()
+                .requestMatchers("/api/csv/**").permitAll()
+                .requestMatchers("/api/import/**").permitAll()
+                .requestMatchers("/uploads/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

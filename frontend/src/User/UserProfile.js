@@ -105,7 +105,7 @@ export default function UserProfile() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/api/user/upload-avatar', {
+      const response = await fetch('http://localhost:8080/api/user/uploads-avatars', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -274,12 +274,12 @@ export default function UserProfile() {
           <div className="profile-sidebar">
             <div className="profile-avatar-section">
               <div className="avatar-container">
-                <img 
+               <img 
                   key={`avatar-${user.avatar}-${Date.now()}`} // Force re-render when avatar changes
                   src={
                     previewUrl || 
                     (user.avatar ? `${user.avatar}?t=${Date.now()}` : "https://i.pravatar.cc/150?img=3")
-                  } 
+                  }
                   alt="Profile" 
                   className="profile-avatar-large" 
                   onError={(e) => {
@@ -287,9 +287,10 @@ export default function UserProfile() {
                     console.log('Current user.avatar from DB:', user.avatar);
                     
                     // Try fallback to FileServeController endpoint
-                    if (user.avatar && !e.target.src.includes('/api/files/avatar/')) {
+                    if (user.avatar && !e.target.src.includes('/api/uploads/avatars/')) {
                       const filename = user.avatar.split('/').pop();
-                      const fallbackUrl = `http://localhost:8080/api/files/avatar/${filename}?t=${Date.now()}`;
+
+                      const fallbackUrl = `http://localhost:8080/api/uploads/avatars/${filename}?t=${Date.now()}`;
                       console.log('Trying fallback URL:', fallbackUrl);
                       e.target.src = fallbackUrl;
                     } else {
