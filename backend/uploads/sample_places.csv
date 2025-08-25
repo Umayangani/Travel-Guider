@@ -1,0 +1,6 @@
+place_id,name,district,description,region,category,estimated_time_to_visit,latitude,longitude
+KANDY-001,Temple of the Tooth,Kandy,Sacred Buddhist temple housing a tooth relic of Buddha,Central,Religious,2.5,7.2906,80.6337
+KANDY-002,Kandy Lake,Kandy,Artificial lake in the heart of Kandy city,Central,Natural,1.0,7.2926,80.6340
+ELLA-001,Nine Arch Bridge,Badulla,Famous railway bridge surrounded by lush tea plantations,Uva,Historical,1.5,6.9373,81.0550
+SIGIRIYA-001,Sigiriya Rock Fortress,Matale,Ancient rock fortress with stunning views and frescoes,Central,Historical,4.0,7.9568,80.7597
+GALLE-001,Galle Fort,Galle,Dutch colonial fort overlooking the Indian Ocean,Southern,Historical,3.0,6.0329,80.2168

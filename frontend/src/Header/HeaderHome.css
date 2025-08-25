@@ -1,0 +1,100 @@
+.headerHome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: none !important;
+  border-bottom: none;
+  color: #faf9f9;
+  font-family: Arial, sans-serif;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Left side */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+}
+
+.site-name {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 12px #000, 0 0 8px #000;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 12;
+}
+
+/* Center nav */
+.center {
+  display: flex;
+  gap: 30px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.center a {
+  text-decoration: none;
+  color: #faf9f9;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.center a:hover {
+  background: #AE8625;
+  color: black;
+}
+
+/* Right side */
+.right {
+  position: relative;
+}
+
+/* User login link */
+.user-link {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.user-link:hover {
+  background: #AE8625;
+}
+
+/* User icon */
+.user-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
+    brightness(103%) contrast(103%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.user-link:hover .user-icon {
+  filter: invert(33%) sepia(89%) saturate(754%) hue-rotate(1deg)
+    brightness(96%) contrast(90%);
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .center {
+    display: none;
+  }
+}
