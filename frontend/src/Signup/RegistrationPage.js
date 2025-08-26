@@ -29,7 +29,9 @@ function RegistrationPage({ onNavigate, onClose }) {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+  // Use a config for API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8090";
+  const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

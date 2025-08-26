@@ -26,7 +26,9 @@ function LoginPage({ onNavigate, onClose }) {
     e.preventDefault();
     setError("");
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+  // Use a config for API base URL
+  const { API_BASE_URL } = require("../api/config");
+  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

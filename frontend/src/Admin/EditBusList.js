@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import { useNavigate } from "react-router-dom";
 import "./AddPlace.css";
 
@@ -45,7 +46,7 @@ const EditBusList = () => {
     if (!searchQuery) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/bus-schedules`);
+  const response = await fetch(`${API_BASE_URL}/api/bus-schedules`);
       const data = await response.json();
       const filtered = data.filter(
         (b) =>
@@ -70,7 +71,7 @@ const EditBusList = () => {
   const handleDeleteBus = async (bus) => {
     if (!window.confirm(`Are you sure you want to delete ${bus.routeName}?`)) return;
     try {
-      const response = await fetch(`http://localhost:8080/api/bus-schedules/${bus.id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/bus-schedules/${bus.id}`, {
         method: "DELETE",
       });
       if (response.ok) {

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { API_BASE_URL } from "../api/config";
 import './CsvImport.css';
 
 const CsvImport = () => {
@@ -16,7 +17,7 @@ const CsvImport = () => {
 
   const checkCsvStatus = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/csv/status');
+  const response = await fetch(`${API_BASE_URL}/api/csv/status`);
       if (response.ok) {
         const status = await response.json();
         setCsvStatus(status);
@@ -53,7 +54,7 @@ const CsvImport = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('http://localhost:8080/api/csv/upload', {
+  const response = await fetch(`${API_BASE_URL}/api/csv/upload`, {
         method: 'POST',
         body: formData,
       });

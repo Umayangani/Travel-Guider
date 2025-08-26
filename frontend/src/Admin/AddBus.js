@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import "./AddPlace.css";
 
 const AddBus = () => {
@@ -35,7 +36,7 @@ const AddBus = () => {
         frequency: busData.frequency,
         durationMinutes: busData.duration_minutes ? parseInt(busData.duration_minutes) : null,
       };
-      const response = await fetch("http://localhost:8080/api/bus-schedules", {
+  const response = await fetch(`${API_BASE_URL}/api/bus-schedules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

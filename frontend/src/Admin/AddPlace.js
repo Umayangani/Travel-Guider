@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import imageCompression from 'browser-image-compression';
 import "./AddPlace.css";
 
@@ -50,7 +51,7 @@ const AddPlace = () => {
         // Upload
         const formData = new FormData();
         formData.append('file', compressedFile);
-        const res = await fetch('http://localhost:8080/api/upload', {
+  const res = await fetch(`${API_BASE_URL}/api/upload`, {
           method: 'POST',
           body: formData,
         });
@@ -99,7 +100,7 @@ const AddPlace = () => {
     };
     try {
       // 1. Create place and entry fee
-      const response = await fetch("http://localhost:8080/api/places", {
+  const response = await fetch(`${API_BASE_URL}/api/places`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ place, entryFee }),
@@ -112,7 +113,7 @@ const AddPlace = () => {
       const savedPlace = await response.json();
       // 2. Save image URLs to place_media
       for (const url of imageUrls) {
-        const resp = await fetch("http://localhost:8080/api/place-media", {
+  const resp = await fetch(`${API_BASE_URL}/api/place-media`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ placeId: savedPlace.placeId, mediaUrl: url, mediaType: "image" }),

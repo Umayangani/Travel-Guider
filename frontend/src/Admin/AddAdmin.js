@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import "./AddPlace.css";
 
 const AddAdmin = () => {
@@ -18,7 +19,7 @@ const AddAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/admin/create", {
+  const response = await fetch(`${API_BASE_URL}/api/admin/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

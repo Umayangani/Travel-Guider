@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../api/config";
 import { useParams, useNavigate } from "react-router-dom";
 import "./AddPlace.css";
 
@@ -18,7 +19,7 @@ const EditBus = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/bus-schedules/${id}`)
+  fetch(`${API_BASE_URL}/api/bus-schedules/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();
@@ -59,7 +60,7 @@ const EditBus = () => {
         frequency: busData.frequency,
         durationMinutes: busData.duration_minutes ? parseInt(busData.duration_minutes) : null,
       };
-      const response = await fetch(`http://localhost:8080/api/bus-schedules/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/bus-schedules/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

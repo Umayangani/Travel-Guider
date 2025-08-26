@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import "./AddPlace.css"; // Reuse the same CSS for consistent styling
 
 const AddTrain = () => {
@@ -32,7 +33,7 @@ const AddTrain = () => {
         arrivalTime: trainData.arrival_time + (trainData.arrival_time.length === 5 ? ':00' : ''),
         duration: trainData.duration + (trainData.duration.length === 5 ? ':00' : ''),
       };
-      const response = await fetch("http://localhost:8080/api/train-schedules", {
+  const response = await fetch(`${API_BASE_URL}/api/train-schedules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
