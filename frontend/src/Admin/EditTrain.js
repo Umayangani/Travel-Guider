@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../api/config";
 import "./AddPlace.css";
 
 const EditTrain = () => {
@@ -18,7 +19,7 @@ const EditTrain = () => {
 
   useEffect(() => {
     // Fetch train schedule by ID
-    fetch(`http://localhost:8080/api/train-schedules/${id}`)
+    fetch(`${API_BASE_URL}/api/train-schedules/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();

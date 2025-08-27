@@ -4,6 +4,7 @@ import com.travelguider.backend.entity.Place;
 import com.travelguider.backend.entity.PlaceEntryFee;
 import com.travelguider.backend.repository.PlaceRepository;
 import com.travelguider.backend.repository.PlaceEntryFeeRepository;
+import com.travelguider.backend.util.PlaceIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,8 @@ public class PlaceService {
     @Autowired
     private PlaceEntryFeeRepository placeEntryFeeRepository;
     @Autowired
+    private PlaceIdGenerator placeIdGenerator;
+    @Autowired
     private AutoMLService autoMLService;
 
     public List<Place> getAllPlaces() {
@@ -30,38 +33,46 @@ public class PlaceService {
 
     @Transactional
     public Place addPlace(Place place, PlaceEntryFee entryFee) {
-        // Generate place_id: REGION-DISTRICT-XXX
-        String region = place.getRegion();
-        String district = place.getDistrict();
-        String prefix = region.substring(0, 2).toUpperCase() + "-" + district.substring(0, 3).toUpperCase();
-        String lastPlaceId = placeRepository.findLastPlaceIdByPrefix(prefix + "%");
-        int nextNumber = 1;
-        if (lastPlaceId != null) {
-            String[] parts = lastPlaceId.split("-");
-            if (parts.length == 3) {
-                try {
-                    nextNumber = Integer.parseInt(parts[2]) + 1;
-                } catch (NumberFormatException ignored) {}
-            }
-        }
-        String placeId = prefix + "-" + String.format("%03d", nextNumber);
+        // Generate place_id using PlaceIdGenerator
+        String placeId = placeIdGenerator.generatePlaceId(place.getDistrict());
         place.setPlaceId(placeId);
+        
         // Generate fee_id
-        String feeId = placeId + "-FEE";
+        String feeId = placeIdGenerator.generateEntryFeeId(placeId);
         entryFee.setFeeId(feeId);
         entryFee.setPlaceId(placeId);
-        placeRepository.save(place);
+        
+        // Save place first
+        Place savedPlace = placeRepository.save(place);
+        
+        // Save entry fee
         placeEntryFeeRepository.save(entryFee);
         
         // Update ML datasets automatically
         autoMLService.updateMLDatasets();
         
-        return place;
+        return savedPlace;
     }
 
     @Transactional
     public Place updatePlace(Place place) {
-        Place updated = placeRepository.save(place);
+        Optional<Place> existingPlace = placeRepository.findById(place.getPlaceId());
+        if (existingPlace.isEmpty()) {
+            throw new RuntimeException("Place not found with ID: " + place.getPlaceId());
+        }
+        
+        // Keep the original ID and update other fields
+        Place existing = existingPlace.get();
+        existing.setName(place.getName());
+        existing.setDistrict(place.getDistrict());
+        existing.setDescription(place.getDescription());
+        existing.setRegion(place.getRegion());
+        existing.setCategory(place.getCategory());
+        existing.setEstimatedTimeToVisit(place.getEstimatedTimeToVisit());
+        existing.setLatitude(place.getLatitude());
+        existing.setLongitude(place.getLongitude());
+        
+        Place updated = placeRepository.save(existing);
         
         // Update ML datasets automatically
         autoMLService.updateMLDatasets();
@@ -71,7 +82,17 @@ public class PlaceService {
 
     @Transactional
     public void deletePlace(String placeId) {
-        placeEntryFeeRepository.deleteAll(placeEntryFeeRepository.findAll().stream().filter(f -> f.getPlaceId().equals(placeId)).toList());
+        if (!placeRepository.existsById(placeId)) {
+            throw new RuntimeException("Place not found with ID: " + placeId);
+        }
+        
+        // Delete associated entry fees first
+        PlaceEntryFee fee = placeEntryFeeRepository.findFirstByPlaceId(placeId);
+        if (fee != null) {
+            placeEntryFeeRepository.delete(fee);
+        }
+        
+        // Then delete the place
         placeRepository.deleteById(placeId);
         
         // Update ML datasets automatically

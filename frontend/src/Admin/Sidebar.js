@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { API_BASE_URL } from "../api/config";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -15,7 +16,7 @@ const Sidebar = () => {
         console.log('Token found:', token ? 'Yes' : 'No');
         
         if (token) {
-          const response = await fetch('http://localhost:8080/api/user/profile', {
+          const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,

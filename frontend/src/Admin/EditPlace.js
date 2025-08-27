@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api/config";
 import "./EditPlace.css";
 
 const EditPlace = () => {
@@ -10,7 +11,7 @@ const EditPlace = () => {
   const handleSearch = async () => {
     if (!searchQuery) return;
     try {
-      const response = await fetch(`http://localhost:8080/api/places`);
+      const response = await fetch(`${API_BASE_URL}/api/places`);
       const data = await response.json();
       // Simple client-side filter by name or district
       const filtered = data.filter(
@@ -29,7 +30,7 @@ const EditPlace = () => {
     setSelectedPlace(place);
     // Fetch entry fee for this place
     try {
-      const res = await fetch(`http://localhost:8080/api/entryfees/${place.placeId}`);
+      const res = await fetch(`${API_BASE_URL}/api/entry-fees/${place.placeId}`);
       if (res.ok) {
         const fee = await res.json();
         setEntryFee(fee);
@@ -62,7 +63,7 @@ const EditPlace = () => {
     if (!selectedPlace) return;
     try {
       // Update place
-      const response = await fetch(`http://localhost:8080/api/places/${selectedPlace.placeId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/places/${selectedPlace.placeId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(selectedPlace),
@@ -70,7 +71,7 @@ const EditPlace = () => {
       // Update entry fee if present
       let feeOk = true;
       if (entryFee) {
-        const feeRes = await fetch(`http://localhost:8080/api/entryfees/${entryFee.feeId}`, {
+        const feeRes = await fetch(`${API_BASE_URL}/api/entry-fees/${selectedPlace.placeId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(entryFee),
@@ -92,7 +93,7 @@ const EditPlace = () => {
     if (!selectedPlace) return;
     if (!window.confirm("Are you sure you want to delete this place?")) return;
     try {
-      const response = await fetch(`http://localhost:8080/api/places/${selectedPlace.placeId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/places/${selectedPlace.placeId}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -127,8 +128,8 @@ const EditPlace = () => {
         <div className="results-list">
           {searchResults.map((place) => (
             <div
-              key={place.id}
-              className={`result-item ${selectedPlace?.id === place.id ? "selected" : ""}`}
+              key={place.placeId}
+              className={`result-item ${selectedPlace?.placeId === place.placeId ? "selected" : ""}`}
               onClick={() => handleSelectPlace(place)}
             >
               <strong>{place.name}</strong> – {place.district}

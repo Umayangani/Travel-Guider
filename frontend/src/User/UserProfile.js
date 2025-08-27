@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../api/config";
 import "./UserProfile.css";
 
 export default function UserProfile() {
@@ -33,7 +34,7 @@ export default function UserProfile() {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await fetch('http://localhost:8080/api/user/profile', {
+          const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -105,7 +106,7 @@ export default function UserProfile() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/api/user/uploads-avatars', {
+      const response = await fetch(`${API_BASE_URL}/api/user/uploads-avatars`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -227,7 +228,7 @@ export default function UserProfile() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8080/api/user/change-password', {
+      const response = await fetch(`${API_BASE_URL}/api/user/change-password`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -290,7 +291,7 @@ export default function UserProfile() {
                     if (user.avatar && !e.target.src.includes('/api/uploads/avatars/')) {
                       const filename = user.avatar.split('/').pop();
 
-                      const fallbackUrl = `http://localhost:8080/api/uploads/avatars/${filename}?t=${Date.now()}`;
+                      const fallbackUrl = `${API_BASE_URL}/api/uploads/avatars/${filename}?t=${Date.now()}`;
                       console.log('Trying fallback URL:', fallbackUrl);
                       e.target.src = fallbackUrl;
                     } else {

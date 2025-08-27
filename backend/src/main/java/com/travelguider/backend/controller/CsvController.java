@@ -2,6 +2,7 @@ package com.travelguider.backend.controller;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.travelguider.backend.service.CsvService;
+import com.travelguider.backend.service.EntryFeeCsvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -10,22 +11,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/csv")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
+@CrossOrigin(
+    origins = {"http://localhost:3000", "http://localhost:3001"},
+    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+    allowCredentials = "true"
+)
 public class CsvController {
 
     @Autowired
     private CsvService csvService;
+
+    @Autowired
+    private EntryFeeCsvService entryFeeCsvService;
 
     /**
      * Export places from database to CSV file
@@ -38,7 +47,7 @@ public class CsvController {
             Map<String, String> response = new HashMap<>();
             response.put("message", "Places exported successfully");
             response.put("filePath", filePath);
-            response.put("info", csvService.getCsvFileInfo());
+            response.put("info", csvService.getCsvFileInfo("places"));
             
             return ResponseEntity.ok(response);
         } catch (IOException e) {
@@ -73,20 +82,28 @@ public class CsvController {
     /**
      * Upload CSV file to backend uploads folder
      */
-    @PostMapping("/upload")
-    public ResponseEntity<Map<String, String>> uploadCsv(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{type}")
+    public ResponseEntity<Map<String, String>> uploadCsv(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("type") String type) {
         try {
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                Map<String, String> error = new HashMap<>();
+                error.put("error", "Invalid type. Must be 'places' or 'entry-fees'");
+                return ResponseEntity.badRequest().body(error);
+            }
+
             if (file.isEmpty()) {
                 Map<String, String> error = new HashMap<>();
                 error.put("error", "Please select a file to upload");
                 return ResponseEntity.badRequest().body(error);
             }
 
-            String filePath = csvService.uploadCsvFile(file);
+            csvService.uploadCsvFile(file, type);
             
             Map<String, String> response = new HashMap<>();
-            response.put("message", "CSV file uploaded successfully");
-            response.put("filePath", filePath);
+            response.put("message", String.format("%s CSV file uploaded successfully", type));
+            response.put("type", type);
             response.put("originalName", file.getOriginalFilename());
             response.put("size", String.valueOf(file.getSize()));
             
@@ -99,50 +116,79 @@ public class CsvController {
     }
 
     /**
-     * Import places from existing CSV file to database
+     * Import data from CSV to database
      */
-    @PostMapping("/import")
-    public ResponseEntity<Map<String, String>> importPlaces() {
+    @PostMapping("/import/{type}")
+    public ResponseEntity<Map<String, String>> importCsv(@PathVariable("type") String type) {
         try {
-            csvService.importPlacesFromCsv();
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                Map<String, String> error = new HashMap<>();
+                error.put("error", "Invalid type. Must be 'places' or 'entry-fees'");
+                return ResponseEntity.badRequest().body(error);
+            }
+
+            if (type.equals("places")) {
+                csvService.importPlacesFromCsv();
+            } else {
+                entryFeeCsvService.importEntryFeesFromCsv();
+            }
             
             Map<String, String> response = new HashMap<>();
-            response.put("message", "Places imported successfully from CSV file");
-            response.put("info", csvService.getCsvFileInfo());
+            response.put("message", String.format("%s imported successfully", type));
+            response.put("info", type.equals("places") ? 
+                csvService.getCsvFileInfo(type) : 
+                entryFeeCsvService.getCsvFileInfo());
             
             return ResponseEntity.ok(response);
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             Map<String, String> error = new HashMap<>();
-            error.put("error", "File error: " + e.getMessage());
+            error.put("error", "Failed to import " + type + ": " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-        } catch (CsvValidationException e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "CSV validation error: " + e.getMessage());
-            return ResponseEntity.badRequest().body(error);
         }
     }
 
     /**
-     * Upload CSV file and immediately import to database
+     * Upload and import CSV file in one step
      */
-    @PostMapping("/upload-and-import")
-    public ResponseEntity<Map<String, String>> uploadAndImportCsv(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload-and-import/{type}")
+    public ResponseEntity<Map<String, String>> uploadAndImportCsv(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("type") String type) {
         try {
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                Map<String, String> error = new HashMap<>();
+                error.put("error", "Invalid type. Must be 'places' or 'entry-fees'");
+                return ResponseEntity.badRequest().body(error);
+            }
+
             if (file.isEmpty()) {
                 Map<String, String> error = new HashMap<>();
                 error.put("error", "Please select a file to upload");
                 return ResponseEntity.badRequest().body(error);
             }
 
-            csvService.importPlacesFromUploadedCsv(file);
+            // Upload file first
+            csvService.uploadCsvFile(file, type);
+            
+            // Then import the data
+            if (type.equals("places")) {
+                csvService.importPlacesFromUploadedCsv(file);
+            } else {
+                entryFeeCsvService.importEntryFeesFromUploadedCsv(file);
+            }
             
             Map<String, String> response = new HashMap<>();
-            response.put("message", "CSV file uploaded and places imported successfully");
+            response.put("message", String.format("%s file uploaded and imported successfully", type));
+            response.put("type", type);
             response.put("originalName", file.getOriginalFilename());
             response.put("size", String.valueOf(file.getSize()));
-            response.put("info", csvService.getCsvFileInfo());
+            response.put("info", type.equals("places") ?
+                csvService.getCsvFileInfo("places") :
+                entryFeeCsvService.getCsvFileInfo());
             
             return ResponseEntity.ok(response);
+
+
         } catch (IOException e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", "File error: " + e.getMessage());
@@ -157,10 +203,16 @@ public class CsvController {
     /**
      * Download CSV file
      */
-    @GetMapping("/download")
-    public ResponseEntity<Resource> downloadCsv() {
+    @GetMapping("/download/{type}")
+    public ResponseEntity<Resource> downloadCsv(@PathVariable("type") String type) {
         try {
-            File csvFile = csvService.getCsvFile();
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                return ResponseEntity.badRequest().build();
+            }
+            
+            File csvFile = type.equals("places") ? 
+                csvService.getCsvFile("places") : 
+                entryFeeCsvService.getCsvFile();
             
             if (!csvFile.exists()) {
                 return ResponseEntity.notFound().build();
@@ -169,7 +221,9 @@ public class CsvController {
             Resource resource = new FileSystemResource(csvFile);
             
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"places.csv\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, 
+                        String.format("attachment; filename=\"%s\"", 
+                            type.equals("places") ? "places.csv" : "entry_fees.csv"))
                     .contentType(MediaType.parseMediaType("text/csv"))
                     .contentLength(csvFile.length())
                     .body(resource);
@@ -185,9 +239,7 @@ public class CsvController {
     @GetMapping("/download-ml")
     public ResponseEntity<Resource> downloadMLCsv() {
         try {
-            Path uploadPath = Paths.get("uploads");
-            Path csvFilePath = uploadPath.resolve("places_ml_ready.csv");
-            File csvFile = csvFilePath.toFile();
+            File csvFile = csvService.getCsvFile("places");
             
             if (!csvFile.exists()) {
                 // Generate ML CSV if it doesn't exist
@@ -210,16 +262,26 @@ public class CsvController {
     /**
      * Get CSV file status and info
      */
-    @GetMapping("/status")
-    public ResponseEntity<Map<String, Object>> getCsvStatus() {
+    @GetMapping("/status/{type}")
+    public ResponseEntity<Map<String, Object>> getCsvStatus(@PathVariable("type") String type) {
         try {
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                return ResponseEntity.badRequest().build();
+            }
+
             Map<String, Object> status = new HashMap<>();
-            status.put("exists", csvService.csvFileExists());
+            boolean exists = type.equals("places") ? 
+                csvService.csvFileExists("places") : 
+                entryFeeCsvService.csvFileExists();
             
-            if (csvService.csvFileExists()) {
-                status.put("info", csvService.getCsvFileInfo());
+            status.put("exists", exists);
+            
+            if (exists) {
+                status.put("info", type.equals("places") ? 
+                    csvService.getCsvFileInfo("places") :
+                    entryFeeCsvService.getCsvFileInfo());
             } else {
-                status.put("info", "No CSV file found");
+                status.put("info", String.format("No %s CSV file found", type));
             }
             
             return ResponseEntity.ok(status);
@@ -233,10 +295,16 @@ public class CsvController {
     /**
      * Delete CSV file
      */
-    @DeleteMapping("/delete")
-    public ResponseEntity<Map<String, String>> deleteCsv() {
+    @DeleteMapping("/delete/{type}")
+    public ResponseEntity<Map<String, String>> deleteCsv(@PathVariable("type") String type) {
         try {
-            File csvFile = csvService.getCsvFile();
+            if (!type.equals("places") && !type.equals("entry-fees")) {
+                return ResponseEntity.badRequest().build();
+            }
+            
+            File csvFile = type.equals("places") ? 
+                csvService.getCsvFile("places") : 
+                entryFeeCsvService.getCsvFile();
             
             if (csvFile.exists() && csvFile.delete()) {
                 Map<String, String> response = new HashMap<>();

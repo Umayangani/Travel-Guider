@@ -196,7 +196,7 @@ public class UserController {
             // Update user avatar in database
             User user = userRepository.findByEmail(userDetails.getUsername()).orElse(null);
             if (user != null) {
-                String avatarUrl = "http://localhost:8080/uploads/avatars/" + uniqueFilename;
+                String avatarUrl = "http://localhost:8090/uploads/avatars/" + uniqueFilename;
                 System.out.println("Setting user avatar to: " + avatarUrl);
                 user.setAvatar(avatarUrl);
                 userRepository.save(user);

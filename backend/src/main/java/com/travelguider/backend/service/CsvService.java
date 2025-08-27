@@ -4,7 +4,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import com.travelguider.backend.entity.Place;
+import com.travelguider.backend.entity.PlaceEntryFee;
 import com.travelguider.backend.repository.PlaceRepository;
+import com.travelguider.backend.repository.PlaceEntryFeeRepository;
+import com.travelguider.backend.util.PlaceIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,16 +26,23 @@ public class CsvService {
     @Autowired
     private PlaceRepository placeRepository;
 
+    @Autowired
+    private PlaceEntryFeeRepository placeEntryFeeRepository;
+    
+    @Autowired
+    private PlaceIdGenerator placeIdGenerator;
+
     @Value("${app.upload.dir:uploads}")
     private String uploadDir;
 
-    private static final String CSV_FILE_NAME = "places.csv";
+    private static final String PLACES_CSV_FILE_NAME = "places.csv";
+    private static final String ENTRY_FEES_CSV_FILE_NAME = "entry_fees.csv";
 
     /**
      * Export all places from database to CSV file in uploads folder
      */
     public String exportPlacesToCsv() throws IOException {
-        return exportPlacesToCsv("places.csv", false);
+        return exportPlacesToCsv(PLACES_CSV_FILE_NAME, false);
     }
 
     /**
@@ -40,6 +50,47 @@ public class CsvService {
      */
     public String exportPlacesToCsvForML() throws IOException {
         return exportPlacesToCsv("places_ml_ready.csv", true);
+    }
+
+    /**
+     * Export entry fees to CSV
+     */
+    public String exportEntryFeesToCsv() throws IOException {
+        Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        Path csvFilePath = uploadPath.resolve(ENTRY_FEES_CSV_FILE_NAME);
+        
+        List<PlaceEntryFee> entryFees = placeEntryFeeRepository.findAll();
+
+        try (FileWriter fileWriter = new FileWriter(csvFilePath.toFile());
+             CSVWriter csvWriter = new CSVWriter(fileWriter)) {
+
+            // Write header
+            String[] header = {
+                "place_id", "foreign_adult", "foreign_child", "local_adult", 
+                "local_child", "student", "free_entry"
+            };
+            csvWriter.writeNext(header);
+
+            // Write data rows
+            for (PlaceEntryFee fee : entryFees) {
+                String[] row = {
+                    fee.getPlaceId(),
+                    fee.getForeignAdult() != null ? fee.getForeignAdult().toString() : "",
+                    fee.getForeignChild() != null ? fee.getForeignChild().toString() : "",
+                    fee.getLocalAdult() != null ? fee.getLocalAdult().toString() : "",
+                    fee.getLocalChild() != null ? fee.getLocalChild().toString() : "",
+                    fee.getStudent() != null ? fee.getStudent().toString() : "",
+                    fee.getFreeEntry() != null ? fee.getFreeEntry().toString() : "false"
+                };
+                csvWriter.writeNext(row);
+            }
+        }
+
+        return csvFilePath.toString();
     }
 
     /**
@@ -216,12 +267,13 @@ public class CsvService {
     /**
      * Upload and save CSV file to uploads folder
      */
-    public String uploadCsvFile(MultipartFile file) throws IOException {
+    public String uploadCsvFile(MultipartFile file, String type) throws IOException {
         if (file.isEmpty()) {
             throw new IOException("File is empty");
         }
 
-        if (!file.getOriginalFilename().toLowerCase().endsWith(".csv")) {
+        String fileName = file.getOriginalFilename();
+        if (fileName == null || !fileName.toLowerCase().endsWith(".csv")) {
             throw new IOException("File must be a CSV file");
         }
 
@@ -231,59 +283,169 @@ public class CsvService {
             Files.createDirectories(uploadPath);
         }
 
-        // Save file as places.csv (replace existing)
-        Path csvFilePath = uploadPath.resolve(CSV_FILE_NAME);
+        // Save file based on type
+        String targetFileName = type.equals("places") ? PLACES_CSV_FILE_NAME : ENTRY_FEES_CSV_FILE_NAME;
+        Path csvFilePath = uploadPath.resolve(targetFileName);
         Files.copy(file.getInputStream(), csvFilePath, StandardCopyOption.REPLACE_EXISTING);
 
         return csvFilePath.toString();
     }
 
     /**
-     * Import places from CSV file to database (replace all existing data)
+     * Import places and their entry fees from CSV file to database
+     * CSV format should contain: Name, District, Description, Region, Category, 
+     * EstimatedTimeToVisit, Latitude, Longitude, ForeignAdult, ForeignChild, LocalAdult, 
+     * LocalChild, Student, FreeEntry
      */
     public void importPlacesFromCsv() throws IOException, CsvValidationException {
-        Path csvFilePath = Paths.get(uploadDir, CSV_FILE_NAME);
+        Path csvFilePath = getCsvFilePath("places");
         
         if (!Files.exists(csvFilePath)) {
             throw new IOException("CSV file not found: " + csvFilePath);
         }
 
-        // Clear existing places (optional - remove if you want to append instead)
-        placeRepository.deleteAll();
+        try (CSVReader csvReader = new CSVReader(new FileReader(csvFilePath.toFile()))) {
+            String[] headerRow = csvReader.readNext();
+            if (headerRow == null) {
+                throw new CsvValidationException("CSV file is empty");
+            }
 
-        try (CSVReader reader = new CSVReader(new FileReader(csvFilePath.toFile()))) {
-            String[] line;
-            boolean isFirst = true;
-            int rowNumber = 0;
+            // Define expected headers with possible variations
+            String[][] expectedHeaders = {
+                {"Name", "name", "PLACE_NAME", "place_name"},
+                {"District", "district", "DISTRICT_NAME", "district_name"},
+                {"Description", "description", "PLACE_DESC", "place_description"},
+                {"Region", "region", "REGION_NAME", "region_name"},
+                {"Category", "category", "PLACE_CATEGORY", "place_type"},
+                {"Estimated_time_to_visit", "EstimatedTimeToVisit", "Estimated Time", "Time", "estimated_time", "time_to_visit", "visit_time", "VISIT_TIME", "TimeToVisit", "visittime", "ESTIMATED_TIME", "Eestimated_time_to_visit", "eestimated_time_to_visit"},
+                {"Foreign_Adult", "ForeignAdult", "foreign_adult", "FOREIGN_ADULT", "foreignadult", "FOREIGN_ADULT_FEE", "foreign_fee_adult"},
+                {"Foreign_Child", "ForeignChild", "foreign_child", "FOREIGN_CHILD", "foreignchild", "FOREIGN_CHILD_FEE", "foreign_fee_child"},
+                {"Local_Adult", "LocalAdult", "local_adult", "LOCAL_ADULT", "localadult", "LOCAL_ADULT_FEE", "local_fee_adult"},
+                {"Local_Child", "LocalChild", "local_child", "LOCAL_CHILD", "localchild", "LOCAL_CHILD_FEE", "local_fee_child"},
+                {"Student", "student", "STUDENT_FEE", "student_fee", "STUDENT", "StudentFee"},
+                {"Free_Entry", "FreeEntry", "free_entry", "FREE", "is_free", "FREE_ENTRY", "freeentry", "IS_FREE_ENTRY"},
+                {"Latitude", "latitude", "LAT", "PLACE_LAT", "place_latitude"},
+                {"Longitude", "longitude", "LNG", "LONG", "PLACE_LONG", "place_longitude"}
+            };
 
-            while ((line = reader.readNext()) != null) {
+            // Validate headers with variations
+            for (String[] headerVariations : expectedHeaders) {
+                boolean found = false;
+                for (String header : headerRow) {
+                    String cleanHeader = header.trim().replaceAll("[\\s_-]", "").toLowerCase();
+                    for (String variation : headerVariations) {
+                        if (cleanHeader.equals(variation.replaceAll("[\\s_-]", "").toLowerCase())) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) break;
+                }
+                if (!found) {
+                    throw new CsvValidationException("Required column missing: " + headerVariations[0] + 
+                        " (or variations like " + String.join(", ", headerVariations) + ")");
+                }
+            }
+
+            // Get header indices
+            int nameIdx = findColumnIndex(headerRow, "Name");
+            int districtIdx = findColumnIndex(headerRow, "District");
+            int descriptionIdx = findColumnIndex(headerRow, "Description");
+            int regionIdx = findColumnIndex(headerRow, "Region");
+            int categoryIdx = findColumnIndex(headerRow, "Category");
+            int timeIdx = findColumnIndex(headerRow, "Estimated_time_to_visit");
+            int foreignAdultIdx = findColumnIndex(headerRow, "Foreign_Adult");
+            int foreignChildIdx = findColumnIndex(headerRow, "Foreign_Child");
+            int localAdultIdx = findColumnIndex(headerRow, "Local_Adult");
+            int localChildIdx = findColumnIndex(headerRow, "Local_Child");
+            int studentIdx = findColumnIndex(headerRow, "Student");
+            int freeEntryIdx = findColumnIndex(headerRow, "Free_Entry");
+            int latitudeIdx = findColumnIndex(headerRow, "Latitude");
+            int longitudeIdx = findColumnIndex(headerRow, "Longitude");
+
+            int rowNumber = 1; // Start after header
+            String[] row;
+            while ((row = csvReader.readNext()) != null) {
                 rowNumber++;
-                
-                if (isFirst) { 
-                    isFirst = false; 
-                    continue; // skip header
-                }
-
-                // Validate minimum required columns
-                if (line.length < 9) {
-                    throw new CsvValidationException("Row " + rowNumber + ": Insufficient columns. Expected 9, got " + line.length);
-                }
-
                 try {
                     Place place = new Place();
-                    place.setPlaceId(validateAndGet(line[0], "place_id", rowNumber));
-                    place.setName(validateAndGet(line[1], "name", rowNumber));
-                    place.setDistrict(line[2]);
-                    place.setDescription(line[3]);
-                    place.setRegion(line[4]);
-                    place.setCategory(line[5]);
-                    place.setEstimatedTimeToVisit(parseDouble(line[6], "estimated_time_to_visit", rowNumber));
-                    place.setLatitude(parseDouble(line[7], "latitude", rowNumber));
-                    place.setLongitude(parseDouble(line[8], "longitude", rowNumber));
-
-                    placeRepository.save(place);
+                    
+                    // Get required fields and validate
+                    String name = validateAndGet(row[nameIdx], "Name", rowNumber);
+                    String district = validateAndGet(row[districtIdx], "District", rowNumber);
+                    
+                    // Generate unique ID based on district prefix
+                    place.setPlaceId(placeIdGenerator.generatePlaceId(district));
+                    
+                    // Set basic info
+                    place.setName(name);
+                    place.setDistrict(district);
+                    place.setDescription(row[descriptionIdx]);
+                    place.setRegion(row[regionIdx]);
+                    place.setCategory(row[categoryIdx]);
+                    
+                    // Set numeric fields with validation
+                    if (row[timeIdx] != null && !row[timeIdx].trim().isEmpty()) {
+                        place.setEstimatedTimeToVisit(parseDouble(row[timeIdx], "Estimated time", rowNumber));
+                    }
+                    
+                    // Set coordinates with validation
+                    if (row[latitudeIdx] != null && !row[latitudeIdx].trim().isEmpty()) {
+                        Double lat = parseDouble(row[latitudeIdx], "Latitude", rowNumber);
+                        if (lat < 5.0 || lat > 10.0) { // Sri Lanka's latitude range
+                            throw new CsvValidationException("Invalid latitude value at row " + rowNumber + 
+                                ". Must be between 5.0 and 10.0 for Sri Lanka");
+                        }
+                        place.setLatitude(lat);
+                    }
+                    
+                    if (row[longitudeIdx] != null && !row[longitudeIdx].trim().isEmpty()) {
+                        Double lng = parseDouble(row[longitudeIdx], "Longitude", rowNumber);
+                        if (lng < 79.0 || lng > 82.0) { // Sri Lanka's longitude range
+                            throw new CsvValidationException("Invalid longitude value at row " + rowNumber + 
+                                ". Must be between 79.0 and 82.0 for Sri Lanka");
+                        }
+                        place.setLongitude(lng);
+                    }
+                    
+                    // Save the place first to ensure it exists
+                    Place savedPlace = placeRepository.save(place);
+                    
+                    // Create and save entry fee
+                    PlaceEntryFee entryFee = new PlaceEntryFee();
+                    entryFee.setFeeId(savedPlace.getPlaceId() + "-fee");
+                    entryFee.setPlaceId(savedPlace.getPlaceId());
+                    
+                    // Set entry fees with validation
+                    entryFee.setForeignAdult(parseDouble(row[foreignAdultIdx], "Foreign Adult fee", rowNumber));
+                    entryFee.setForeignChild(parseDouble(row[foreignChildIdx], "Foreign Child fee", rowNumber));
+                    entryFee.setLocalAdult(parseDouble(row[localAdultIdx], "Local Adult fee", rowNumber));
+                    entryFee.setLocalChild(parseDouble(row[localChildIdx], "Local Child fee", rowNumber));
+                    entryFee.setStudent(parseDouble(row[studentIdx], "Student fee", rowNumber));
+                    
+                    // Set free entry boolean
+                    String freeEntryStr = row[freeEntryIdx].trim().toLowerCase();
+                    boolean freeEntry = "yes".equals(freeEntryStr) || "true".equals(freeEntryStr) || "1".equals(freeEntryStr);
+                    entryFee.setFreeEntry(freeEntry);
+                    
+                    // Validate fee consistency
+                    if (freeEntry && (entryFee.getForeignAdult() != null || entryFee.getForeignChild() != null || 
+                        entryFee.getLocalAdult() != null || entryFee.getLocalChild() != null || 
+                        entryFee.getStudent() != null)) {
+                        throw new CsvValidationException("Row " + rowNumber + ": Free entry places cannot have entry fees");
+                    }
+                    
+                    if (!freeEntry && (entryFee.getForeignAdult() == null && entryFee.getForeignChild() == null && 
+                        entryFee.getLocalAdult() == null && entryFee.getLocalChild() == null && 
+                        entryFee.getStudent() == null)) {
+                        throw new CsvValidationException("Row " + rowNumber + ": Non-free entry places must have at least one fee specified");
+                    }
+                    
+                    // Save the entry fee
+                    placeEntryFeeRepository.save(entryFee);
+                    
                 } catch (Exception e) {
-                    throw new CsvValidationException("Row " + rowNumber + ": " + e.getMessage());
+                    throw new CsvValidationException("Error at row " + rowNumber + ": " + e.getMessage());
                 }
             }
         }
@@ -294,7 +456,7 @@ public class CsvService {
      */
     public void importPlacesFromUploadedCsv(MultipartFile file) throws IOException, CsvValidationException {
         // First upload the file
-        uploadCsvFile(file);
+        uploadCsvFile(file, "places");
         
         // Then import from the uploaded file
         importPlacesFromCsv();
@@ -303,8 +465,8 @@ public class CsvService {
     /**
      * Get the CSV file for download
      */
-    public File getCsvFile() throws IOException {
-        Path csvFilePath = Paths.get(uploadDir, CSV_FILE_NAME);
+    public File getCsvFile(String type) throws IOException {
+        Path csvFilePath = getCsvFilePath(type);
         
         if (!Files.exists(csvFilePath)) {
             // If file doesn't exist, export current data first
@@ -317,16 +479,16 @@ public class CsvService {
     /**
      * Check if CSV file exists
      */
-    public boolean csvFileExists() {
-        Path csvFilePath = Paths.get(uploadDir, CSV_FILE_NAME);
+    public boolean csvFileExists(String type) {
+        Path csvFilePath = getCsvFilePath(type);
         return Files.exists(csvFilePath);
     }
 
     /**
      * Get CSV file info
      */
-    public String getCsvFileInfo() throws IOException {
-        Path csvFilePath = Paths.get(uploadDir, CSV_FILE_NAME);
+    public String getCsvFileInfo(String type) throws IOException {
+        Path csvFilePath = getCsvFilePath(type);
         
         if (!Files.exists(csvFilePath)) {
             return "CSV file does not exist";
@@ -335,8 +497,9 @@ public class CsvService {
         long size = Files.size(csvFilePath);
         long lines = Files.lines(csvFilePath).count() - 1; // Subtract header
         
+        String fileName = type.equals("places") ? PLACES_CSV_FILE_NAME : ENTRY_FEES_CSV_FILE_NAME;
         return String.format("CSV file: %s, Size: %d bytes, Records: %d", 
-                CSV_FILE_NAME, size, lines);
+                fileName, size, lines);
     }
 
     // Helper methods
@@ -345,6 +508,30 @@ public class CsvService {
             throw new CsvValidationException(fieldName + " is required");
         }
         return value.trim();
+    }
+
+    /**
+     * Find the index of a column in the header row
+     */
+    private int findColumnIndex(String[] headerRow, String columnName) throws CsvValidationException {
+        String searchCol = columnName.replaceAll("[\\s_-]", "").toLowerCase();
+        for (int i = 0; i < headerRow.length; i++) {
+            String headerCol = headerRow[i].trim().replaceAll("[\\s_-]", "").toLowerCase();
+            if (headerCol.equals(searchCol)) {
+                return i;
+            }
+        }
+        
+        // If exact match not found, try partial match
+        for (int i = 0; i < headerRow.length; i++) {
+            String headerCol = headerRow[i].trim().replaceAll("[\\s_-]", "").toLowerCase();
+            if (headerCol.contains(searchCol) || searchCol.contains(headerCol)) {
+                return i;
+            }
+        }
+        
+        throw new CsvValidationException("Column not found: " + columnName + 
+            ". Please make sure the CSV file has this column (or a similar variation).");
     }
 
     private Double parseDouble(String value, String fieldName, int rowNumber) throws CsvValidationException {
@@ -357,5 +544,13 @@ public class CsvService {
         } catch (NumberFormatException e) {
             throw new CsvValidationException(fieldName + " must be a valid number: " + value);
         }
+    }
+
+    /**
+     * Get the file path for the given type
+     */
+    private Path getCsvFilePath(String type) {
+        String fileName = type.equals("places") ? PLACES_CSV_FILE_NAME : ENTRY_FEES_CSV_FILE_NAME;
+        return Paths.get(uploadDir, fileName);
     }
 }

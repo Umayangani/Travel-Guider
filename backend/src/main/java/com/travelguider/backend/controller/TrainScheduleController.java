@@ -46,6 +46,29 @@ public class TrainScheduleController {
         return ResponseEntity.ok(saved);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<TrainSchedule>> searchSchedules(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String fromStation,
+            @RequestParam(required = false) String toStation) {
+        List<TrainSchedule> results;
+        
+        // If specific stations are provided, use station search
+        if (fromStation != null || toStation != null) {
+            results = trainScheduleService.findByStations(fromStation, toStation);
+        }
+        // Otherwise use keyword search
+        else if (keyword != null && !keyword.trim().isEmpty()) {
+            results = trainScheduleService.searchSchedules(keyword);
+        }
+        // If no parameters, return all schedules
+        else {
+            results = trainScheduleService.getAllSchedules();
+        }
+        
+        return ResponseEntity.ok(results);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSchedule(@PathVariable String id) {
         trainScheduleService.deleteSchedule(id);

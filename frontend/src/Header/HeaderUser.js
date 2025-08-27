@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { API_BASE_URL } from "../api/config";
 import "./HeaderUser.css";
 
 const images = [
@@ -34,7 +35,7 @@ function HeaderUser({ onNavigate = () => {}, onLogout = () => {} }) {
         console.log('Token value:', token);
         
         if (token) {
-          const response = await fetch('http://localhost:8080/api/user/profile', {
+          const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,

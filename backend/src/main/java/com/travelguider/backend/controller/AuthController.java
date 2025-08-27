@@ -28,12 +28,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+        System.out.println("Login attempt for email: " + request.email);
         Optional<User> userOpt = userRepository.findByEmail(request.email);
         if (userOpt.isEmpty()) {
+            System.out.println("User not found with email: " + request.email);
             return ResponseEntity.status(401).body(new ErrorResponse("Invalid email or password"));
         }
         User user = userOpt.get();
         if (!passwordEncoder.matches(request.password, user.getPassword())) {
+            System.out.println("Password mismatch for user: " + request.email);
             return ResponseEntity.status(401).body(new ErrorResponse("Invalid email or password"));
         }
         // Generate JWT token

@@ -80,7 +80,7 @@ const CsvImport = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8080/api/csv/import', {
+      const response = await fetch(`${API_BASE_URL}/api/csv/import`, {
         method: 'POST',
       });
 
@@ -113,12 +113,23 @@ const CsvImport = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('http://localhost:8080/api/csv/upload-and-import', {
+      const response = await fetch(`${API_BASE_URL}/api/csv/upload-and-import`, {
         method: 'POST',
         body: formData,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
 
-      const result = await response.json();
+      // Try to parse response as JSON
+      let result;
+      try {
+        const text = await response.text();
+        result = JSON.parse(text);
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        throw new Error('Invalid response from server');
+      }
 
       if (response.ok) {
         setMessage(result.message);
@@ -128,10 +139,14 @@ const CsvImport = () => {
         }
         checkCsvStatus(); // Refresh status
       } else {
-        setError(result.error || 'Upload and import failed');
+        // Extract error message from response
+        const errorMessage = result.error || result.message || 'Upload and import failed';
+        console.error('Upload failed:', errorMessage);
+        setError(errorMessage);
       }
     } catch (error) {
-      setError('Network error: ' + error.message);
+      console.error('Network error:', error);
+      setError('Network error: Please check your connection and try again');
     } finally {
       setLoading(false);
     }
@@ -143,7 +158,7 @@ const CsvImport = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8080/api/csv/export', {
+      const response = await fetch(`${API_BASE_URL}/api/csv/export`, {
         method: 'POST',
       });
 
@@ -164,7 +179,7 @@ const CsvImport = () => {
 
   const handleDownload = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/csv/download');
+      const response = await fetch(`${API_BASE_URL}/api/csv/download`);
       
       if (response.ok) {
         const blob = await response.blob();
@@ -196,7 +211,7 @@ const CsvImport = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8080/api/csv/delete', {
+      const response = await fetch(`${API_BASE_URL}/api/csv/delete`, {
         method: 'DELETE',
       });
 

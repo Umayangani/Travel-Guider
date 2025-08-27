@@ -1,11 +1,8 @@
 package com.travelguider.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-
 import java.time.LocalDate;
 
-@Getter
 @Entity
 public class User {
     @Id
@@ -28,7 +25,15 @@ public class User {
 
     private String avatar;
 
-    // Getters and setters
+    // Getters
+    public Long getUserId() { return userId; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public LocalDate getDob() { return dob; }
+    public String getAddress() { return address; }
+    public Role getRole() { return role; }
+    public String getAvatar() { return avatar; }
 
 
     public void setUserId(Long userId) {
@@ -49,10 +54,6 @@ public class User {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public void setAddress(String address) {

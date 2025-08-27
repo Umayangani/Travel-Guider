@@ -6,13 +6,19 @@ import com.travelguider.backend.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/places")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
+@CrossOrigin(
+    origins = {"http://localhost:3000", "http://localhost:3001"},
+    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+    allowCredentials = "true"
+)
 public class PlaceController {
     @Autowired
     private PlaceService placeService;
@@ -37,16 +43,24 @@ public class PlaceController {
     }
 
     @PutMapping("/{placeId}")
-    public ResponseEntity<Place> updatePlace(@PathVariable String placeId, @RequestBody Place place) {
-        place.setPlaceId(placeId);
-        Place updated = placeService.updatePlace(place);
-        return ResponseEntity.ok(updated);
+    public ResponseEntity<?> updatePlace(@PathVariable String placeId, @RequestBody Place place) {
+        try {
+            place.setPlaceId(placeId);
+            Place updated = placeService.updatePlace(place);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{placeId}")
     public ResponseEntity<?> deletePlace(@PathVariable String placeId) {
-        placeService.deletePlace(placeId);
-        return ResponseEntity.ok().build();
+        try {
+            placeService.deletePlace(placeId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     // DTO for addPlace

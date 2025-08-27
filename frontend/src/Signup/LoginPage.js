@@ -28,21 +28,22 @@ function LoginPage({ onNavigate, onClose }) {
     try {
   // Use a config for API base URL
   const { API_BASE_URL } = require("../api/config");
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      console.log('Sending login request to:', `${API_BASE_URL}/api/auth/login`);
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
+      console.log('Response status:', response.status);
       const data = await response.json();
-      console.log('Backend response:', data); // Debug log
+      console.log('Backend response:', data);
       if (!response.ok) {
+        console.error('Login failed:', data);
         setError(data.message || JSON.stringify(data) || "Login failed");
         return;
-      }
-      
-      // Store the token in localStorage
+      }      // Store the token in localStorage
       if (data.token) {
         localStorage.setItem('token', data.token);
         console.log('Token stored:', data.token);

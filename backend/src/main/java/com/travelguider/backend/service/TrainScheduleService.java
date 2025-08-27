@@ -44,6 +44,23 @@ public class TrainScheduleService {
 
     public void deleteSchedule(String id) {
         trainScheduleRepository.deleteById(id);
-
+    }
+    
+    public List<TrainSchedule> searchSchedules(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllSchedules();
+        }
+        return trainScheduleRepository.searchSchedules(keyword.trim());
+    }
+    
+    public List<TrainSchedule> findByStations(String fromStation, String toStation) {
+        if ((fromStation == null || fromStation.trim().isEmpty()) && 
+            (toStation == null || toStation.trim().isEmpty())) {
+            return getAllSchedules();
+        }
+        return trainScheduleRepository.findByStations(
+            fromStation != null ? fromStation.trim() : "",
+            toStation != null ? toStation.trim() : ""
+        );
     }
 }
