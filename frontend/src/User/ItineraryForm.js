@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./ItineraryForm.css";
+import ItineraryDisplay from "./ItineraryDisplay";
 
 const shortCategories = [
   "Beach", "Temple", "Wildlife", "Adventure", "Culture", "Nature", "Camping"
@@ -14,6 +16,10 @@ function ItineraryForm() {
   const [preference, setPreference] = useState("");
   const [preferences, setPreferences] = useState([]);
   const [transport, setTransport] = useState("public");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [itinerary, setItinerary] = useState(null);
+  const [showItineraryDisplay, setShowItineraryDisplay] = useState(false);
 
   const addPreference = () => {
     if (preference && !preferences.includes(preference)) {
@@ -31,6 +37,131 @@ function ItineraryForm() {
     // In real app, open map and set location
     setStartLocation("Colombo");
   };
+
+  const handleGenerateItinerary = async () => {
+    setLoading(true);
+    setError("");
+    setItinerary(null);
+
+    try {
+      // Validate required fields
+      if (!startDate || !endDate) {
+        setError("Please select start and end dates");
+        return;
+      }
+      if (!startLocation) {
+        setError("Please select a starting location");
+        return;
+      }
+
+      // Prepare request data for backend
+      const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+      
+      // Ensure preferences is always an array
+      const preferencesArray = Array.isArray(preferences) ? preferences : [];
+      
+      const requestData = {
+        title: "My Travel Itinerary",
+        startDate: startDate,
+        endDate: endDate,
+        totalDays: totalDays,
+        startingLocation: startLocation,
+        adultsCount: adults,
+        childrenCount: children,
+        studentsCount: 0,
+        foreignersCount: 0,
+        budgetRange: "medium",
+        transportPreference: transport === "public" ? "bus" : "car",
+        activityLevel: "moderate",
+        preferredCategories: preferencesArray,
+        specificInterests: preferencesArray,
+        includeWeather: true
+      };
+
+      console.log("🚀 Sending request to:", 'http://localhost:8090/api/itinerary/generate?userId=1');
+      console.log("📋 Request data:", JSON.stringify(requestData, null, 2));
+      console.log("📋 Preferences type:", typeof requestData.preferredCategories, requestData.preferredCategories);
+
+      const response = await axios.post(
+        'http://localhost:8090/api/itinerary/generate',
+        requestData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          timeout: 30000, // 30 second timeout
+          transformRequest: [(data) => {
+            // Ensure data is properly serialized as JSON
+            return JSON.stringify(data);
+          }]
+        }
+      );
+
+      console.log("✅ Response received:", response);
+      
+      // Transform the response data to match our display component format
+      const transformedItinerary = {
+        success: true,
+        total_days: response.data.totalDays || Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)),
+        total_places: response.data.days ? response.data.days.reduce((total, day) => total + (day.places?.length || 0), 0) : 0,
+        travel_style: "Moderate",
+        interests: preferences,
+        daily_itinerary: response.data.days ? response.data.days.map(day => ({
+          day: day.dayNumber,
+          date: day.date,
+          places: day.places ? day.places.map(place => ({
+            Place: place.placeName,
+            Category: place.category || 'General',
+            Region: place.district || 'Sri Lanka',
+            Latitude: place.latitude || 6.9271,
+            Longitude: place.longitude || 79.8612,
+            Ticket_price: place.totalEntryCost || 0,
+            Eestimated_time_to_visit: place.estimatedVisitDurationHours || 2,
+            Contact_no: place.contact || 'N/A',
+            Description: place.description || '',
+            start_time: place.arrivalTime || '09:00',
+            end_time: place.departureTime || '11:00'
+          })) : [],
+          total_places: day.places?.length || 0
+        })) : []
+      };
+      
+      setItinerary(transformedItinerary);
+      setShowItineraryDisplay(true);
+      console.log("🎯 Transformed itinerary:", transformedItinerary);
+
+    } catch (error) {
+      console.error("❌ Full error object:", error);
+      
+      if (error.response) {
+        // Server responded with error status
+        console.error("🔴 Server error:", error.response.status, error.response.data);
+        setError(`Server error (${error.response.status}): ${error.response.data.message || error.response.data || 'Failed to generate itinerary'}`);
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error("🔴 Network error - no response received");
+        console.error("Request details:", error.request);
+        setError('Network error: Unable to connect to server. Please check if backend is running on port 8090.');
+      } else {
+        // Something else happened
+        console.error("🔴 Other error:", error.message);
+        setError(`Error: ${error.message}`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleBackToForm = () => {
+    setShowItineraryDisplay(false);
+    setItinerary(null);
+  };
+
+  // If showing itinerary display, render that instead
+  if (showItineraryDisplay && itinerary) {
+    return <ItineraryDisplay itineraryData={itinerary} onBack={handleBackToForm} />;
+  }
 
   return (
     <div>
@@ -99,8 +230,24 @@ function ItineraryForm() {
           </div>
         </div>
       )}
+      
+      {/* Error Message */}
+      {error && (
+        <div className="itinerary-row">
+          <div className="error-message">
+            {error}
+          </div>
+        </div>
+      )}
+
       <div className="itinerary-row" style={{justifyContent: 'flex-end'}}>
-        <button className="itinerary-submit">Get Recommendations</button>
+        <button 
+          className="itinerary-submit" 
+          onClick={handleGenerateItinerary}
+          disabled={loading}
+        >
+          {loading ? "Generating..." : "Get Started"}
+        </button>
       </div>
       </div>
     </div>

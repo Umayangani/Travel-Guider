@@ -49,12 +49,19 @@ function RegistrationPage({ onNavigate, onClose }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
+    <div className="registration-window">
+      <div className="window-header">
+        <div className="window-title">
+          <span className="window-icon">🚀</span>
+          Travel Guider - Registration
+        </div>
+        <button className="window-close-btn" onClick={onClose}>✕</button>
+      </div>
       <div className="registration-container">
         <div className="registration-card">
-          <button className="close-btn" onClick={onClose}>✕</button>
           <div className="form-section">
-            <h2>Sign Up</h2>
+            <h2>Create Your Account</h2>
+            <p className="form-subtitle">Join us to start your travel journey</p>
             <form onSubmit={handleSubmit}>
               <div className="input-group">
                 <span className="icon">👤</span>
@@ -82,10 +89,19 @@ function RegistrationPage({ onNavigate, onClose }) {
             </form>
           </div>
           <div className="image-section">
-            <img src="/media/registration.jpg" alt="Register" />
-            <button className="switch-btn" onClick={handleLoginClick}>
-              Already a member?
-            </button>
+            <div className="image-container">
+              <img src="/media/registration.jpg" alt="Register" />
+              <div className="image-overlay">
+                <h3>Welcome to Travel Guider</h3>
+                <p>Discover amazing places and create unforgettable memories</p>
+              </div>
+            </div>
+            <div className="switch-section">
+              <p>Already have an account?</p>
+              <button className="switch-btn" onClick={handleLoginClick}>
+                Sign In Here
+              </button>
+            </div>
           </div>
         </div>
       </div>

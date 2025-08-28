@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Connection Test</h1>
+    <button onclick="testAPI()">Test API Connection</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                console.log('🚀 Testing API connection...');
+                
+                const testData = {
+                    title: 'Test Trip',
+                    startDate: '2025-09-01',
+                    endDate: '2025-09-03',
+                    location: 'Colombo',
+                    adultsCount: 2,
+                    childrenCount: 0,
+                    studentsCount: 0,
+                    foreignersCount: 0,
+                    budgetRange: 'medium',
+                    transportPreference: 'bus',
+                    activityLevel: 'moderate',
+                    preferences: ['Beach', 'Temple'],
+                    specificInterests: 'Photography',
+                    includeWeather: true
+                };
+
+                const response = await fetch('http://localhost:8090/api/itinerary/generate?userId=1', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                console.log('📡 Response status:', response.status);
+                console.log('📡 Response headers:', response.headers);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ SUCCESS:', data);
+                    resultDiv.innerHTML = `<div style="color: green;">✅ SUCCESS! API is working.<br>Response: ${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    const errorText = await response.text();
+                    console.log('❌ ERROR Response:', errorText);
+                    resultDiv.innerHTML = `<div style="color: red;">❌ ERROR ${response.status}: ${errorText}</div>`;
+                }
+            } catch (error) {
+                console.error('❌ Network Error:', error);
+                resultDiv.innerHTML = `<div style="color: red;">❌ Network Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

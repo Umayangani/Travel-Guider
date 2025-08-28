@@ -164,3 +164,91 @@
 .itinerary-submit:hover {
   background: #0a4a0a;
 }
+.itinerary-submit:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0.7rem 1rem;
+  border-radius: 7px;
+  border: 1px solid #fca5a5;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+/* Generated itinerary display */
+.generated-itinerary {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 1400px;
+  width: 98vw;
+  box-shadow: 0 4px 24px rgba(6,46,3,0.08);
+}
+
+.generated-itinerary h3 {
+  color: #062E03;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.itinerary-summary {
+  background: #f0f9ff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #062E03;
+}
+
+.itinerary-summary h4 {
+  color: #062E03;
+  margin-bottom: 0.5rem;
+}
+
+.itinerary-summary p {
+  margin: 0.3rem 0;
+  color: #374151;
+}
+
+.itinerary-day {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.itinerary-day h5 {
+  color: #062E03;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #062E03;
+  padding-bottom: 0.3rem;
+}
+
+.itinerary-place {
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-left: 3px solid #10b981;
+}
+
+.itinerary-place h6 {
+  color: #062E03;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.place-details p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
