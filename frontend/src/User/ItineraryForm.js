@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ItineraryForm.css";
-import ItineraryDisplay from "./ItineraryDisplay";
+import ItineraryModal from "./ItineraryModal";
 
+// Enhanced categories matching ML system capabilities
 const shortCategories = [
   "Beach", "Temple", "Wildlife", "Adventure", "Culture", "Nature", "Camping"
+];
+
+// Activity levels for better trip planning
+const activityLevels = [
+  { value: "relaxed", label: "Relaxed (2-3 places/day)" },
+  { value: "moderate", label: "Moderate (3-4 places/day)" },
+  { value: "active", label: "Active (4-5 places/day)" }
 ];
 
 function ItineraryForm() {
@@ -16,10 +24,11 @@ function ItineraryForm() {
   const [preference, setPreference] = useState("");
   const [preferences, setPreferences] = useState([]);
   const [transport, setTransport] = useState("public");
+  const [activityLevel, setActivityLevel] = useState("moderate"); // New activity level state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [itinerary, setItinerary] = useState(null);
-  const [showItineraryDisplay, setShowItineraryDisplay] = useState(false);
+  const [showItineraryModal, setShowItineraryModal] = useState(false);
 
   const addPreference = () => {
     if (preference && !preferences.includes(preference)) {
@@ -72,7 +81,7 @@ function ItineraryForm() {
         foreignersCount: 0,
         budgetRange: "medium",
         transportPreference: transport === "public" ? "bus" : "car",
-        activityLevel: "moderate",
+        activityLevel: activityLevel, // Include activity level
         preferredCategories: preferencesArray,
         specificInterests: preferencesArray,
         includeWeather: true
@@ -128,7 +137,7 @@ function ItineraryForm() {
       };
       
       setItinerary(transformedItinerary);
-      setShowItineraryDisplay(true);
+      setShowItineraryModal(true);
       console.log("🎯 Transformed itinerary:", transformedItinerary);
 
     } catch (error) {
@@ -153,15 +162,11 @@ function ItineraryForm() {
     }
   };
 
-  const handleBackToForm = () => {
-    setShowItineraryDisplay(false);
-    setItinerary(null);
+  const handleCloseModal = () => {
+    setShowItineraryModal(false);
   };
 
-  // If showing itinerary display, render that instead
-  if (showItineraryDisplay && itinerary) {
-    return <ItineraryDisplay itineraryData={itinerary} onBack={handleBackToForm} />;
-  }
+  // Remove the old return statement that showed ItineraryDisplay in hero section
 
   return (
     <div>
@@ -199,6 +204,14 @@ function ItineraryForm() {
             <label><input type="radio" name="transport" value="public" checked={transport === "public"} onChange={() => setTransport("public")} /> Public</label>
             <label><input type="radio" name="transport" value="private" checked={transport === "private"} onChange={() => setTransport("private")} /> Private</label>
           </div>
+        </div>
+        <div className="itinerary-field same-size">
+          <label>Activity Level</label>
+          <select value={activityLevel} onChange={e => setActivityLevel(e.target.value)}>
+            {activityLevels.map(level => (
+              <option key={level.value} value={level.value}>{level.label}</option>
+            ))}
+          </select>
         </div>
       </div>
       {/* Preferences selector on its own row */}
@@ -250,6 +263,13 @@ function ItineraryForm() {
         </button>
       </div>
       </div>
+      
+      {/* Itinerary Modal */}
+      <ItineraryModal
+        isOpen={showItineraryModal}
+        itineraryData={itinerary}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

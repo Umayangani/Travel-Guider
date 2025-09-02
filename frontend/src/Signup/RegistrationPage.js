@@ -14,12 +14,6 @@ function RegistrationPage({ onNavigate, onClose }) {
     onNavigate('login');
   };
 
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -49,16 +43,12 @@ function RegistrationPage({ onNavigate, onClose }) {
   };
 
   return (
-    <div className="registration-window">
-      <div className="window-header">
-        <div className="window-title">
-          <span className="window-icon">🚀</span>
-          Travel Guider - Registration
-        </div>
-        <button className="window-close-btn" onClick={onClose}>✕</button>
-      </div>
+    <div className="modal-overlay">
       <div className="registration-container">
         <div className="registration-card">
+          {/* Close button positioned at top-right */}
+          <button className="close-btn" onClick={onClose}>✕</button>
+          
           <div className="form-section">
             <h2>Create Your Account</h2>
             <p className="form-subtitle">Join us to start your travel journey</p>
@@ -83,7 +73,7 @@ function RegistrationPage({ onNavigate, onClose }) {
               {success && <div className="success-message">{success}</div>}
               <label className="checkbox-group">
                 <input type="checkbox" required />
-                I agree to the <a href="#">Terms of Service</a>
+                I agree to the <button type="button" className="terms-link" onClick={() => {}}>Terms of Service</button>
               </label>
               <button type="submit" className="register-btn">Register</button>
             </form>
@@ -91,10 +81,6 @@ function RegistrationPage({ onNavigate, onClose }) {
           <div className="image-section">
             <div className="image-container">
               <img src="/media/registration.jpg" alt="Register" />
-              <div className="image-overlay">
-                <h3>Welcome to Travel Guider</h3>
-                <p>Discover amazing places and create unforgettable memories</p>
-              </div>
             </div>
             <div className="switch-section">
               <p>Already have an account?</p>

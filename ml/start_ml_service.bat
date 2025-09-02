@@ -1,42 +1,32 @@
 @echo off
-echo 🚀 Starting Travel Guider ML Service...
+echo 🚀 Starting Travel Guider ML Integration System
+echo.
 
-REM Check if Python is installed
+echo 📋 Checking Python installation...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Python is not installed or not in PATH
-    echo Please install Python 3.8+ and try again
+    echo ❌ Python not found! Please install Python first.
     pause
     exit /b 1
 )
 
-REM Navigate to ML directory
+echo ✅ Python found!
+echo.
+
+echo 📦 Installing required packages...
+pip install flask flask-cors pandas numpy scikit-learn joblib requests >nul 2>&1
+
+echo 📂 Changing to ML directory...
 cd /d "%~dp0"
 
-REM Check if virtual environment exists
-if not exist "venv" (
-    echo 📦 Creating virtual environment...
-    python -m venv venv
-)
+echo 🧠 Starting ML API Service...
+echo 🌐 Service will be available at: http://localhost:5000
+echo 📊 This connects your Java backend to the ML system
+echo.
+echo 💡 Keep this window open while using the application
+echo 🛑 Press Ctrl+C to stop the service
+echo.
 
-REM Activate virtual environment
-echo 🔄 Activating virtual environment...
-call venv\Scripts\activate.bat
-
-REM Install/upgrade requirements
-echo 📥 Installing/updating Python packages...
-pip install -r requirements.txt
-
-REM Check if CSV data exists
-if not exist "..\backend\uploads\places.csv" (
-    echo ⚠️  Warning: places.csv not found in backend/uploads/
-    echo The ML service will start but may not have data to work with
-    echo Please ensure the backend has imported place data
-)
-
-REM Start the ML API service
-echo 🎯 Starting ML API service on http://localhost:5000...
-echo Press Ctrl+C to stop the service
-python ml_api_service.py
+python flask_ml_api.py
 
 pause

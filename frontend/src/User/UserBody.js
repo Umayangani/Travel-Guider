@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ItineraryModal from "./ItineraryModal";
 import "./UserBody.css";
 
 // Example data, replace with real recommendations
@@ -44,6 +45,98 @@ const recommendedPlaces = [
 function UserBody() {
   const [liked, setLiked] = useState({});
   const [start, setStart] = useState(0);
+  const [showItineraryModal, setShowItineraryModal] = useState(false);
+  const [sampleItinerary] = useState({
+    daily_itinerary: [
+      {
+        day: 1,
+        total_places: 2,
+        places: [
+          {
+            Place: "Temple of the Tooth",
+            Category: "Religious",
+            Region: "Kandy",
+            Description: "Sacred Buddhist temple housing a relic of Buddha's tooth",
+            Latitude: 7.2936,
+            Longitude: 80.6337,
+            Ticket_price: "500",
+            Contact_no: "+94812234567",
+            Eestimated_time_to_visit: "2",
+            start_time: "09:00",
+            end_time: "11:00"
+          },
+          {
+            Place: "Kandy Lake",
+            Category: "Nature",
+            Region: "Kandy", 
+            Description: "Beautiful artificial lake in the heart of Kandy",
+            Latitude: 7.2906,
+            Longitude: 80.6337,
+            Ticket_price: "0",
+            Contact_no: "N/A",
+            Eestimated_time_to_visit: "1",
+            start_time: "11:30",
+            end_time: "12:30"
+          }
+        ]
+      },
+      {
+        day: 2,
+        total_places: 2,
+        places: [
+          {
+            Place: "Sigiriya Rock Fortress",
+            Category: "Historical",
+            Region: "Sigiriya",
+            Description: "Ancient rock fortress with stunning frescoes and views",
+            Latitude: 7.9570,
+            Longitude: 80.7603,
+            Ticket_price: "3900",
+            Contact_no: "+94662285049",
+            Eestimated_time_to_visit: "3",
+            start_time: "08:00",
+            end_time: "11:00"
+          },
+          {
+            Place: "Dambulla Cave Temple",
+            Category: "Religious",
+            Region: "Dambulla",
+            Description: "Ancient cave temple complex with beautiful Buddha statues",
+            Latitude: 7.8567,
+            Longitude: 80.6490,
+            Ticket_price: "1500",
+            Contact_no: "+94662284767",
+            Eestimated_time_to_visit: "2",
+            start_time: "14:00",
+            end_time: "16:00"
+          }
+        ]
+      },
+      {
+        day: 3,
+        total_places: 1,
+        places: [
+          {
+            Place: "Galle Fort",
+            Category: "Historical",
+            Region: "Galle",
+            Description: "UNESCO World Heritage site with colonial architecture",
+            Latitude: 6.0215,
+            Longitude: 80.2168,
+            Ticket_price: "0",
+            Contact_no: "+94912232423",
+            Eestimated_time_to_visit: "3",
+            start_time: "09:00",
+            end_time: "12:00"
+          }
+        ]
+      }
+    ],
+    total_days: 3,
+    total_places: 5,
+    travel_style: "Cultural",
+    interests: ["Religious", "Historical", "Nature"]
+  });
   const cardsPerPage = 3;
   const end = start + cardsPerPage;
 
@@ -58,8 +151,42 @@ function UserBody() {
     setStart((prev) => (prev + cardsPerPage < recommendedPlaces.length ? prev + cardsPerPage : prev));
   };
 
+  const handleViewItinerary = () => {
+    setShowItineraryModal(true);
+  };
+
+  const handleCloseItinerary = () => {
+    setShowItineraryModal(false);
+  };
+
   return (
     <div className="user-body">
+      {/* Itinerary Quick Access Section */}
+      <div className="itinerary-section">
+        <h2 className="user-body-title">Your Travel Plans</h2>
+        <div className="itinerary-quick-view">
+          <div className="itinerary-card-mini">
+            <div className="itinerary-preview">
+              <h3>Sri Lanka Cultural Tour</h3>
+              <div className="preview-details">
+                <span>3 days • 5 places • Cultural</span>
+              </div>
+            </div>
+            <button 
+              className="view-itinerary-btn"
+              onClick={handleViewItinerary}
+            >
+              View Full Itinerary
+            </button>
+          </div>
+          <div className="create-new-mini">
+            <h4>Plan New Trip</h4>
+            <button className="create-new-btn">Create Itinerary</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Recommended Places Section */}
       <h2 className="user-body-title">Recommended Places</h2>
       <div className="user-card-list">
         <button className="user-arrow user-arrow-left" onClick={handlePrev} disabled={start === 0}>&lt;</button>
@@ -85,6 +212,13 @@ function UserBody() {
         </div>
         <button className="user-arrow user-arrow-right" onClick={handleNext} disabled={end >= recommendedPlaces.length}>&gt;</button>
       </div>
+      
+      {/* Itinerary Modal */}
+      <ItineraryModal
+        isOpen={showItineraryModal}
+        itineraryData={sampleItinerary}
+        onClose={handleCloseItinerary}
+      />
     </div>
   );
 }

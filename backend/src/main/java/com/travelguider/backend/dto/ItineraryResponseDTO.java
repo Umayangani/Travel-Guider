@@ -18,6 +18,13 @@ public class ItineraryResponseDTO {
     private LocalDateTime createdAt;
     private List<ItineraryDayDTO> days;
     
+    // ML-specific fields
+    private Double totalDistance;
+    private Double totalDuration;
+    private Double mlConfidence;
+    private Boolean generatedByML;
+    private String mlModelVersion;
+    
     // Inner class for day details
     public static class ItineraryDayDTO {
         private Integer dayNumber;
@@ -189,4 +196,20 @@ public class ItineraryResponseDTO {
     
     public List<ItineraryDayDTO> getDays() { return days; }
     public void setDays(List<ItineraryDayDTO> days) { this.days = days; }
+    
+    // ML-specific getters and setters
+    public Double getTotalDistance() { return totalDistance; }
+    public void setTotalDistance(Double totalDistance) { this.totalDistance = totalDistance; }
+    
+    public Double getTotalDuration() { return totalDuration; }
+    public void setTotalDuration(Double totalDuration) { this.totalDuration = totalDuration; }
+    
+    public Double getMlConfidence() { return mlConfidence; }
+    public void setMlConfidence(Double mlConfidence) { this.mlConfidence = mlConfidence; }
+    
+    public Boolean getGeneratedByML() { return generatedByML; }
+    public void setGeneratedByML(Boolean generatedByML) { this.generatedByML = generatedByML; }
+    
+    public String getMlModelVersion() { return mlModelVersion; }
+    public void setMlModelVersion(String mlModelVersion) { this.mlModelVersion = mlModelVersion; }
 }

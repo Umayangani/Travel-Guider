@@ -1,0 +1,225 @@
+/* ItineraryPage.css */
+
+.itinerary-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 40px 20px;
+}
+
+.itinerary-page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.itinerary-page-header h1 {
+  color: #2d3748;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.itinerary-page-header p {
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.itinerary-cards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.itinerary-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.itinerary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.itinerary-card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+}
+
+.itinerary-card-header h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.itinerary-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.itinerary-card-body {
+  padding: 25px;
+}
+
+.itinerary-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-item .label {
+  color: #718096;
+  font-weight: 500;
+}
+
+.summary-item .value {
+  color: #2d3748;
+  font-weight: 600;
+  background: #f7fafc;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.itinerary-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.itinerary-actions button {
+  flex: 1;
+  min-width: 80px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.view-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.edit-btn {
+  background: #48bb78;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+}
+
+.download-btn {
+  background: #ed8936;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #dd6b20;
+  transform: translateY(-2px);
+}
+
+/* New Itinerary Card */
+.new-itinerary {
+  border: 2px dashed #cbd5e0;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-itinerary:hover {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+}
+
+.new-itinerary-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.new-itinerary-icon {
+  font-size: 3rem;
+  color: #cbd5e0;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.new-itinerary:hover .new-itinerary-icon {
+  color: #667eea;
+  transform: scale(1.1);
+}
+
+.new-itinerary h3 {
+  color: #4a5568;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.new-itinerary p {
+  color: #718096;
+  margin: 0 0 20px 0;
+}
+
+.create-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .itinerary-page {
+    padding: 20px 15px;
+  }
+  
+  .itinerary-page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .itinerary-cards-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .itinerary-actions {
+    flex-direction: column;
+  }
+  
+  .itinerary-actions button {
+    flex: none;
+  }
+}
